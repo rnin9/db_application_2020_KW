@@ -1,6 +1,3 @@
-const { DataTypes } = require("sequelize/types");
-const { sequelize } = require(".");
-
 module.exports = (sequelize, DataTypes) =>{
     return sequelize.define('USER',{
      userID:{
@@ -58,5 +55,6 @@ module.exports = (sequelize, DataTypes) =>{
         type: DataTypes.BOOLEAN,
         allowNull: false,
      },
-    });
+   
+    },{ timestamps: false});
 }

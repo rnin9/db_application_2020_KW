@@ -30,5 +30,7 @@ let sequelize = new Sequalize(
         console.log('Unable to connect to the DB',err);
     });
 
+    db.USER = require('./USER')(sequelize,Sequalize);
+
 db.secret = '(9*)5$&!3%^0%^@@2$1!#5@2!4';
 module.exports = db;
