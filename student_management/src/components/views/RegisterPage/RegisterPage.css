@@ -1,20 +1,20 @@
 @import '~antd/dist/antd.css';
 
-.register{
-    padding: 0 20px;
-  border-bottom: solid 1px #e8e8e8;
-  overflow: auto;
-  box-shadow: 0 0 30px #f3f1f1;
-  background-color: white;
+
+.colleges{
+    width:'500px';
+    display: flex;
+    justify-content: center;
 }
+
 .college{
     width: '300px';
     display: inline-block;
+    margin-right:40px;
 }
-
 .major{
-    width: '300px';
+    width: '200px';
     display: inline-block;
-    margin-right:80px;
+    margin-left:5px;
+    margin-right:50px;
 }
-

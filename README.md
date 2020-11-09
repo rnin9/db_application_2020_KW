@@ -27,4 +27,4 @@ ____________________________________________
 
 ### 2020-11-09
 * Navigation Design
-* Register
+* Register Page Design
