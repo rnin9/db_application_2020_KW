@@ -4,7 +4,7 @@ ____________________________________________
 # How To Run
 
 1. make 'config' folder in 'server' folder
-2. make 'config.json' file in config folder like this code
+2. make 'config.json' file in config folder with this code
 
 ```{
     "development":{
