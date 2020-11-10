@@ -30,6 +30,5 @@ ____________________________________________
 * Register Page Design
 
 ### 2020-11-10
-
 * Registeration 
 * Login

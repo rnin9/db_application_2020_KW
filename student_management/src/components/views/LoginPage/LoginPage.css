@@ -1,0 +1,12 @@
+@import '~antd/dist/antd.css';
+@font-face {
+    font-family: 'Chosunilbo_myungjo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.main{
+    font-family: Chosunilbo_myungjo;
+    margin-top:100px;
+}

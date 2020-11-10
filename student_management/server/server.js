@@ -7,11 +7,11 @@ sequelize.sync();
 
 app.use(express.json());
 app.use('/', router);
-// app.get('/get/data', (req, res) => {
-//     USER.findAll()
-//     .then( result => { res.send(result)})
-//     .catch( err => { throw err})
-// }); 
+router.get('/get/data', (req, res) => {
+    users.findAll()
+    .then( result => { res.send(result)})
+    .catch( err => { throw err})
+}); 
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

@@ -12,10 +12,6 @@ class LandingPage extends Component{
         }    
       }
 
-         componentDidMount() {
-          this._getData();
-        }
-      
         _getData = async () => {
           const res = await axios.get('/get/data');
           if(res.data[0] === undefined) {

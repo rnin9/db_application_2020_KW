@@ -56,9 +56,16 @@ const onFinish = values => {
                email:values.user.email,
                address:values.user.address
                };             
-    axios('/add/user',{ method: 'POST', headers: new Headers(), data: datas});
-    alert('회원가입에 성공했습니다!');
-    return window.location.href='/';
+    axios('/add/user',{ method: 'POST', headers: new Headers(), data: datas})
+    .then(res=>{
+      if(res.data){
+      alert('회원가입에 성공했습니다!');
+      return window.location.href='/';
+      } else{
+      alert('아이디가 중복됩니다!');
+      }
+    });
+    
 };
 class Register extends Component{
 

@@ -1,11 +1,26 @@
 const sequelize = require('./models').sequelize;
+const Sequelize = require('sequelize');
+const { Op } = Sequelize;
 const {
-    USER,
-    // Sequelize: { Op } //연산
+    USER  
   } = require('./models');
 sequelize.query('SET NAMES utf8;');
 
 module.exports ={
+
+    api:{
+        searchUser :(body,callback) =>{
+            USER.findAll({
+                where: {[Op.and]: [{userID: body.id, userPassword: body.password}]}
+            })
+            .then(data=>{
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+    },
 
     add:{
         user : (body, callback) => {
