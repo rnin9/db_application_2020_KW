@@ -1,13 +1,29 @@
 import React,{Component} from 'react'
 import { Form, Input, InputNumber, Button, Radio, Select } from 'antd';
+import axios from 'axios'
 import './RegisterPage.css'
 const { Option } = Select;
 
 const layout = {
-  labelCol: { span: 9 },
-  wrapperCol: { span: 4 },
+  labelCol: { 
+    xs:{span:24},
+    sm:{span:6},
+   },
+  wrapperCol: { 
+    xs:{span: 24},
+    sm:{span: 8},
+}
 };
 
+const layout2={
+  labelCol: { 
+    xs:{span:24},
+    sm:{span:3},
+   },
+  wrapperCol: { 
+    xs:{span: 24},
+    sm:{span: 10},
+}}
 
 
 const collegeData = ['소프트웨어융합대학', '전자정보공과대학','자연대학'];
@@ -18,35 +34,39 @@ const majorData = {
 };
 
 const validateMessages = {
-  required: '${label}, 꼭 작성해 주세요!',
+  
+  required: '${label}` is required',
   types: {
-    email: ' 유효한${label}이 아닙니다!',
+    email: '유효한${label}이 아닙니다!', 
     number: '학생이 아니면,"0"을 입력하세요!',
-    password:' ${label}를 작성해 주세요!',
-    ID:'유효한 ID가 아닙니다! 학번을 작성해주세요'
-  },
-  number: {
-    range: '${label}은 ${min}와 ${max} 사이여야 합니다'
-  },
-  ID:{
+    password:' ${label}를 작성해 주세요!',  
+    ID:'유효한 ID가 아닙니다! 학번을 작성해주세요',
   }
 };
 
 const onFinish = values => {
-  console.log(values);
+  const datas={ id: values.user.ID,
+               password: values.user.password,
+               name: values.user.name,
+               gender:values.user.gender,
+               college:values.user.college,
+               major:values.user.major,
+               grade:values.user.grade,
+               position:values.user.position,
+               email:values.user.email,
+               address:values.user.address
+               };             
+    axios('/add/user',{ method: 'POST', headers: new Headers(), data: datas});
+    alert('회원가입에 성공했습니다!');
+    return window.location.href='/';
 };
-
 class Register extends Component{
-  
-
-  onChange(e) {
-    console.log(`radio checked:${e.target.value}`);
-  }
 
   state = {
     majors: majorData[collegeData[0]],
     major: majorData[collegeData[0]][0],
     college: collegeData[0],
+
   };
 
   handleCollegeChange = value => {
@@ -66,27 +86,42 @@ class Register extends Component{
   
 
   render(){
+
     const { majors } = this.state; 
   return (
+    
+    <div className="reg_font">
+      <h2>회원가입</h2>
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-
+      <div className="id">
       <Form.Item name={['user', 'ID']} label="ID (학번)" rules={[{ required: true }]}>
-        <Input style={{ width: 380 }}/>
+        <Input style={{ width: 250 }}/>
       </Form.Item>
-
-      <Form.Item name={['user','password']} label="Password" rules={[{ required: true}]}>
-        <Input.Password style={{ width: 380 }} />
-      </Form.Item>
-
+      </div>
+      <div className="id">
       <Form.Item name={['user', 'name']} label="이름">
-        <Input style={{ width: 380 }} />
+        <Input style={{ width:260 }} />
       </Form.Item>
-      
-      <div className="colleges">
-      <div className="college">
-      <Form.Item name={['user','college']}label="전공" labelCol={{ ...layout.labelCol}}>
+      </div>
+      <div>
+      <div className="pw">
+      <Form.Item name={['user','password']} label="비밀번호" rules={[{ required: true}]}>
+        <Input.Password style={{ width: 250 }} />
+      </Form.Item>
+      </div>
+      <div className="gender">
+      <Form.Item name={['user','gender']} label="성별"labelCol={{...layout2.labelCol,offset:2}}>
+      <Radio.Group style={{ width: 250 }}>
+      <Radio.Button value="남성">남성</Radio.Button>
+      <Radio.Button value="여성">여성</Radio.Button>
+      </Radio.Group>
+      </Form.Item>
+      </div>
+      </div> 
+     <div className="college">
+      <Form.Item name={['user','college']}label="단과대학"labelCol={{...layout.labelCol,offset:3}}>
       <Select
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           onChange={this.handleCollegeChange}
           value={this.state.college}
         >
@@ -97,9 +132,9 @@ class Register extends Component{
       </Form.Item>
       </div>
       <div className="major">
-      <Form.Item name={['user','major']} wrapperCol={{ ...layout.wrapperCol}}>
+      <Form.Item name={['user','major']} label="학과"labelCol={{...layout2.labelCol,offset:1}}>
         <Select 
-          style={{ width: 150 }}
+          style={{ width: 260 }}
           onChange={this.onMajorChange}
           value={this.state.majors}
         >
@@ -109,34 +144,44 @@ class Register extends Component{
         </Select>
       </Form.Item>
       </div>
+      <div>
+      <div className="grade">
+      <Form.Item name={['user', 'grade']} label="학번" rules={[{type: 'number', min: 0, max: 22 }]}labelCol={{...layout2.labelCol,offset:3}}>
+        <InputNumber style={{ width:250 }}/>
+      </Form.Item>
       </div>
-
-      <Form.Item name={['user','position']} label="직급">
-     <Radio.Group style={{ width: 380 }}>
+      <div className="position">
+      <Form.Item name={['user','position']} label="직급"labelCol={{...layout2.labelCol,offset:4}}>
+      <Radio.Group style={{ width: 270 }}>
       <Radio.Button value="학부생">학부생</Radio.Button>
       <Radio.Button value="대학원">대학원</Radio.Button>
       <Radio.Button value="교수">교수</Radio.Button>
       <Radio.Button value="직원">직원</Radio.Button>
-    </Radio.Group>
-    
+      </Radio.Group>
       </Form.Item>
-      <Form.Item name={['user', 'Grade']} label="학년" rules={[{ required: true,type: 'number', min: 0, max: 5 }]}>
-        <InputNumber style={{ width: 50 }}/>
+      </div>
+      </div>
+
+      <div>
+      <div className="email">
+      <Form.Item name={['user', 'email']} label="이메일" rules={[{type:'email'}]}>
+        <Input style={{ width: 250 }} />
       </Form.Item>
-      <Form.Item name={['user', 'website']} label="Website">
-        <Input style={{ width: 380 }} />
+      </div>
+      <div className="address">
+      <Form.Item name={['user', 'address']} label="주소">
+        <Input style={{width: 250 }} />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Introduction">
-        <Input.TextArea style={{width: 380 }} />
-      </Form.Item>
-      
-      
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 11 }}>
+      </div>
+      </div>
+      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
       </Form.Item>
     </Form>
+    </div>
+    
   );}
 };
   export default Register;

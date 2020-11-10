@@ -1,20 +1,66 @@
 @import '~antd/dist/antd.css';
+@font-face{font-family: 'nexonlv'; src: url(../../../fonts/nexonlv.ttf)}
 
 
-.colleges{
+/* .colleges{
     width:'500px';
     display: flex;
     justify-content: center;
 }
+.gandp{
+    width:'500px';
+    display: flex;
+    justify-content: center;
 
-.college{
-    width: '300px';
+} */
+
+.reg_font{
+    font-family: nexonlv;
     display: inline-block;
-    margin-right:40px;
+ }
+.college{
+    width: '250px';
+    display: inline-block;
+    margin-right:75px;
+}
+.id{
+    width: "250px";
+    display: inline-block;
+}
+.pw{
+    width: "250px";
+    margin-right: 5px;
+    display: inline-block;
 }
 .major{
-    width: '200px';
+    width: '250px';
+    display: inline-block;
+    margin-right: 15px;
+}
+.gender{
+    width: '250px';
+    display: inline-block;
+    margin-left:10px;
+}
+.grade{
+    width: "250px";
+    display: inline-block;
+    margin-left:10px;
+    margin-right: 15px;
+}
+.position{
+    width: "250px";
+    display: inline-block;
+    margin-right:10px;
+}
+.email{
+    width: '250px';
+    display: inline-block;
+    margin-right: 15px;
+}
+.address{
+    width: "250px";
     display: inline-block;
     margin-left:5px;
-    margin-right:50px;
+    margin-right:5px;
 }

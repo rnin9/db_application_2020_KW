@@ -28,3 +28,8 @@ ____________________________________________
 ### 2020-11-09
 * Navigation Design
 * Register Page Design
+
+### 2020-11-10
+
+* Registeration 
+* Login

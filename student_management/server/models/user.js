@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) =>{
      userPhoto:{
         type: DataTypes.STRING(30),
         allowNull: true,
+        defaultValue : 0
      },
      userCollege:{
         type: DataTypes.STRING(30),
@@ -46,14 +47,17 @@ module.exports = (sequelize, DataTypes) =>{
      userPhoneNumber:{
         type: DataTypes.STRING(30),
         allowNull: true,
+        defaultValue : 0
      },
      userAddress:{
         type: DataTypes.STRING(30),
         allowNull: false,
+        defaultValue : 0
      },
      leaveOfAbsense:{
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue : 0
      },
    
     },{ timestamps: false});
