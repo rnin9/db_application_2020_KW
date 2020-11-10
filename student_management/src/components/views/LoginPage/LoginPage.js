@@ -23,8 +23,9 @@ const onFinish = (values) => {
   axios('/api/sendLogin',{ 
   method: 'POST', headers: new Headers(), data: datas})
   .then(res =>{
-        if(res.data){
+        if(res.data.success){
         alert('로그인에 성공했습니다!');
+        sessionStorage.setItem('login', true);
         return window.location.href='/';
         }
         else

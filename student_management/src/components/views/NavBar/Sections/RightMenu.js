@@ -4,22 +4,28 @@ import React from 'react';
 import { Menu } from 'antd';
 
 function RightMenu(props) {
-  
+  const{login,_logout} =props;
   return (
     <Menu mode="horizontal">
 
-    <Menu.Item key="rightLogin">
+    {!login? <Menu.Item key="rightLogin">
       <a href="/login">
         로그인
       </a>
-    </Menu.Item>
-
-
-    <Menu.Item key="rightRegister">
+    </Menu.Item>:
+    <Menu.Item key="rightLogin" onClick={()=>props._logout()}>
+    <a>
+      로그아웃
+    </a>
+  </Menu.Item>
+}  
+    
+  {!login?<Menu.Item key="rightRegister">
       <a href="/register">
         회원가입
       </a>
-    </Menu.Item>
+    </Menu.Item>:null}
+    
     </Menu>
    
   )

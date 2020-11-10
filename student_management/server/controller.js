@@ -6,11 +6,14 @@ module.exports = {
     sendLogin : (req, res) =>{
       const body = req.body;
     model.api.searchUser(body, result => {
+      var obj={};
       if(result[0]){
-        res.send(true);   
+        obj['success'] = true;
+         
       } else{
-        res.send(false);
+        obj['success'] = false;
       }
+      res.send(obj);
     });
     },
   },
