@@ -30,5 +30,9 @@ ____________________________________________
 * Register Page Design
 
 ### 2020-11-10
-* Registeration 
-* Login
+* Registeration UI update
+* Login, Logout
+
+### 2020-11-11
+* alert message customizing
+* Landing page Design

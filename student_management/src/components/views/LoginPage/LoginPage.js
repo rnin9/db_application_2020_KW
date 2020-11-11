@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 import axios from 'axios';
 import './LoginPage.css';
 const layout = {
@@ -24,12 +24,12 @@ const onFinish = (values) => {
   method: 'POST', headers: new Headers(), data: datas})
   .then(res =>{
         if(res.data.success){
-        alert('로그인에 성공했습니다!');
+        message.success('로그인에 성공했습니다!')
         sessionStorage.setItem('login', true);
         return window.location.href='/';
         }
         else
-          alert('계정을 확인해 주세요');
+        message.error('로그인에 실패했습니다.')
   })
   .catch(err=>{
     console.log(err);
@@ -47,7 +47,7 @@ const onFinishFailed = (errorInfo) => {
     render() {
       return (
         <div className="main">
-          <h3> 로그인 </h3>
+          <h2> 로그인 </h2>
         <Form
           {...layout}
           name="basic"

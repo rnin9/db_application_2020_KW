@@ -6,29 +6,15 @@
     font-style: normal;
 }
 
-
-/* .colleges{
-    width:'500px';
-    display: flex;
-    justify-content: center;
-}
-.gandp{
-    width:'500px';
-    display: flex;
-    justify-content: center;
-
-} */
-
 .reg_font{
     font-family: Chosunilbo_myungjo;
-    font-style: bold;
     display: inline-block;
     margin-top: 100px;
  }
 .college{
     width: '250px';
     display: inline-block;
-    margin-right:75px;
+    margin-right:40px;
 }
 .id{
     width: "250px";
@@ -36,38 +22,43 @@
 }
 .pw{
     width: "250px";
-    margin-right: 5px;
     display: inline-block;
+    margin-left: 20px;
 }
 .major{
     width: '250px';
     display: inline-block;
-    margin-right: 15px;
+    margin-right: 45px;
 }
 .gender{
     width: '250px';
     display: inline-block;
-    margin-left:10px;
+    margin-left:23px;
 }
 .grade{
     width: "250px";
     display: inline-block;
-    margin-left:10px;
-    margin-right: 15px;
+    margin-left:15px;
+    margin-right: 10px;
 }
 .position{
     width: "250px";
     display: inline-block;
-    margin-right:10px;
 }
 .email{
     width: '250px';
     display: inline-block;
-    margin-right: 15px;
+    margin-right: 10px;
 }
 .address{
     width: "250px";
     display: inline-block;
-    margin-left:5px;
-    margin-right:5px;
+    margin-right:15px;
 }
+
+.ant-form-item-explain{
+    width:"250px";
+    color: #ff4d4f;
+    display: inline-block !important;
+}
+

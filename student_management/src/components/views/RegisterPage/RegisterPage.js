@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
-import { Form, Input, InputNumber, Button, Radio, Select } from 'antd';
+import { Form, Input, InputNumber, Button, Radio, Select, message} from 'antd';
+import { DingtalkOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import './RegisterPage.css'
 const { Option } = Select;
@@ -34,10 +35,9 @@ const majorData = {
 };
 
 const validateMessages = {
-  
-  required: '${label}` is required',
+  required: '${label} is Required',
   types: {
-    email: '유효한${label}이 아닙니다!', 
+    email: '${label}이 아닙니다!', 
     number: '학생이 아니면,"0"을 입력하세요!',
     password:' ${label}를 작성해 주세요!',  
     ID:'유효한 ID가 아닙니다! 학번을 작성해주세요',
@@ -59,10 +59,10 @@ const onFinish = values => {
     axios('/add/user',{ method: 'POST', headers: new Headers(), data: datas})
     .then(res=>{
       if(res.data){
-      alert('회원가입에 성공했습니다!');
+      message.success("회원가입에 성공했습니다!")
       return window.location.href='/';
       } else{
-      alert('아이디가 중복됩니다!');
+      message.error("아이디가 중복됩니다!")
       }
     });
     
@@ -98,27 +98,29 @@ class Register extends Component{
   return (
     
     <div className="reg_font">
-      <h2>회원가입</h2>
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+      <h2><DingtalkOutlined/> 회원가입</h2>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} >
       <div className="id">
-      <Form.Item name={['user', 'ID']} label="ID (학번)" rules={[{ required: true }]}>
-        <Input style={{ width: 250 }}/>
+      <Form.Item name={['user', 'ID']} label="ID (학번)" rules={[{ required: true }]}
+      >
+        <Input style={{ width: 300 }}/>
+  
       </Form.Item>
       </div>
       <div className="id">
-      <Form.Item name={['user', 'name']} label="이름">
-        <Input style={{ width:260 }} />
+      <Form.Item name={['user', 'name']} label="이름" rules={[{ required: true }]}>
+        <Input style={{ width:300 }} />
       </Form.Item>
       </div>
       <div>
       <div className="pw">
       <Form.Item name={['user','password']} label="비밀번호" rules={[{ required: true}]}>
-        <Input.Password style={{ width: 250 }} />
+        <Input.Password style={{ width: 300 }} />
       </Form.Item>
       </div>
       <div className="gender">
-      <Form.Item name={['user','gender']} label="성별"labelCol={{...layout2.labelCol,offset:2}}>
-      <Radio.Group style={{ width: 250 }}>
+      <Form.Item name={['user','gender']} label="성별"labelCol={{...layout2.labelCol,offset:1}} rules={[{ required: true }]}>
+      <Radio.Group style={{ width: 300 }}>
       <Radio.Button value="남성">남성</Radio.Button>
       <Radio.Button value="여성">여성</Radio.Button>
       </Radio.Group>
@@ -126,9 +128,10 @@ class Register extends Component{
       </div>
       </div> 
      <div className="college">
-      <Form.Item name={['user','college']}label="단과대학"labelCol={{...layout.labelCol,offset:3}}>
+      <Form.Item name={['user','college']}label="단과대학"labelCol={{...layout.labelCol,offset:3}} 
+      rules={[{ required: true }]}>
       <Select
-          style={{ width: 250 }}
+          style={{ width: 300 }}
           onChange={this.handleCollegeChange}
           value={this.state.college}
         >
@@ -139,9 +142,9 @@ class Register extends Component{
       </Form.Item>
       </div>
       <div className="major">
-      <Form.Item name={['user','major']} label="학과"labelCol={{...layout2.labelCol,offset:1}}>
+      <Form.Item name={['user','major']} label="학과" rules={[{ required: true }]}>
         <Select 
-          style={{ width: 260 }}
+          style={{ width: 310 }}
           onChange={this.onMajorChange}
           value={this.state.majors}
         >
@@ -153,13 +156,14 @@ class Register extends Component{
       </div>
       <div>
       <div className="grade">
-      <Form.Item name={['user', 'grade']} label="학번" rules={[{type: 'number', min: 0, max: 22 }]}labelCol={{...layout2.labelCol,offset:3}}>
-        <InputNumber style={{ width:250 }}/>
+      <Form.Item name={['user', 'grade']} label="학번" rules={[{type: 'number', min: 0, max: 22 }]}
+      rules={[{ required: true }]}>
+        <InputNumber style={{ width:300 }}/>
       </Form.Item>
       </div>
       <div className="position">
-      <Form.Item name={['user','position']} label="직급"labelCol={{...layout2.labelCol,offset:4}}>
-      <Radio.Group style={{ width: 270 }}>
+      <Form.Item name={['user','position']} label="직급" rules={[{ required: true }]}>
+      <Radio.Group style={{ width: 320 }}>
       <Radio.Button value="학부생">학부생</Radio.Button>
       <Radio.Button value="대학원">대학원</Radio.Button>
       <Radio.Button value="교수">교수</Radio.Button>
@@ -171,13 +175,13 @@ class Register extends Component{
 
       <div>
       <div className="email">
-      <Form.Item name={['user', 'email']} label="이메일" rules={[{type:'email'}]}>
-        <Input style={{ width: 250 }} />
+      <Form.Item name={['user', 'email']} label="이메일" rules={[{type:'email', required: true }]}>
+        <Input style={{ width: 300 }} />
       </Form.Item>
       </div>
       <div className="address">
       <Form.Item name={['user', 'address']} label="주소">
-        <Input style={{width: 250 }} />
+        <Input style={{width: 300 }} />
       </Form.Item>
       </div>
       </div>

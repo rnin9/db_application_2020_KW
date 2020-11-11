@@ -14,8 +14,14 @@ module.exports = {
         obj['success'] = false;
       }
       res.send(obj);
+
     });
     },
+    user :(req, res)=>{
+      model.api.getUser(result=>{
+          res.send(result);
+      });
+    }
   },
     add:{
     user : (req, res) => {

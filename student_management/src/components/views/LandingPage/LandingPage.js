@@ -1,5 +1,36 @@
 import React, { Component } from 'react';
+import { Table, } from 'antd';
+import './LandingPage.css'
 import axios from 'axios';
+
+const columns = [
+  {
+    title: 'ID',
+    dataIndex: 'userID',
+    key: 'id',
+  },
+  {
+    title: 'Name',
+    dataIndex: 'userName',
+    key: 'name',
+  },
+  
+  {
+    title: 'Password',
+    dataIndex: 'userPassword',
+    key: 'pw',
+  },
+  {
+    title: '이메일',
+    dataIndex: 'userEmail',
+    key: 'email',
+  },
+  {
+    title: '주소',
+    dataIndex: 'userAddress',
+    key: 'add',
+  },
+];
 
 class LandingPage extends Component{
 
@@ -11,46 +42,37 @@ class LandingPage extends Component{
           update : false,
         }    
       }
-
-        _getData = async () => {
-          const res = await axios.get('/get/data');
-          if(res.data[0] === undefined) {
-            let cover = [];
-            cover.push(res.data);
-            return this.setState({ list : cover })
-          }
-          this.setState({ list : res.data });
-        }
     
+    componentDidMount(){
+      this._getData()
+    }
+
+    _getData = async () => {
+      const res = await axios.get('/api/user');
+      if(res.data[0] === undefined) {
+        let cover = [];
+        cover.push(res.data);
+        return this.setState({ list : cover })
+      }
+      this.setState({ list : res.data });
+    }
+
+
     render(){
         const { list } = this.state;
+        console.log(list);
         return(
-            <div className="LandingPage">
-                <br /> <br />
-          <div style={{ height : '250px', overflow : 'auto' }}>
-            <h4 style={{ color : '#ababab'}}> Users List </h4>
-
-              <div style={{ border : 'solid 1px black', width : '50%', marginLeft : '25%', textAlign : 'left' }}>
-                <div style={{ display : 'grid', gridTemplateColumns : '32% 35% 30%', textAlign : 'center' }}>
-                  <div> Number </div>
-                  <div> Name </div>
-                  <div> Other </div>
-                </div>
-              </div>
-
+          <div className="table_menu">
+            <h3>유저 정보</h3>
+            <div className="table_user">
+           
             {list.length !== 0
-              ? list.map( (el, key) => {
-                return(
-                  <div key={key} style={{ display : 'grid', lineHeight : '40px', gridTemplateColumns : '32% 35%', width : '50%', marginLeft : '25%'}}>
-                    <div> {el.userID} </div>
-                    <div> {el.userName} </div>
-                  </div>
-                )
-              })
-            
+              ? 
+              <Table dataSource={list} columns={columns} size="small"/>
               : null}
           </div>
-            </div>
+          </div>
+            
         )};
 }
 

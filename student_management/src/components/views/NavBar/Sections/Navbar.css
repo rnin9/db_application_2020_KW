@@ -1,22 +1,17 @@
 @import '~antd/dist/antd.css';
-
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 .menu {
   padding: 0 20px;
   border-bottom: solid 1px #e8e8e8;
   overflow: auto;
   box-shadow: 0 0 30px #f3f1f1;
   background-color: white;
-}
-
-.menu__logo {
-  width: 180px;
-  float: left;
-}
-
-.menu__logo a {
-  display: inline-block;
-  font-size: 20px;
-  padding: 19px 20px;
+  font-family: S-CoreDream-3Light;
 }
 
 .menu__container .ant-menu-item {
