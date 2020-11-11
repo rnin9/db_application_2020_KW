@@ -27,14 +27,14 @@ const layout2={
 }}
 
 
-const collegeData = ['소프트웨어융합대학', '전자정보공과대학','자연대학'];
+const collegeData = ['소프트웨어융합대학', '전자정보공과대학','자연대학'];    // 단과대학, 전공 데이터
 const majorData = {
   소프트웨어융합대학: ['컴퓨터정보공학부', '소프트웨어학부', '정보융합학부'],
   전자정보공과대학: ['컴퓨터공학과', '전자공학과', '전자재료공학과'],
   자연대학: ['수학과', '전자바이오물리학과'],
 };
 
-const validateMessages = {
+const validateMessages = {            // Validation check
   required: '${label} is Required',
   types: {
     email: '${label}이 아닙니다!', 
@@ -44,7 +44,7 @@ const validateMessages = {
   }
 };
 
-const onFinish = values => {
+const onFinish = values => {                      // 제출 시 , POST 형식으로 /add/user request, response 대기
   const datas={ id: values.user.ID,
                password: values.user.password,
                name: values.user.name,
@@ -56,7 +56,7 @@ const onFinish = values => {
                email:values.user.email,
                address:values.user.address
                };             
-    axios('/add/user',{ method: 'POST', headers: new Headers(), data: datas})
+    axios('/add/user',{ method: 'POST', headers: new Headers(), data: datas}) // 성공, 실패시 메시지
     .then(res=>{
       if(res.data){
       message.success("회원가입에 성공했습니다!")
@@ -70,13 +70,13 @@ const onFinish = values => {
 class Register extends Component{
 
   state = {
-    majors: majorData[collegeData[0]],
+    majors: majorData[collegeData[0]],    // 기본 state설정
     major: majorData[collegeData[0]][0],
     college: collegeData[0],
 
   };
 
-  handleCollegeChange = value => {
+  handleCollegeChange = value => {  // 단과대학 변할 때 state 변화
     this.setState({
       majors: majorData[value],
       major: majorData[value][0],
@@ -84,7 +84,7 @@ class Register extends Component{
     });
   };
 
-  onMajorChange = value => {
+  onMajorChange = value => {      // 전공 선택시
     this.setState({
       major: value,
     });

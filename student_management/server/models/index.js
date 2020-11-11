@@ -14,7 +14,7 @@ let sequelize = new Sequalize(
     config,{
         define:{
             charset:'utf8',
-            collate:'utf8_genetal_ci'
+            collate:'utf8_genetal_ci'                   //db 연결
         }
     });
 
@@ -27,7 +27,7 @@ let sequelize = new Sequalize(
         console.log('Connection has been established Successfully!') // mysql잘 연동됨
     })
     .catch(err=>{
-        console.log('Unable to connect to the DB',err);
+        console.log('Unable to connect to the DB',err);     // 연결 에러시, 출력
     });
 
     db.USER = require('./USER')(sequelize,Sequalize);

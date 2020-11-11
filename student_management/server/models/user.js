@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) =>{
-    return sequelize.define('USER',{
+    return sequelize.define('USER',{   // User 데이터 정의
      userID:{
          type: DataTypes.STRING(30),
          allowNull: false,

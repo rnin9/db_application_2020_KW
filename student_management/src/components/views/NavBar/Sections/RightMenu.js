@@ -10,19 +10,19 @@ function RightMenu(props) {
     <div className="menu_right">
     <Menu mode="horizontal">
     {!login? <Menu.Item key="rightLogin">
-      <a href="/login" style={{fontSize:20}}> 
+      <a href="/login" style={{fontSize:15}}> {/*3항 연산자로 로그인시, 아닐시 보일 view 설정*/}
       로그인
       </a>
     </Menu.Item>:
     <Menu.Item key="rightLogin" onClick={()=>props._logout()}>
-    <a style={{fontSize:20}}>
+    <a style={{fontSize:15}}>
       로그아웃
     </a>
   </Menu.Item>
 }  
     
   {!login?<Menu.Item key="rightRegister">
-      <a href="/register" style={{fontSize:20}}>
+      <a href="/register" style={{fontSize:15}}>
       <DingtalkOutlined/>
         회원가입
       </a>

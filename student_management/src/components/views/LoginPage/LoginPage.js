@@ -23,13 +23,13 @@ const onFinish = (values) => {
   axios('/api/sendLogin',{ 
   method: 'POST', headers: new Headers(), data: datas})
   .then(res =>{
-        if(res.data.success){
+        if(res.data.success){         // 받은 데이터 확인
         message.success('로그인에 성공했습니다!')
         sessionStorage.setItem('login', true);
-        return window.location.href='/';
+        return window.location.href='/';    //성공!
         }
         else
-        message.error('로그인에 실패했습니다.')
+        message.error('로그인에 실패했습니다.') // 실패!
   })
   .catch(err=>{
     console.log(err);

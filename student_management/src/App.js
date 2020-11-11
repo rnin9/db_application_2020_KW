@@ -15,11 +15,11 @@ class App extends Component {
     super(props)
     this.state = {
       login: false,
-      admin: false,    
+      admin: false,           // 기본 state  admin은 직원, 교수용
     }
   }
   componentDidMount(){
-    if(sessionStorage.login)
+    if(sessionStorage.login)    // session이 login상태이면, login true
       this.setState({ 
         login : true,        
       })
@@ -28,20 +28,20 @@ class App extends Component {
  
   _login =()=>{    
     this.setState({ login : true})
-      return sessionStorage.setItem('login',true);
+      return sessionStorage.setItem('login',true);    // login 시 실행
   }
 
   _logout =()=>{
     this.setState({ login : false})
-    return sessionStorage.removeItem('login');
+    return sessionStorage.removeItem('login');      // logout 시 실행
   }
 
   render() {
     const {login, admin} = this.state;
-    const { _login, _logout} = this;
+    const { _login, _logout} = this;      // login , 권한정보 설정
     return(
       <div className='App'>
-        <NavBar login={login} _login={_login} _logout={_logout}/>
+        <NavBar login={login} _login={_login} _logout={_logout}/>       {/*path routing* , 정보 담아서 state or props로 사용*/}
         <BrowserRouter>
           <Route exact path="/" component={LandingPage}></Route>
           <Route exact path="/register" component={Register}></Route>

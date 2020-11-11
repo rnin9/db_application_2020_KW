@@ -9,7 +9,7 @@ sequelize.query('SET NAMES utf8;');
 module.exports ={
 
     api:{
-        searchUser :(body,callback) =>{
+        searchUser :(body,callback) =>{     // 데이터를 이용해서 쿼리 수행
             USER.findAll({
                 where: {[Op.and]: [{userID: body.id, userPassword: body.password}]}
             })
@@ -20,10 +20,10 @@ module.exports ={
                 throw err;
             })
         },
-        getUser:(callback) =>{
+        getUser:(callback) =>{        // 쿼리만 수행 (get)
             USER.findAll()
             .then(data=>{
-                callback(data)
+                callback(data)        // data를 controller로 보냄,
             })
             .catch(err=>{
                 throw err;

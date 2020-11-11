@@ -48,10 +48,10 @@ class LandingPage extends Component{
     }
 
     _getData = async () => {
-      const res = await axios.get('/api/user');
+      const res = await axios.get('/api/user');     
       if(res.data[0] === undefined) {
         let cover = [];
-        cover.push(res.data);
+        cover.push(res.data);       // response 데이터들 push
         return this.setState({ list : cover })
       }
       this.setState({ list : res.data });
@@ -60,7 +60,6 @@ class LandingPage extends Component{
 
     render(){
         const { list } = this.state;
-        console.log(list);
         return(
           <div className="table_menu">
             <h3>유저 정보</h3>
