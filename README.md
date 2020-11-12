@@ -35,4 +35,9 @@ ____________________________________________
 
 ### 2020-11-11
 * alert message customizing
-* Landing page Design
+* Landing page Design (select * from USER)
+* add comment
+
+### 2020-11-12
+* session -> local storage change ( for friend Page)
+* navBar -> Header , + New Nav(side Menu)

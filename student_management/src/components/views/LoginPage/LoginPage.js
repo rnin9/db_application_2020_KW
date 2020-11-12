@@ -25,7 +25,7 @@ const onFinish = (values) => {
   .then(res =>{
         if(res.data.success){         // 받은 데이터 확인
         message.success('로그인에 성공했습니다!')
-        sessionStorage.setItem('login', true);
+        localStorage.setItem('login', true);
         return window.location.href='/';    //성공!
         }
         else

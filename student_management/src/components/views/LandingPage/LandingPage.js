@@ -60,6 +60,7 @@ class LandingPage extends Component{
 
     render(){
         const { list } = this.state;
+        
         return(
           <div className="table_menu">
             <h3>유저 정보</h3>
@@ -67,7 +68,7 @@ class LandingPage extends Component{
            
             {list.length !== 0
               ? 
-              <Table dataSource={list} columns={columns} size="small"/>
+              <Table dataSource={list} columns={columns} size="small" rowKey="userID"/>
               : null}
           </div>
           </div>
