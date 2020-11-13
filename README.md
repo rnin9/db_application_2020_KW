@@ -40,4 +40,4 @@ ____________________________________________
 
 ### 2020-11-12
 * session -> local storage change ( for friend Page)
-* navBar -> Header , + New Nav(side Menu)
+* NavBar -> Header , + New Nav(side bar)
