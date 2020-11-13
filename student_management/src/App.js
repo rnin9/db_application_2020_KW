@@ -16,13 +16,18 @@ class App extends Component {
     super(props)
     this.state = {
       login: false,
-      admin: false,           // 기본 state  admin은 직원, 교수용
+      position: "",           // 기본 state  admin은 직원, 교수용
+      id:"",
+      name:""
     }
   }
   componentDidMount(){
     if(localStorage.login)   // session이 login상태이면, login true
       this.setState({ 
-        login : true,        
+        login : true,
+        position : localStorage.getItem('position'),
+        id : localStorage.getItem('id'),
+        name : localStorage.getItem('name')  
       })
     }
   
@@ -34,15 +39,16 @@ class App extends Component {
 
   _logout =()=>{
     this.setState({ login : false})
-    return localStorage.removeItem('login');      // logout 시 실행
+    return localStorage.clear();      // logout 시 실행
   }
 
   render() {
-    const {login, admin} = this.state;
+    const {login, position, name, id} = this.state;
+    console.log(this.state);
     const { _login, _logout} = this;      // login , 권한정보 설정
     return(
       <Suspense fallback={(<div>Loading...</div>)}>
-      <Header login={login} _login={_login} _logout={_logout}/>     {/*path routing* , 정보 담아서 state or props로 사용*/}
+      <Header login={login} id={id} name ={name}  _logout={_logout}/>     {/*path routing* , 정보 담아서 state or props로 사용*/}
       <NavBar login={login}/>
         <div className='App'>        
         <BrowserRouter>

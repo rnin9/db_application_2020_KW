@@ -9,6 +9,9 @@ module.exports = {
       var obj={};
       if(result[0]){                
         obj['success'] = true;
+        obj['id'] = result[0].dataValues.userID;
+        obj['name'] = result[0].dataValues.userName;
+        obj['position'] = result[0].dataValues.userPosition; //로그인시 정보 보내기
          
       } else{
         obj['success'] = false;
@@ -20,6 +23,7 @@ module.exports = {
     user :(req, res)=>{        //api key를 이용한 values (user)
       model.api.getUser(result=>{
           res.send(result);     // result를 대기했던 axios로 전달
+    
       });
     }
   },

@@ -14,5 +14,6 @@
       background-color: white;
       display: flex;
       float: left;
+      max-height: 640px;
   }
   

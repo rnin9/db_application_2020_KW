@@ -26,6 +26,9 @@ const onFinish = (values) => {
         if(res.data.success){         // 받은 데이터 확인
         message.success('로그인에 성공했습니다!')
         localStorage.setItem('login', true);
+        localStorage.setItem('position',res.data.position);
+        localStorage.setItem('id',res.data.id);
+        localStorage.setItem('name',res.data.name);
         return window.location.href='/';    //성공!
         }
         else

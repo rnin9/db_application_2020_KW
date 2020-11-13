@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, } from 'antd';
+import { AutoComplete, Table, } from 'antd';
 import './LandingPage.css'
 import axios from 'axios';
 
@@ -62,14 +62,17 @@ class LandingPage extends Component{
         const { list } = this.state;
         
         return(
+          <div style={{margin: AutoComplete}}> 
           <div className="table_menu">
-            <h3>유저 정보</h3>
-            <div className="table_user">
+            <h2>유저 정보</h2>
+          </div>
+           <div className="table_user">
            
             {list.length !== 0
               ? 
               <Table dataSource={list} columns={columns} size="small" rowKey="userID"/>
               : null}
+          
           </div>
           </div>
             

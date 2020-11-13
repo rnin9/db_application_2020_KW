@@ -5,7 +5,7 @@ import React from 'react';
 const { SubMenu } = Menu;
 
 const handleClick = e => {
-  console.log('click ', e);
+  console.log('click ', e);     
 };
 
 function EmployeeBar(props) {

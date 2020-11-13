@@ -7,11 +7,10 @@
 .table_menu{
     font-family: Chosunilbo_myungjo;
     margin-top :20px;
-    display: inline-block;
+    text-align: center;
 }
 .table_user{
-    
-    width: 600px;
+    display: inline-block;
+    width: 60vw;
     text-align-last: center;
-
 }
