@@ -14,9 +14,17 @@
   font-family: S-CoreDream-3Light;
 }
 
-.menu__container .ant-menu-item {
-  padding: 0px 5px;
+.menu__logo {
+  width: 180px;
+  float: left;
 }
+
+.menu__logo a {
+  display: inline-block;
+  font-size: 20px;
+  /* padding: 19px 20px; */
+}
+
 
 .menu__container .menu_left {
   float: left;
@@ -24,30 +32,4 @@
 
 .menu__container .menu_right {
   float: right;
-}
-
-
-align header of Drawer with header of page
-.menu_drawer .ant-drawer-header {
-  padding: 14px 24px !important;
-}
-
-@media (max-width: 767px) {
-  .menu__mobile-button {
-    display: inline-block !important;
-  }
-
-  .menu_left,
-  .menu_right {
-    display: none;
-  }
-
-  .menu__logo a {
-    margin-left: -20px;
-  }
-
-  .menu__container .ant-menu-item,
-  .menu__container .ant-menu-submenu-title {
-    padding: 1px 20px;
-  }
 }

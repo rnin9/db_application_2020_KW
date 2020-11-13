@@ -1,5 +1,5 @@
 import { Menu } from 'antd';
-import {FormOutlined} from '@ant-design/icons';
+import {  UserOutlined, FormOutlined, TeamOutlined} from '@ant-design/icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -7,9 +7,10 @@ import {MDBIcon}  from 'mdbreact';
 import React from 'react';
 import '../NavBar.css';
 
+
 const { SubMenu } = Menu;
 
-function EmployeeBar(props) {
+function ProfessorBar(props) {
   return (
     
     // /*if position === student*/
@@ -23,9 +24,9 @@ function EmployeeBar(props) {
       key="sub1"
       title={
         <span>
-          <span style={{marginRight:10}}>
-          <MDBIcon icon="users" />    
-          </span>
+      <span style={{marginRight:10}}>
+      <MDBIcon far icon="address-book" />
+      </span>
           <span>학생관리</span>
         </span>
       }
@@ -38,29 +39,19 @@ function EmployeeBar(props) {
       key="sub2"
       title={
         <span>
-          <FormOutlined />
-          <span>휴학</span>
-        </span>
-      }
-    >
-      <Menu.Item key="3">휴학생 정보</Menu.Item>
-    </SubMenu>
-    <SubMenu
-      key="sub3"
-      title={
-        <span>
-        <span  style={{marginRight:10}}>
-          <MDBIcon icon="user-graduate"/>
+          <span style={{fontSize:13,marginRight:3}}>
+          <MDBIcon icon="chalkboard-teacher"/>
           </span>
-          <span>졸업</span>
+          <span> 강의관리</span>
         </span>
       }
     >
-      <Menu.Item key="4">졸업생 정보</Menu.Item>
-      <Menu.Item key="5">졸업사정</Menu.Item>
-    </SubMenu>    
+      <Menu.Item key="3">공지사항</Menu.Item>
+      <Menu.Item key="4">게시판</Menu.Item>
+    </SubMenu>  
   </Menu>  
   </div>
+
   )
 }
-export default EmployeeBar
+export default ProfessorBar

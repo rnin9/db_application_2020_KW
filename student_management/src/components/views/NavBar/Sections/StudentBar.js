@@ -1,65 +1,61 @@
 import { Menu } from 'antd';
-import {  AppstoreOutlined,SettingOutlined, MailOutlined,} from '@ant-design/icons';
+import {  UserOutlined, FormOutlined, TeamOutlined} from '@ant-design/icons';
 import React from 'react';
+import '../NavBar.css';
 
 const { SubMenu } = Menu;
 
-const handleClick = e => {
-  console.log('click ', e);
-};
-
 function StudentBar(props) {
-  const { login, admin, _login, _logout }  = props;   // props 사용
   return (
-    <Menu
-    onClick={handleClick}
+    
+    // /*if position === student*/
+
+  <div className="navigation" style={{height: '100vh'}}>
+   <Menu
     style={{ width: 256 }}
-    defaultSelectedKeys={['1']}
-    defaultOpenKeys={['sub1']}
     mode="inline"
   >
     <SubMenu
       key="sub1"
       title={
         <span>
-          <MailOutlined />
-          <span>Navigation One</span>
+          <UserOutlined />
+          <span>대학생활</span>
         </span>
       }
     >
-      <Menu.ItemGroup key="g1" title="Item 1">
-        <Menu.Item key="1">Option 1</Menu.Item>
-        <Menu.Item key="2">Option 2</Menu.Item>
+      <Menu.ItemGroup key="g1" title="수강관리">
+        <Menu.Item key="1">시간표</Menu.Item>
+        <Menu.Item key="2">수강신청</Menu.Item>
       </Menu.ItemGroup>
-      <Menu.ItemGroup key="g2" title="Item 2">
-        <Menu.Item key="3">Option 3</Menu.Item>
-        <Menu.Item key="4">Option 4</Menu.Item>
+      <Menu.ItemGroup key="g2" title="학습결과">
+        <Menu.Item key="3">성적조회</Menu.Item>
+        <Menu.Item key="4">수강평가</Menu.Item>
       </Menu.ItemGroup>
-    </SubMenu>
-    <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-      <Menu.Item key="5">Option 5</Menu.Item>
-      <Menu.Item key="6">Option 6</Menu.Item>
-      <SubMenu key="sub3" title="Submenu">
-        <Menu.Item key="7">Option 7</Menu.Item>
-        <Menu.Item key="8">Option 8</Menu.Item>
-      </SubMenu>
     </SubMenu>
     <SubMenu
-      key="sub4"
+      key="sub2"
       title={
         <span>
-          <SettingOutlined />
-          <span>Navigation Three</span>
+          <FormOutlined />
+          <span>학습지원</span>
         </span>
       }
     >
-      <Menu.Item key="9">Option 9</Menu.Item>
-      <Menu.Item key="10">Option 10</Menu.Item>
-      <Menu.Item key="11">Option 11</Menu.Item>
-      <Menu.Item key="12">Option 12</Menu.Item>
+      <Menu.Item key="5">공지사항</Menu.Item>
+      <Menu.Item key="6">게시판</Menu.Item>
+      <Menu.Item key="7">휴학신청</Menu.Item>
     </SubMenu>
-  </Menu>
+    <SubMenu key="sub3" icon={<TeamOutlined />} title="친구">
+      <Menu.Item key="8">친구관리</Menu.Item>
+      <SubMenu key="sub4" title="공유">
+        <Menu.Item key="9">시간표</Menu.Item>
+        <Menu.Item key="10">성적</Menu.Item>
+      </SubMenu>
+    </SubMenu>
+  </Menu>  
+  </div>
+
   )
 }
-
 export default StudentBar

@@ -5,7 +5,7 @@ import './Header.css';
 
 
 function Header(props) {
-  const { login, _logout, id, name }  = props;   // props 사용
+  const { login, _logout, name, id }  = props;   // props 사용
   return (
     <nav className="menu">
       <div className="menu__container">             {/*left menu 설정 */}
@@ -13,7 +13,7 @@ function Header(props) {
             <LeftMenu mode="horizontal" />          
           </div>
           <div className="menu_right">
-            <RightMenu login={login} _logout={_logout} id={id} name={name} mode="horizontal" /> {/*left menu 설정, Login상태에 따라 변함 */}
+            <RightMenu login={login} _logout={_logout} name={name} id={id} mode="horizontal" /> {/*left menu 설정, Login상태에 따라 변함 */}
           </div>
         </div>
     </nav>

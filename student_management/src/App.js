@@ -49,7 +49,7 @@ class App extends Component {
     return(
       <Suspense fallback={(<div>Loading...</div>)}>
       <Header login={login} id={id} name ={name}  _logout={_logout}/>     {/*path routing* , 정보 담아서 state or props로 사용*/}
-      <NavBar login={login}/>
+      <NavBar login={login} position={position}/>
         <div className='App'>        
         <BrowserRouter>
           <Route exact path="/" component={LandingPage}></Route>

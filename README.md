@@ -41,3 +41,6 @@ ____________________________________________
 ### 2020-11-12
 * session -> local storage change ( for friend Page)
 * NavBar -> Header , + New Nav(side bar)
+
+### 2020-11-13
+* My page, diffrent sidebar By authority
