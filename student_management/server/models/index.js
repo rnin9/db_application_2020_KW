@@ -31,6 +31,10 @@ let sequelize = new Sequalize(
     });
 
     db.USER = require('./USER')(sequelize,Sequalize);
+    db.GRADE = require('./GRADE')(sequelize,Sequalize);
+    db.EVALUATION = require('./EVALUATION')(sequelize,Sequalize);
+    db.TAG = require('./TAG')(sequelize,Sequalize);
+    db.UPVOTE = require('./UPVOTE')(sequelize,Sequalize);
 
 db.secret = '(9*)5$&!3%^0%^@@2$1!#5@2!4';
 module.exports = db;

@@ -29,7 +29,11 @@ function StudentBar(props) {
         <Menu.Item key="2">수강신청</Menu.Item>
       </Menu.ItemGroup>
       <Menu.ItemGroup key="g2" title="학습결과">
-        <Menu.Item key="3">성적조회</Menu.Item>
+        <Menu.Item key="3">
+        <a className="logo" href="/user/grade">
+          성적조회
+        </a>
+        </Menu.Item>
         <Menu.Item key="4">수강평가</Menu.Item>
       </Menu.ItemGroup>
     </SubMenu>

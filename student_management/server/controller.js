@@ -32,6 +32,12 @@ module.exports = {
         if(result[0])
         res.send(result);
         });
+    },
+    userGrade:(req, res)=>{
+      model.api.getUserGrade(result=>{
+        res.send(result);     // result를 대기했던 axios로 전달
+  
+    });
     }
   },
     add:{
@@ -42,7 +48,6 @@ module.exports = {
     });
     },
   },
-
   update:{
     userInfo : (req, res)=>{
       const data = req.body
@@ -51,4 +56,4 @@ module.exports = {
     })
     }
   }
-} 
+}

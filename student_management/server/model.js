@@ -4,6 +4,7 @@ const { Op } = Sequelize;
 const {
     USER  
   } = require('./models');
+const { GRADE } = require('./models');
 sequelize.query('SET NAMES utf8;');
 
 module.exports ={
@@ -32,6 +33,18 @@ module.exports ={
         getUserInfo:(body,callback)=>{
             USER.findAll({
                 where: {userID:body}
+            })
+            .then(data=>{
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserGrade:(callback)=>{
+            GRADE.findAll({
+                //where: {userID:body},
+                //include: COURSE
             })
             .then(data=>{
                 callback(data)
