@@ -54,7 +54,8 @@ function MyInfoPage(props){
                  <InfoLeft info={data}/>
              </div>
              <div className="my_right_info">
-              {auth ==='학부생' || auth==='대학원' ? <InfoStudent/>: <span>학생아님ㅋ</span>}   
+              {/* {auth ==='학부생' || auth==='대학원' ? <InfoStudent/>: <span>학생아님ㅋ</span>}    */}
+                <InfoStudent/>
              </div>
         </div>
 

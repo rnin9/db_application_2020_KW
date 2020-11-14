@@ -1,5 +1,8 @@
 import React from 'react'
-import { Image } from 'antd';
+import { Image, Button } from 'antd';
+import { SettingTwoTone }from '@ant-design/icons'
+import sample from './Upload/sample.jpg'
+import './MyInfoPage.css'
 
 function InfoLeft(props){
     const leftInfo ={photo:'',id:'',name:'',position:''}        // 사용할 정보만 뺴냄.
@@ -7,14 +10,18 @@ function InfoLeft(props){
    
     
     return(
-        <div className="head">
-            <div className="photo">
-            <Image width={200}
-                src='./Upload/sample.jpg'
-            />
+        <div>
+        <div className="photo">
+            <Image width={200} src={sample} />
+        </div>
+        <div className="item">
+            <div style={{paddingTop:20, paddingBottom:20, color:"white"}}>
+            <h4 style={{ color:"white" }}>{info.id}</h4>
             </div>
-            <div>
-    <span>{info.id}/ {info.name}({info.position})</span>
+            <p style={{fontSize:20, paddingBottom:20}}>{info.name}  [{info.position}]</p> 
+        </div>    
+            <div style={{paddingBottom:20}}>
+            <Button><SettingTwoTone style={{paddingBottom:20}} /></Button>
             </div>
         </div>
     );

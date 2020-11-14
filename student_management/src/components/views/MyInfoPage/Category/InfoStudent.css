@@ -1,0 +1,41 @@
+.right_page{
+    margin-bottom: 25px;
+}
+
+.right_page h3{
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    color: #353c4e;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+.right_page .info_data,
+.right_page .info_data2,
+.right_page .info_data3
+{
+    display: flex;
+    padding: 25px 20px;
+
+}
+
+.right_page .info_data .data{
+    margin-left:60px;
+}
+
+.right_page .info_data2 .data{
+    margin-left: 85px;
+}
+
+.right_page .info_data3 .data{
+    margin-left: 20px;
+}
+
+.right_page .info_data .data p,
+.right_page .info_data2 .data p,
+.right_page .info_data3 .data p{
+
+    color:#4e70be;
+}
+
+
