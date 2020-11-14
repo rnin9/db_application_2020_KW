@@ -42,4 +42,13 @@ module.exports = {
     });
     },
   },
-}
+
+  update:{
+    userInfo : (req, res)=>{
+      const data = req.body
+    model.update.setUserInfo(data, result=>{
+      res.send(result);
+    })
+    }
+  }
+} 

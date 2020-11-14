@@ -46,4 +46,4 @@ ____________________________________________
 * My page, diffrent sidebar By authority
 
 ## 2020-11-14
-* UI update, My page design
+* UI update, My page design, Edit UserData (except Photo)

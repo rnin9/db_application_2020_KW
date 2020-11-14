@@ -1,0 +1,68 @@
+@import '~antd/dist/antd.css';
+@font-face {
+    font-family: 'Chosunilbo_myungjo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.reg h2{
+    display: inline-block;
+    margin-top: 20px;
+}
+.reg_font2{
+    font-family: Chosunilbo_myungjo;
+    display: flex;
+    text-align: center;
+ }
+.college{
+    width: '250px';
+    display: inline-block;
+    margin-right:40px;
+}
+.id{
+    width: "250px";
+    display: inline-block;
+}
+.pw{
+    width: "250px";
+    display: inline-block;
+    margin-left: 20px;
+}
+.major{
+    width: '250px';
+    display: inline-block;
+    margin-right: 45px;
+}
+.gender{
+    width: '250px';
+    display: inline-block;
+    margin-left:23px;
+}
+.grade{
+    width: "250px";
+    display: inline-block;
+    margin-left:15px;
+    margin-right: 10px;
+}
+.position{
+    width: "250px";
+    display: inline-block;
+}
+.email{
+    width: '250px';
+    display: inline-block;
+    margin-right: 10px;
+}
+.address{
+    width: "250px";
+    display: inline-block;
+    margin-right:15px;
+}
+
+.ant-form-item-explain{
+    width:"250px";
+    color: #ff4d4f;
+    display: inline-block !important;
+}
+

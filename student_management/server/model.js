@@ -49,7 +49,7 @@ module.exports ={
             })
             .then(cnt => {
               if(cnt > 0) {
-                   callback(false);     // 확인하는함수
+                   callback(false);     // 중복 확인하는함수
                }
                else{
                     USER.create({
@@ -67,6 +67,22 @@ module.exports ={
                 }
             })
         } 
+    },
+    update:{
+        setUserInfo:(body,callback)=>{      // 유저정보 업데이트
+            USER.update(
+                {userPassword: body.password,
+                 userAddress: body.address,
+                 userEmail : body.email},
+                {where: {userID: body.id}})
+        .then(result => {
+         callback(true);
+         })
+        .catch(err => {
+         callback(false);
+          throw err;
+         });
+        }
     }
        
 }
