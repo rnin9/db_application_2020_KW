@@ -1,43 +1,32 @@
 import React from 'react'
+import { Descriptions, Badge } from 'antd';
 import './InfoStudent.css'
 
 
-function InfoStudent(){
+function InfoStudent(props){
+    const leftInfo ={address:'',email:'',grade:'',leaveofabsense:0,college:'',major:''}        // 사용할 정보만 뺴냄.
+    const info = Object.assign(leftInfo, props.info.data)       // 유저 상세정보!
 
     return(
         <div className="right_page">
             <h3>information</h3>
             <div className="info_data">
-                <div className="data">
-                    <h4>단과대학</h4>
-                    <p>소프트웨어융합대학</p>
-                </div>
-                <div className="data">
-                    <h4>전공</h4>
-                    <p>컴퓨터정보공학부</p>
-                </div>
-            </div>
-            <div className="info_data2">
-                <div className="data">
-                    <h4>학적상태</h4>
-                    <p>재학</p>
-                </div>
-                <div className="data">
-                    <h4>phone</h4>
-                    <p>010-1234-5697</p>
-                </div>
-            </div>
-            <div className="info_data3">
-                <div className="data">
-                    <h4>Email</h4>
-                    <p>rkdalswn1209@naver.com</p>
-                </div>
-                <div className="data">
-                    <h4>주소</h4>
-                    <p>경기도 부천시 원미구</p>
-                </div>
+            <Descriptions bordered>
+    <Descriptions.Item label="학번" span={3}>{info.grade}</Descriptions.Item>
+    <Descriptions.Item label="단과대학"span={3}>{info.college}</Descriptions.Item>
+    <Descriptions.Item label="전공" span={3}>{info.major}</Descriptions.Item>
+    <Descriptions.Item label="학적상태" span={3}>
+        {info.leaveofabsense==0 ?
+      <Badge status="processing" text="재학중" />:
+      <Badge status="error" text="휴학중" />     
+    }
+    </Descriptions.Item>
+    <Descriptions.Item label="이메일"span={3}>{info.email}</Descriptions.Item>
+<Descriptions.Item label="주소" span={3}>{info.address}</Descriptions.Item>
+  </Descriptions> 
             </div>
         </div>
+
     );
 }
 

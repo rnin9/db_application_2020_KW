@@ -9,7 +9,7 @@
     font-family:Binggrae-Bold;
     position: absolute;
     top:50%;
-    left:60%;
+    left:50%;
     transform: translate(-50%,-50%);
     width: 800px;
     display: flex;
@@ -18,7 +18,7 @@
 
 .my_left_info{
     width: 35%;
-    background: linear-gradient(to right, #112749, #8583e0);
+    background: linear-gradient(to right, #9abdf1, #c2c2eb);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     padding: 60px 25px 0px 25px;
@@ -33,7 +33,7 @@
 }
 
 .my_right_info{
-    width: 70%;
+    width: 100%;
     background: white;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;

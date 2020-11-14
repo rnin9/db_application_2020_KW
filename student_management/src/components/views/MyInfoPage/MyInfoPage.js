@@ -5,9 +5,9 @@ import InfoStudent from './Category/InfoStudent'
 
 function MyInfoPage(props){
    const userID = localStorage.getItem('id');
-   const auth = localStorage.getItem('position')
+   const auth = localStorage.getItem('position')    // 권한별 다른 form으로,
 
-   const [data, setData] = useState({
+   const [data, setData] = useState({               // function에서 state 사용
     id:'',
     name:'',
     photo:'',
@@ -55,7 +55,7 @@ function MyInfoPage(props){
              </div>
              <div className="my_right_info">
               {/* {auth ==='학부생' || auth==='대학원' ? <InfoStudent/>: <span>학생아님ㅋ</span>}    */}
-                <InfoStudent/>
+                <InfoStudent info={data}/>
              </div>
         </div>
 

@@ -1,6 +1,6 @@
 /* src/app.js */
 
-import React, { Component, Suspense } from 'react';
+import React, { Component, Suspense, Switch } from 'react';
 import { Route, BrowserRouter} from 'react-router-dom';
 import Register from './components/views/RegisterPage/RegisterPage.js'
 import LandingPage from './components/views/LandingPage/LandingPage.js'
@@ -9,6 +9,7 @@ import Friend from './components/views/FriendPage/FriendPage.js'
 import Login from './components/views/LoginPage/LoginPage.js'
 import NavBar from './components/views/NavBar/NavBar.js'
 import MyInfoPage from './components/views/MyInfoPage/MyInfoPage.js'
+import MyInfoEditPage from './components/views/MyInfoPage/Edit/MyInfoEditPage'
 import './App.css';
 // import axios from 'axios';
 
@@ -58,6 +59,7 @@ class App extends Component {
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/friend" component={Friend}></Route>
           <Route exact path="/user/info" component={MyInfoPage}></Route>  
+          <Route exact path="/user/info/modify/:id/:name" component={MyInfoEditPage}></Route>
         </BrowserRouter>        
     </div>
     </Suspense>
