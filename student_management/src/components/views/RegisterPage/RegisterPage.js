@@ -36,11 +36,14 @@ const majorData = {
 };
 
 const validateMessages = {            // Validation check
+  // eslint-disable-next-line
   required: '${label} is Required',
   types: {
+    // eslint-disable-next-line
     email: '${label}이 아닙니다!', 
     number: '학생이 아니면,"0"을 입력하세요!',
-    password:' ${label}를 작성해 주세요!',  
+    // eslint-disable-next-line
+    password:'${label}를 작성해 주세요!',  
     ID:'유효한 ID가 아닙니다! 학번을 작성해주세요',
   }
 };
@@ -157,8 +160,7 @@ class Register extends Component{
       </div>
       <div>
       <div className="grade">
-      <Form.Item name={['user', 'grade']} label="학번" rules={[{type: 'number', min: 0, max: 22 }]}
-      rules={[{ required: true }]}>
+      <Form.Item name={['user', 'grade']} label="학번" rules={[{type: 'number', min: 0, max: 22 },{required:true}]}>
         <InputNumber style={{ width:300 }}/>
       </Form.Item>
       </div>

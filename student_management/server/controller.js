@@ -25,6 +25,13 @@ module.exports = {
           res.send(result);     // result를 대기했던 axios로 전달
     
       });
+    },
+    userInfo:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserInfo(body,result=>{
+        if(result[0])
+        res.send(result);
+        });
     }
   },
     add:{

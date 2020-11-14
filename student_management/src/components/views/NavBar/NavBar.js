@@ -1,13 +1,12 @@
-import { Menu } from 'antd';
 import React from 'react';
-import StduentBar from './Sections/StudentBar.js'
-import ProfessorBar from './Sections/ProfessorBar.js'
-import EmployeeBar from './Sections/EmployeeBar'
+import StduentBar from './Category/StudentBar.js'
+import ProfessorBar from './Category/ProfessorBar.js'
+import EmployeeBar from './Category/EmployeeBar'
 
 import './NavBar.css';
 
 function NavBar(props) {
-  const { login, position, _login, _logout }  = props;   // props 사용
+  const { login, position}  = props;   // props 사용
   return (
     // /*if admin => EmpolyeeBar else StduentBar*/
   <div className="navigation" style={{height: '100vh'}}>

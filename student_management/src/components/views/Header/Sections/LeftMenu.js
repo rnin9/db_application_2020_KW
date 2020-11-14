@@ -15,12 +15,12 @@ function LeftMenu() {
       </a>
     </Menu.Item>
     <Menu.Item key="KW" >
-      <a style={{marginLeft:2},{fontSize:15}} href="https://www.kw.ac.kr"  target="_blank" rel="noopener noreferrer" >
+      <a style={{marginLeft:2,fontSize:15}} href="https://www.kw.ac.kr"  target="_blank" rel="noopener noreferrer" >
       KW
       </a>
     </Menu.Item>
     <Menu.Item key="KLAS">
-      <a style={{marginLeft:2}} target="_blank" rel="noopener noreferrer" href="https://klas.kw.ac.kr" style={{fontSize:15}}>
+      <a style={{marginLeft:2,fontSize:15}} target="_blank" rel="noopener noreferrer" href="https://klas.kw.ac.kr">
       KLAS
       </a>
     </Menu.Item>

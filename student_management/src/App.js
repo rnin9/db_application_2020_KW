@@ -8,6 +8,7 @@ import Header from './components/views/Header/Header.js'
 import Friend from './components/views/FriendPage/FriendPage.js'
 import Login from './components/views/LoginPage/LoginPage.js'
 import NavBar from './components/views/NavBar/NavBar.js'
+import MyInfoPage from './components/views/MyInfoPage/MyInfoPage.js'
 import './App.css';
 // import axios from 'axios';
 
@@ -44,18 +45,19 @@ class App extends Component {
 
   render() {
     const {login, position, name, id} = this.state;
-    console.log(this.state);
     const { _login, _logout} = this;      // login , 권한정보 설정
     return(
       <Suspense fallback={(<div>Loading...</div>)}>
       <Header login={login} id={id} name ={name}  _logout={_logout}/>     {/*path routing* , 정보 담아서 state or props로 사용*/}
       <NavBar login={login} position={position}/>
+        
         <div className='App'>        
         <BrowserRouter>
           <Route exact path="/" component={LandingPage}></Route>
           <Route exact path="/register" component={Register}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/friend" component={Friend}></Route>
+          <Route exact path="/user/info" component={MyInfoPage}></Route>  
         </BrowserRouter>        
     </div>
     </Suspense>

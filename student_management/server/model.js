@@ -29,6 +29,17 @@ module.exports ={
                 throw err;
             })
         },
+        getUserInfo:(body,callback)=>{
+            USER.findAll({
+                where: {userID:body}
+            })
+            .then(data=>{
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
     },
 
     add:{

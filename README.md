@@ -44,3 +44,6 @@ ____________________________________________
 
 ### 2020-11-13
 * My page, diffrent sidebar By authority
+
+## 2020-11-14
+* UI update, My page design
