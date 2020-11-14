@@ -45,5 +45,10 @@ ____________________________________________
 ### 2020-11-13
 * My page, diffrent sidebar By authority
 
-## 2020-11-14
+### 2020-11-14
 * UI update, My page design, Edit UserData (except Photo)
+
+### 2020-11-15
+* oyh
+  * Add sequelize db
+  * Add Grade page
