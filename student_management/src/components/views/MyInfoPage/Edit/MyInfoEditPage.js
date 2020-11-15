@@ -9,37 +9,14 @@ function MyInfoEditPage({match}){
     const layout = {
         labelCol: { 
           xs:{span:24},
-          sm:{span:6},
+          sm:{span:5},
          },
         wrapperCol: { 
           xs:{span: 24},
           sm:{span: 8},
       }
       };
-      
-      const layout2={
-        labelCol: { 
-          xs:{span:24},
-          sm:{span:3},
-         },
-        wrapperCol: { 
-          xs:{span: 24},
-          sm:{span: 10},
-      }}
-
-      const validateMessages = {            // Validation check
-        // eslint-disable-next-line
-        required: '${label} is Required',
-        types: {
-          // eslint-disable-next-line
-          email: '${label}이 아닙니다!', 
-          number: '학생이 아니면,"0"을 입력하세요!',
-          // eslint-disable-next-line
-          password:'${label}를 작성해 주세요!',  
-          ID:'유효한 ID가 아닙니다! 학번을 작성해주세요',
-        }
-      };
-
+    
     const id = match.params.id
     const name = match.params.name
     const [file, setFile] = useState(""); // 파일 base64
@@ -106,9 +83,13 @@ function MyInfoEditPage({match}){
     <div className="reg">
         <h2 style={{width:300, height:60}}><DingtalkOutlined/> 정보수정</h2>
       <div className="reg_font2">
-        <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} >
-
+      
+        <Form {...layout} name="nest-messages" onFinish={onFinish}>
+        <div>
+        <h4>{name}</h4>
+        </div>
         <div className="photoEdit">
+        
         <img src ={previewURL}/>
           <input type='file' 
           accept='image/jpg,impge/png,image/jpeg,image/gif' 
@@ -117,24 +98,15 @@ function MyInfoEditPage({match}){
         </input>
         </div>
 
-        <div className="pw">
-        <Form.Item name={['user','password']} label="비밀번호" rules={[{ required: true}]}>
-          <Input.Password style={{ width: 300 }} />
+        <Form.Item name={['user','password']} label="비밀번호">
+          <Input.Password style={{ width: 250 }} />
         </Form.Item>
-        </div> 
-  
-        <div>
-        <div className="email">
-        <Form.Item name={['user', 'email']} label="이메일" rules={[{type:'email', required: true }]}>
-          <Input style={{ width: 300 }} />
+        <Form.Item name={['user', 'email']} label="이메일">
+          <Input style={{ width: 250 }} />
         </Form.Item>
-        </div>
-        <div className="address">
-        <Form.Item name={['user', 'address']} label="주소">
-          <Input style={{width: 300 }} />
+       <Form.Item name={['user', 'address']} label="주소">
+          <Input style={{width: 250 }} />
         </Form.Item>
-        </div>
-        </div>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button type="primary" htmlType="submit">
             수정하기

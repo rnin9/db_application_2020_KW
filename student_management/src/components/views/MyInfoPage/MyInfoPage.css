@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-.mypage{
+.mypage {
     font-family:Binggrae-Bold;
     position: absolute;
     top:50%;
@@ -13,7 +13,9 @@
     transform: translate(-50%,-50%);
     width: 800px;
     display: flex;
-    box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    border-bottom-left-radius: 5px;
+
 }
 
 .my_left_info{

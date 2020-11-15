@@ -6,71 +6,46 @@
     font-style: normal;
 }
 
-.reg h2{
+.reg {
+    font-family: Chosunilbo_myungjo;
     display: inline-block;
     margin-top: 20px;
 }
+.reg h2{
+    margin-left: 30px;
+}
 .reg_font2{
-    font-family: Chosunilbo_myungjo;
     display: flex;
+    justify-content: center;
     text-align: center;
+    border-radius: 30px;
+    background: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding-right: 50px;
+    padding-left:50px;
  }
-.college{
-    width: '250px';
-    display: inline-block;
-    margin-right:40px;
-}
-.id{
-    width: "250px";
-    display: inline-block;
-}
-.pw{
-    width: "250px";
-    display: inline-block;
-    margin-left: 20px;
-}
-.major{
-    width: '250px';
-    display: inline-block;
-    margin-right: 45px;
-}
-.gender{
-    width: '250px';
-    display: inline-block;
-    margin-left:23px;
-}
-.grade{
-    width: "250px";
-    display: inline-block;
-    margin-left:15px;
-    margin-right: 10px;
-}
-.position{
-    width: "250px";
-    display: inline-block;
-}
-.email{
-    width: '250px';
-    display: inline-block;
-    margin-right: 10px;
-}
-.address{
-    width: "250px";
-    display: inline-block;
-    margin-right:15px;
+
+.reg_font2 h4{
+    padding:15px 0px;
+    border-bottom: 2px solid #e0e0e0;
+    letter-spacing: 5px;
+    
 }
 
-.ant-form-item-explain{
-    width:"250px";
-    color: #ff4d4f;
-    display: inline-block !important;
-}
-
-.photoEdit {
-    }
+ .photoEdit{
+    display: inline-block;
+ }
 .photoEdit img{
-    background-color: "#efefef";
-    max-width: 200px;
-    height: auto;
+    background:#f0f2f5;
+    width: 180px;
+    height: 200px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-radius: 10px;
+}
+.photoEdit input{
+    display: flex;
+    justify-content: center;
+    padding:10px;
+    margin-left:15%;
 }
 
