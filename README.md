@@ -55,3 +55,4 @@ ____________________________________________
 
 * rnin9
   * handle userPhoto
+  * Add AuthRouter <= prevent access of Not-allowed user
