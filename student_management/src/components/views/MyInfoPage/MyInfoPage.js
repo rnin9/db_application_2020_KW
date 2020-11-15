@@ -2,6 +2,8 @@ import React,{useState, useEffect} from 'react'
 import axios from 'axios'
 import InfoLeft from './InfoLeft'
 import InfoStudent from './Category/InfoStudent'
+import InfoEmployee from './Category/InfoEmployee'
+import InfoProfessor from './Category/InfoProfessor'
 
 function MyInfoPage(props){
    const userID = localStorage.getItem('id');
@@ -54,11 +56,10 @@ function MyInfoPage(props){
                  <InfoLeft info={data}/>
              </div>
              <div className="my_right_info">
-              {/* {auth ==='학부생' || auth==='대학원' ? <InfoStudent/>: <span>학생아님ㅋ</span>}    */}
-                <InfoStudent info={data}/>
+              {auth ==='학부생' || auth==='대학원' ? <InfoStudent  info={data}/>: auth==='교수' ? <InfoProfessor info={data}/>
+              : <InfoEmployee  info={data}/>}
              </div>
         </div>
-
     );
 }
 

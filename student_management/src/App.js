@@ -5,6 +5,7 @@ import { Route, BrowserRouter} from 'react-router-dom';
 import Register from './components/views/RegisterPage/RegisterPage.js'
 import LandingPage from './components/views/LandingPage/LandingPage.js'
 import Header from './components/views/Header/Header.js'
+import AuthRoute from './helpers/AuthRoute.js'
 import Friend from './components/views/FriendPage/FriendPage.js'
 import Login from './components/views/LoginPage/LoginPage.js'
 import NavBar from './components/views/NavBar/NavBar.js'
@@ -58,10 +59,10 @@ class App extends Component {
           <Route exact path="/" component={LandingPage}></Route>
           <Route exact path="/register" component={Register}></Route>
           <Route exact path="/login" component={Login}></Route>
-          <Route exact path="/friend" component={Friend}></Route>
-          <Route exact path="/user/grade" component={Grade}></Route>
-          <Route exact path="/user/info" component={MyInfoPage}></Route>  
-          <Route exact path="/user/info/modify/:id/:name" component={MyInfoEditPage}></Route>
+          <AuthRoute exact path="/friend" component={Friend}></AuthRoute>
+          <AuthRoute exact path="/user/grade" component={Grade}></AuthRoute> {/*유저권한확인*/}
+          <AuthRoute exact path="/user/info" component={MyInfoPage}></AuthRoute>  
+          <AuthRoute exact path="/user/info/modify/:id/:name" component={MyInfoEditPage}></AuthRoute>
         </BrowserRouter>        
     </div>
     </Suspense>
