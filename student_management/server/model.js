@@ -86,7 +86,8 @@ module.exports ={
             USER.update(
                 {userPassword: body.password,
                  userAddress: body.address,
-                 userEmail : body.email},
+                 userEmail : body.email,
+                 userPhoto : body.photo},
                 {where: {userID: body.id}})
         .then(result => {
          callback(true);
@@ -95,7 +96,7 @@ module.exports ={
          callback(false);
           throw err;
          });
-        }
+        },
     }
        
 }

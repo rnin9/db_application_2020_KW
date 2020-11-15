@@ -66,3 +66,11 @@
     display: inline-block !important;
 }
 
+.photoEdit {
+    }
+.photoEdit img{
+    background-color: "#efefef";
+    max-width: 200px;
+    height: auto;
+}
+

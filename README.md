@@ -52,3 +52,6 @@ ____________________________________________
 * oyh
   * Add sequelize db
   * Add Grade page
+
+* rnin9
+  * handle userPhoto

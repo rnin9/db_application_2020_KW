@@ -1,5 +1,18 @@
 const path = require('path');
 const model = require('./model');
+const multer = require('multer');
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/image/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}_${file.originalname}`)
+  }
+})
+ 
+var upload = multer({storage: storage}).single('file')
+
+
 module.exports = {
 
   api:{
@@ -49,11 +62,20 @@ module.exports = {
     },
   },
   update:{
-    userInfo : (req, res)=>{
+      userInfo : (req, res)=>{
       const data = req.body
     model.update.setUserInfo(data, result=>{
       res.send(result);
     })
-    }
-  }
+    },
+    userPhoto : (req, res)=>{
+      var obj={};
+      upload(req,res,err=>{
+        if(err){
+          return req.json({ success: false, err})
+      }
+      return res.json({ success: true, filepath: res.req.file.path, filename: res.req.file.filename})
+      })
+    },
+  },
 }
