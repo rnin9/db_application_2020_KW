@@ -6,7 +6,7 @@ import sample from './samples.jpg'
 import './MyInfoPage.css'
 
 function InfoLeft(props){
-    const leftInfo ={photo:'',id:'',name:'',position:''}        // 사용할 정보만 뺴냄.
+    const leftInfo ={photo:'',id:'',address:'',email:'',password:'',name:'',position:''}        // 사용하고, 보낼 정보 뺴냄.
     const info = Object.assign(leftInfo, props.info.data)       // 유저 기본정보
     const url =  '/user/info/modify/'+`${info.id}/${info.name}`
     const userPhoto = '/image/'+`${info.photo}`                 // 사진 경로
@@ -25,7 +25,15 @@ function InfoLeft(props){
             <p style={{fontSize:20, paddingBottom:20}}>{info.name}  [{info.position}]</p> 
         </div>    
             <div style={{paddingBottom:20}}>
-            <Link to={url}>
+            <Link to={{
+                pathname:url,
+                state:{
+                    email:info.email,
+                    password:info.password,
+                    address:info.address,
+                    photo:info.photo
+                }
+            }}>
                 <Button><SettingTwoTone style={{paddingBottom:20}} /></Button>
             </Link>
             </div>

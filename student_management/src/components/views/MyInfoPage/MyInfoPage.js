@@ -23,7 +23,6 @@ function MyInfoPage(props){
     leavofabsense:'',
 
 });
-
     useEffect(() =>{
     userdata(userID)
     }, [])
@@ -43,7 +42,8 @@ function MyInfoPage(props){
                 gender:res.data[0].userGender,
                 email:res.data[0].userEmail,
                 address:res.data[0].userAddress,
-                leavofabsense:res.data[0].userLeaveOfAbsense
+                leavofabsense:res.data[0].userLeaveOfAbsense,
+                password:res.data[0].userPassword
             }
         }))
     })
@@ -52,7 +52,7 @@ function MyInfoPage(props){
     })
     return(
         <div className="mypage">
-             <div className="my_left_info">
+             <div className="my_left_info">        
                  <InfoLeft info={data}/>
              </div>
              <div className="my_right_info">

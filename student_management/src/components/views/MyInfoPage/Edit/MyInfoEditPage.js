@@ -1,11 +1,12 @@
 import React,{useState} from 'react'
 import { Form, Input,Button,message} from 'antd';
 import { DingtalkOutlined} from '@ant-design/icons'
+import sample from '../samples.jpg'
 import './MyInfoEditPage.css'
 import axios from 'axios'
 
 
-function MyInfoEditPage({match}){
+function MyInfoEditPage({match,location}){
     const layout = {
         labelCol: { 
           xs:{span:24},
@@ -19,8 +20,13 @@ function MyInfoEditPage({match}){
     
     const id = match.params.id
     const name = match.params.name
+    const email = location.state.email
+    const address =location.state.address
+    const password = location.state.password
+    const photo = location.state.photo
+
     const [file, setFile] = useState(""); // 파일 base64
-    const [previewURL, setPrevURL] = useState(null);	//파일
+    const [previewURL, setPrevURL] = useState(sample);	//파일
     const [filename,setfilename] =useState('0');	  // 파일이름 default 0 => 수정사항없을 시.
 
     const handleFileOnChange = (event) => {
@@ -60,7 +66,7 @@ function MyInfoEditPage({match}){
             address : values.user.address,
             email : values.user.email,
             password : values.user.password,
-            photo : filename
+            photo : filename==='0' && photo!=='0' ? photo:filename
         }
         axios('/update/userInfo', {
             method : 'POST',
@@ -79,33 +85,42 @@ function MyInfoEditPage({match}){
             throw err;
         })
     }
+
+    const handleResetPhoto = ()=>{
+        setfilename('0')
+        setPrevURL(sample)
+        return
+    }
+
     return(
     <div className="reg">
         <h2 style={{width:300, height:60}}><DingtalkOutlined/> 정보수정</h2>
       <div className="reg_font2">
       
-        <Form {...layout} name="nest-messages" onFinish={onFinish}>
+      
+        <Form {...layout} name="nest-messages" onFinish={onFinish} >
         <div>
         <h4>{name}</h4>
         </div>
         <div className="photoEdit">
-        
-        <img src ={previewURL}/>
-          <input type='file' 
-          accept='image/jpg,impge/png,image/jpeg,image/gif' 
+        <img src ={previewURL} alt="prev"/>
+        <input type='file' 
+          accept='image/jpg,impge/png,image/jpeg,image/gif'
           name='profile_img' 
           onChange={handleFileOnChange}>
         </input>
+        <Button type="ghost" onClick={handleResetPhoto}>
+           X
+          </Button>
         </div>
-
-        <Form.Item name={['user','password']} label="비밀번호">
-          <Input.Password style={{ width: 250 }} />
+        <Form.Item name={['user','password']} label="비밀번호" initialValue={password}>
+          <Input.Password style={{ width: 250 }}/>
         </Form.Item>
-        <Form.Item name={['user', 'email']} label="이메일">
+        <Form.Item name={['user', 'email']} label="이메일" initialValue={email}>
           <Input style={{ width: 250 }} />
         </Form.Item>
-       <Form.Item name={['user', 'address']} label="주소">
-          <Input style={{width: 250 }} />
+       <Form.Item name={['user', 'address']} label="주소" initialValue={address}>
+          <Input style={{width: 250 }}/>
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button type="primary" htmlType="submit">

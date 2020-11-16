@@ -1,6 +1,6 @@
 /* src/app.js */
 
-import React, { Component, Suspense, Switch } from 'react';
+import React, { Component, Suspense } from 'react';
 import { Route, BrowserRouter} from 'react-router-dom';
 import Register from './components/views/RegisterPage/RegisterPage.js'
 import LandingPage from './components/views/LandingPage/LandingPage.js'

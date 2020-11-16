@@ -43,9 +43,12 @@
     border-radius: 10px;
 }
 .photoEdit input{
-    display: flex;
-    justify-content: center;
     padding:10px;
-    margin-left:15%;
+    margin-left:5%;
+}
+.photoEdit Button{
+    position: relative;
+    left: 100px;
+    bottom: 40px;
 }
 

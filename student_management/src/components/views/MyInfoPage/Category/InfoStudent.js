@@ -16,7 +16,7 @@ function InfoStudent(props){
     <Descriptions.Item label="단과대학"span={3}>{info.college}</Descriptions.Item>
     <Descriptions.Item label="전공" span={3}>{info.major}</Descriptions.Item>
     <Descriptions.Item label="학적상태" span={3}>
-        {info.leaveofabsense==0 ?
+        {info.leaveofabsense===0 ?
       <Badge status="processing" text="재학중" />:
       <Badge status="error" text="휴학중" />     
     }
