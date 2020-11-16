@@ -70,7 +70,7 @@ const onFinishFailed = (errorInfo) => {
               },
             ]}
           >
-            <Input />
+            <Input allowClear />
           </Form.Item>
     
           <Form.Item
@@ -83,7 +83,7 @@ const onFinishFailed = (errorInfo) => {
               },
             ]}
           >
-            <Input.Password />
+            <Input.Password  allowClear/>
           </Form.Item>
     
           <Form.Item {...tailLayout} name="remember" valuePropName="checked">

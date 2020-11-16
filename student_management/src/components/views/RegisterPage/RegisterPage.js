@@ -107,19 +107,19 @@ class Register extends Component{
       <div className="id">
       <Form.Item name={['user', 'ID']} label="ID (학번)" rules={[{ required: true }]}
       >
-        <Input style={{ width: 300 }}/>
+        <Input style={{ width: 300 }} allowClear/>
   
       </Form.Item>
       </div>
       <div className="id">
       <Form.Item name={['user', 'name']} label="이름" rules={[{ required: true }]}>
-        <Input style={{ width:300 }} />
+        <Input style={{ width:300 }}allowClear />
       </Form.Item>
       </div>
       <div>
       <div className="pw">
       <Form.Item name={['user','password']} label="비밀번호" rules={[{ required: true}]}>
-        <Input.Password style={{ width: 300 }} />
+        <Input.Password style={{ width: 300 }} allowClear/>
       </Form.Item>
       </div>
       <div className="gender">
@@ -161,7 +161,7 @@ class Register extends Component{
       <div>
       <div className="grade">
       <Form.Item name={['user', 'grade']} label="학번" rules={[{type: 'number', min: 0, max: 22 },{required:true}]}>
-        <InputNumber style={{ width:300 }}/>
+        <InputNumber style={{ width:300 }} allowClear/>
       </Form.Item>
       </div>
       <div className="position">
@@ -179,12 +179,12 @@ class Register extends Component{
       <div>
       <div className="email">
       <Form.Item name={['user', 'email']} label="이메일" rules={[{type:'email', required: true }]}>
-        <Input style={{ width: 300 }} />
+        <Input style={{ width: 300 }} allowClear />
       </Form.Item>
       </div>
       <div className="address">
       <Form.Item name={['user', 'address']} label="주소">
-        <Input style={{width: 300 }} />
+        <Input style={{width: 300 }} allowClear/>
       </Form.Item>
       </div>
       </div>

@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Chosunilbo_myungjo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.friend_table_menu{
+    font-family: Chosunilbo_myungjo;
+    padding-top :20px;
+    text-align: center;
+}
+.friend_table_user{
+    font-family: Chosunilbo_myungjo;
+    display: inline-block;
+    width: 60vw;
+    text-align-last: center;
+}
+
+.friend_search{
+    width: 60vw;
+    display: inline-block;
+    padding-top:30px
+}
+

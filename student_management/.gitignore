@@ -25,3 +25,6 @@ yarn-error.log*
 
 # db information
 /server/config
+
+# server image
+/public/image

@@ -18,7 +18,8 @@ ____________________________________________
     }
 }
 ```
-3. Type 'npm install' in root directory
+3. make 'image' folder in '/public' directory 
+4. Type 'npm install' in root directory
 5. Type 'npm run dev' in root directory to Run This project
 ____________________________________________
 ### 2020-11-08 
@@ -59,3 +60,4 @@ ____________________________________________
 
   ### 2020-11-16
   * remember value when change userInfo
+  * friend add page design

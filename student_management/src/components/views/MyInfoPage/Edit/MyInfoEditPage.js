@@ -1,6 +1,10 @@
 import React,{useState} from 'react'
 import { Form, Input,Button,message} from 'antd';
 import { DingtalkOutlined} from '@ant-design/icons'
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+import {MDBIcon}  from 'mdbreact';
 import sample from '../samples.jpg'
 import './MyInfoEditPage.css'
 import axios from 'axios'
@@ -109,8 +113,8 @@ function MyInfoEditPage({match,location}){
           name='profile_img' 
           onChange={handleFileOnChange}>
         </input>
-        <Button type="ghost" onClick={handleResetPhoto}>
-           X
+        <Button type="default" onClick={handleResetPhoto}>
+        <MDBIcon far icon="trash-alt" />
           </Button>
         </div>
         <Form.Item name={['user','password']} label="비밀번호" initialValue={password}>
