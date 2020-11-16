@@ -58,6 +58,6 @@ ____________________________________________
   * handle userPhoto
   * Add AuthRouter <= prevent access of Not-allowed user
 
-  ### 2020-11-16
+### 2020-11-16
   * remember value when change userInfo
   * friend add page design
