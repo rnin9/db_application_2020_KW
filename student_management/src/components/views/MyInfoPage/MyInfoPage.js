@@ -20,7 +20,7 @@ function MyInfoPage(props){
     gender:'',
     email:'',
     address:'',
-    leavofabsense:'',
+    leaveofabsense:true
 
 });
     useEffect(() =>{
@@ -29,7 +29,8 @@ function MyInfoPage(props){
 
     const userdata = (uid)=> axios.get('/api/userInfo',{params:uid})
     .then(res=>{
-        setData(prevdata=>({
+        console.log(res)
+       setData(prevdata=>({
             data:{
                 ...prevdata,
                 id:res.data[0].userID,
@@ -42,8 +43,8 @@ function MyInfoPage(props){
                 gender:res.data[0].userGender,
                 email:res.data[0].userEmail,
                 address:res.data[0].userAddress,
-                leavofabsense:res.data[0].userLeaveOfAbsense,
-                password:res.data[0].userPassword
+                password:res.data[0].userPassword,
+                leaveofabsense:res.data[0].leaveOfAbsense
             }
         }))
     })

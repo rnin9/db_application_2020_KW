@@ -22,7 +22,8 @@ class App extends Component {
       login: false,
       position: "",           // 기본 state  admin은 직원, 교수용
       id:"",
-      name:""
+      name:"",
+      friend: 0      //삭제!!
     }
   }
   componentDidMount(){
@@ -31,7 +32,8 @@ class App extends Component {
         login : true,
         position : localStorage.getItem('position'),
         id : localStorage.getItem('id'),
-        name : localStorage.getItem('name')  
+        name : localStorage.getItem('name'), 
+        friend : localStorage.getItem('friend')
       })
     }
   
@@ -47,11 +49,11 @@ class App extends Component {
   }
 
   render() {
-    const {login, position, name, id} = this.state;
+    const {login, position, name, id, friend} = this.state;
     const { _login, _logout} = this;      // login , 권한정보 설정
     return(
       <Suspense fallback={(<div>Loading...</div>)}>
-      <Header login={login} id={id} name ={name}  _logout={_logout}/>     {/*path routing* , 정보 담아서 state or props로 사용*/}
+      <Header login={login} id={id} name ={name} friend={friend}  _logout={_logout}/>     {/*path routing* , 정보 담아서 state or props로 사용*/}
       <NavBar login={login} position={position}/>
         
         <div className='App'>        

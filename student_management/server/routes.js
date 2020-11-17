@@ -4,6 +4,8 @@ const path = require('path');
 const controller = require('./controller');
 
 router.post('/add/user', controller.add.user);              // signup 정보 추가
+router.post('/add/friend',controller.add.friend);
+
 router.post('/api/sendLogin',controller.api.sendLogin);     // login request
 router.post('/update/userInfo',controller.update.userInfo); // update 유저 정보
 router.post('/update/userPhoto',controller.update.userPhoto); //사진 업로드시, 받음

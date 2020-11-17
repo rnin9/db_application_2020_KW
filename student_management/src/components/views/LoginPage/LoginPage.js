@@ -29,6 +29,7 @@ const onFinish = (values) => {
         localStorage.setItem('position',res.data.position);
         localStorage.setItem('id',res.data.id);
         localStorage.setItem('name',res.data.name);
+        localStorage.setItem('friend',0); //삭제
         return window.location.href='/';    //성공!
         }
         else

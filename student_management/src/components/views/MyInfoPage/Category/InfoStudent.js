@@ -4,9 +4,9 @@ import './InfoStudent.css'
 
 
 function InfoStudent(props){
-    const leftInfo ={address:'',email:'',grade:'',leaveofabsense:0,college:'',major:''}        // 사용할 정보만 뺴냄.
+    const leftInfo ={address:'',email:'',grade:'',leaveofabsense:'' ,college:'',major:''}        // 사용할 정보만 뺴냄.
     const info = Object.assign(leftInfo, props.info.data)       // 유저 상세정보!
-
+    console.log(info)
     return(
         <div className="right_page">
             <h3>information</h3>
@@ -16,7 +16,7 @@ function InfoStudent(props){
     <Descriptions.Item label="단과대학"span={3}>{info.college}</Descriptions.Item>
     <Descriptions.Item label="전공" span={3}>{info.major}</Descriptions.Item>
     <Descriptions.Item label="학적상태" span={3}>
-        {info.leaveofabsense===0 ?
+        {info.leaveofabsense===false ?
       <Badge status="processing" text="재학중" />:
       <Badge status="error" text="휴학중" />     
     }

@@ -2,9 +2,10 @@ const sequelize = require('./models').sequelize;
 const Sequelize = require('sequelize');
 const { Op } = Sequelize;
 const {
-    USER  
+    USER, FRIEND  
   } = require('./models');
 const { GRADE } = require('./models');
+const friend = require('./models/friend');
 sequelize.query('SET NAMES utf8;');
 
 module.exports ={
@@ -79,6 +80,22 @@ module.exports ={
                     }).then(() => callback(true));
                 }
             })
+        },
+        friend:(body, callback)=>{
+            FRIEND.count({
+                where: {[Op.and]: [{userID: body.u_id, friendID: body.f_id}]}  
+            })
+            .then(cnt => {
+                if(cnt > 0) {
+                     callback(false);     // 중복 확인하는함수
+                 }
+                 else{
+                      FRIEND.create({
+                          userID:body.u_id,  
+                          friendID:body.f_id
+                      }).then(() => callback(true));
+                  }
+              })
         } 
     },
     update:{

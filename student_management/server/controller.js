@@ -60,6 +60,14 @@ module.exports = {
         res.send(result);   // result를 대기했던 axios로 전달
     });
     },
+    friend:(req,res)=>{
+      const data =req.body;
+      console.log(data)
+      model.add.friend(data,result=>{
+        console.log(result)
+        res.send(result);
+      })
+    },
   },
   update:{
       userInfo : (req, res)=>{

@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) =>{
      leaveOfAbsense:{
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue : 0
+        defaultValue : false
      },
    
     },{ timestamps: false});

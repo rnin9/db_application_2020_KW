@@ -64,3 +64,4 @@ ____________________________________________
 
 ### 2020-11-17
   * Friend Search
+  * request friend <= not have pk(userID,friendID)

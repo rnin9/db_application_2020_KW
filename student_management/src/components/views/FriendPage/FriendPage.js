@@ -10,17 +10,22 @@ const { Search } = Input;
 
   function FriendPage(){
 
-    const [data, setdata] = useState([])
-   
+    const [data, setdata] = useState([]) //user정보
+    const [friendreq, setfriendreq] = useState({
+      f_id :'',
+      u_id :''
+    })
     const onSearch = value =>{
     value!=='' ?
     axios.get('/api/userInfo',{params:value})
     .then(res=>{
-      console.log(res)
       if(res.data[0] === undefined) {
         message.error('사용자가 없습니다!')
       }
      setdata(res.data);
+     setfriendreq({
+       f_id: res.data[0].userID,
+       u_id: localStorage.getItem('id')})
     })
     .catch(err=>{
         console.log('err:',err);
@@ -28,6 +33,22 @@ const { Search } = Input;
     :
     message.error('사용자를 입력해주세요!')
     }
+
+    const handleAdd=()=>{
+      
+      axios('/add/friend',{ method: 'POST', headers: new Headers(), data: friendreq})
+       .then(req=>{
+        console.log(req)
+        message.success('친구요청하였습니다!')
+       })
+       .catch(err=>{
+        console.log(err)
+        message.error('친구요청에 실패했습니다')
+       })
+      }
+
+
+
       return (
         <div style={{margin:'auto'}}>
         <div className="friend_table_menu">
@@ -59,7 +80,7 @@ const { Search } = Input;
       key="action"
       render={(text, record) => (
         <Space size="middle">
-          <Button type="primary"style={{fontSize:15}} ><UserAddOutlined /></Button>
+          <Button type="primary"style={{fontSize:15}} onClick={handleAdd}><UserAddOutlined /></Button>
         </Space>
       )}
     />
