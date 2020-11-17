@@ -61,3 +61,6 @@ ____________________________________________
 ### 2020-11-16
   * remember value when change userInfo
   * friend add page design
+
+### 2020-11-17
+  * Friend Search

@@ -42,7 +42,7 @@ module.exports = {
     userInfo:(req, res)=>{
       const body = req.query[0]
       model.api.getUserInfo(body,result=>{
-        if(result[0])
+        // if(result[0])
         res.send(result);
         });
     },

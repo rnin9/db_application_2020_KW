@@ -1,43 +1,33 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { UserAddOutlined} from '@ant-design/icons';
-import { Table, Tag, Space, Input, Button } from 'antd';
+import { Table,message, Tag, Space, Input, Button } from 'antd';
+import axios from 'axios'
 import './FriendPage.css'
-const { Column, ColumnGroup } = Table;
+const { Column} = Table;
 
 
 const { Search } = Input;
 
   function FriendPage(){
 
-    const onSearch = value => console.log(value);
-    const data = [
-      {
-        key: '1',
-        id: '2014722090',
-        name: '강민주',
-        major: '컴퓨터정보공학부',
-        gender: '남자',
-        tags: ['학부생'],
-      },
-      {
-        key: '2',
-        id: '20147',
-        name: '이기훈',
-        major: '컴퓨터정보공학부',
-        gender: '남자',
-        tags: ['교수'],
-      },
-      {
-        key: '3',
-        id: '22034',
-        name: '나직원',
-        major: '컴퓨터정보공학부',
-        gender: '남자',
-        tags: ['직원'],
-      },
-    ];
-
-
+    const [data, setdata] = useState([])
+   
+    const onSearch = value =>{
+    value!=='' ?
+    axios.get('/api/userInfo',{params:value})
+    .then(res=>{
+      console.log(res)
+      if(res.data[0] === undefined) {
+        message.error('사용자가 없습니다!')
+      }
+     setdata(res.data);
+    })
+    .catch(err=>{
+        console.log('err:',err);
+    }) 
+    :
+    message.error('사용자를 입력해주세요!')
+    }
       return (
         <div style={{margin:'auto'}}>
         <div className="friend_table_menu">
@@ -45,41 +35,24 @@ const { Search } = Input;
         <div className="friend_search">
         <Search
       placeholder="아이디를 입력하세요!"
-      allowClear
       onSearch={onSearch}
-      enterButton
+      enterButton="검색"
+      
       />
       </div>
       </div>
        <div className="friend_table_user">
        
       
-       <Table dataSource={data}>
-    <Column title="ID" dataIndex="id" key="lastName" />
-    <Column title="이름" dataIndex="name" key="age" />
-    <Column title="성별" dataIndex="gender" key="address" />
-    <Column title="학과" dataIndex="major" key="address" />
+    <Table dataSource={data} rowKey="userID">
+    <Column title="ID" dataIndex="userID" key="id" />
+    <Column title="이름" dataIndex="userName" key="name" />
+    <Column title="성별" dataIndex="userGender" key="gender" />
+    <Column title="학과" dataIndex="userMajor" key="major" />
     <Column
       title="직급"
-      dataIndex="tags"
+      dataIndex="userPosition"
       key="tags"
-      render={tags => (
-        <>
-          {tags.map(tag => (
-            tag ==='학부생'?
-            <Tag color="geekblue" key={tag}>
-              {tag}
-            </Tag>
-            : tag ==='교수' ?
-            <Tag color="red" key={tag}>
-              {tag}
-            </Tag> :
-            <Tag color="green" key={tag}>
-              {tag}
-            </Tag>
-          ))}
-        </>
-      )}
     />
     <Column
       title=""
