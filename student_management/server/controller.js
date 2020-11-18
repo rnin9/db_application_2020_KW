@@ -58,7 +58,13 @@ module.exports = {
         if(result[0])
         res.send(result);
         });
-    }
+    },
+    userEval:(req, res)=>{        //api key를 이용한 values (user)
+      model.api.getUserEval(result=>{
+          res.send(result);     // result를 대기했던 axios로 전달
+    
+      });
+    },
   },
     add:{
     user : (req, res) => {   //add key를 이용한 values (user)

@@ -15,5 +15,6 @@ router.get('/api/user',controller.api.user);                // 모든 유저의 
 router.get('/api/userInfo',controller.api.userInfo);        // 특정 유저 정보 get
 router.get('/api/userFriend',controller.api.userFriend);
 router.get('/api/userGrade',controller.api.userGrade);
+router.get('/api/userEval',controller.api.userEval);
 
 module.exports = router;
