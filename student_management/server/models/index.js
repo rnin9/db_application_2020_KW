@@ -36,6 +36,18 @@ let sequelize = new Sequalize(
     db.EVALUATION = require('./EVALUATION')(sequelize,Sequalize);
     db.TAG = require('./TAG')(sequelize,Sequalize);
     db.UPVOTE = require('./UPVOTE')(sequelize,Sequalize);
+/*
+    db.USER.hasMany(db.GRADE);
+    db.GRADE.belongsTo(db.USER);
 
+    db.USER.hasMany(db.EVALUATION);
+    db.EVALUATION.belongsTo(db.USER);
+
+    db.EVALUATION.hasMany(db.TAG);
+    db.TAG.belongsTo(db.EVALUATION);
+
+    db.EVALUATION.hasMany(db.UPVOTE);
+    db.UPVOTE.belongsTo(db.EVALUATION);
+*/
 db.secret = '(9*)5$&!3%^0%^@@2$1!#5@2!4';
 module.exports = db;
