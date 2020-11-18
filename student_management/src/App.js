@@ -63,19 +63,15 @@ class App extends Component {
           <Route exact path="/" component={LandingPage}></Route>
           <Route exact path="/register" component={Register}></Route>
           <Route exact path="/login" component={Login}></Route>
-<<<<<<< HEAD
+
           <AuthRoute exact path="/user/friend/add" component={FriendRequestPage}></AuthRoute>
-          <AuthRoute exact path="/user/grade" component={Grade}></AuthRoute> {/*유저권한확인*/}
           <AuthRoute exact path="/user/friend/list" component={FriendListPage}></AuthRoute>
           <AuthRoute exact path="/user/info" component={MyInfoPage}></AuthRoute>  
           <AuthRoute exact path="/user/info/modify/:id/:name" component={MyInfoEditPage}></AuthRoute>
-=======
-          <Route exact path="/friend" component={Friend}></Route>
-          <Route exact path="/user/grade" component={Grade}></Route>
-          <Route exact path="/user/eval" component={Evaluation}></Route>
-          <Route exact path="/user/info" component={MyInfoPage}></Route>  
-          <Route exact path="/user/info/modify/:id/:name" component={MyInfoEditPage}></Route>
->>>>>>> origin/oyh
+          <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>
+          <AuthRoute exact path="/user/grade" component={Grade}></AuthRoute> {/*유저권한확인*/}
+          
+
         </BrowserRouter>        
     </div>
     </Suspense>

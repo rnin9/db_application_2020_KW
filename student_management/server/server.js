@@ -6,12 +6,6 @@ const sequelize = require('./models').sequelize;
 const path = require('path');
 sequelize.sync();
 
-<<<<<<< HEAD
-=======
-app.use(express.json());
-app.use('/', router)
->>>>>>> origin/oyh
-
 app.use(express.json());
 app.use('/', router);                                            
 
