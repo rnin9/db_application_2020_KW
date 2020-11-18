@@ -42,6 +42,17 @@ module.exports ={
                 throw err;
             })
         },
+        getUserFriend:(body,callback)=>{
+            FRIEND.findAll({
+                where: {[Op.and]: [{userID: body, friendGrant: false}]}
+            })
+            .then(data=>{
+                callback(data)
+            })
+            .catch(err=>{
+                throw err;
+            })
+        },
         getUserGrade:(callback)=>{
             GRADE.findAll({
                 //where: {userID:body},

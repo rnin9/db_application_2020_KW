@@ -46,6 +46,12 @@ module.exports = {
         res.send(result);
         });
     },
+    userFriend:(req,res)=>{
+      const body = req.query[0]
+      model.api.getUserFriend(body,result=>{
+        res.send(result);
+      })
+    },
     userGrade:(req, res)=>{
       model.api.getUserGrade(result=>{
         res.send(result);     // result를 대기했던 axios로 전달
@@ -62,9 +68,7 @@ module.exports = {
     },
     friend:(req,res)=>{
       const data =req.body;
-      console.log(data)
       model.add.friend(data,result=>{
-        console.log(result)
         res.send(result);
       })
     },

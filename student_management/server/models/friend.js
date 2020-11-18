@@ -4,13 +4,13 @@ module.exports = (sequelize, DataTypes,) =>{
      userID:{
          type: DataTypes.STRING(30),
          allowNull: false,
-        //  primaryKey: true,
+         primaryKey: true,
          allowNull: false,
      },  
      friendID:{
         type: DataTypes.STRING(30),
         allowNull: false,
-        // primaryKey:true,
+        primaryKey:true,
         allowNull:false,
      },
      scheduleShare :{

@@ -21,7 +21,6 @@ function MyInfoPage(props){
     email:'',
     address:'',
     leaveofabsense:true
-
 });
     useEffect(() =>{
     userdata(userID)
@@ -51,6 +50,7 @@ function MyInfoPage(props){
     .catch(err=>{
         console.log('err:',err);
     })
+
     return(
         <div className="mypage">
              <div className="my_left_info">        

@@ -13,6 +13,7 @@ router.post('/update/userPhoto',controller.update.userPhoto); //사진 업로드
 
 router.get('/api/user',controller.api.user);                // 모든 유저의 정보 get
 router.get('/api/userInfo',controller.api.userInfo);        // 특정 유저 정보 get
+router.get('/api/userFriend',controller.api.userFriend);
 router.get('/api/userGrade',controller.api.userGrade);
 
 module.exports = router;
