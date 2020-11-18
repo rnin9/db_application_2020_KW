@@ -3,6 +3,8 @@ import { AutoComplete, Table, } from 'antd';
 import './GradePage.css'
 import axios from 'axios';
 
+const userID = localStorage.getItem('id');
+const userName = localStorage.getItem('name');
 const columns = [
   {
     title: '학정번호',
@@ -63,7 +65,7 @@ class GradePage extends Component{
     }
 
     _getData = async () => {
-      const res = await axios.get('/api/userGrade');     
+      const res = await axios.get('/api/userGrade',{params:userID});     
       if(res.data[0] === undefined) {
         let cover = [];
         cover.push(res.data);       // response 데이터들 push
@@ -81,14 +83,22 @@ class GradePage extends Component{
           <div className="table">
             <h2>성적/수강 정보</h2>
           </div>
-           <div className="table_grade">
-           
+          
+          <div className="table">
+            
+          <h3>{userName} 학생의 학기별 수강 정보입니다.</h3>
+          
+          </div>
+          <div className="table_grade">
+          
             {list.length !== 0
               ? 
               <Table dataSource={list} columns={columns} size="small" rowKey="course_code"/>
               : null}
           
           </div>
+          <br></br>
+          <br></br>
           </div>
             
         )};

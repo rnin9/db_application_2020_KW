@@ -47,10 +47,11 @@ module.exports = {
         });
     },
     userGrade:(req, res)=>{
-      model.api.getUserGrade(result=>{
-        res.send(result);     // result를 대기했던 axios로 전달
-  
-    });
+      const body = req.query[0]
+      model.api.getUserGrade(body,result=>{
+        if(result[0])
+        res.send(result);
+        });
     }
   },
     add:{

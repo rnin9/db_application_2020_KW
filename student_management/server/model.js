@@ -42,9 +42,9 @@ module.exports ={
                 throw err;
             })
         },
-        getUserGrade:(callback)=>{
+        getUserGrade:(body,callback)=>{
             GRADE.findAll({
-                //where: {userID:body},
+                where: {user_id:body},
                 //include: COURSE
             })
             .then(data=>{
