@@ -8,5 +8,6 @@ router.post('/update/userInfo',controller.update.userInfo);
 router.get('/api/user',controller.api.user);
 router.get('/api/userInfo',controller.api.userInfo);
 router.get('/api/userGrade',controller.api.userGrade);
+router.get('/api/userEval',controller.api.userEval);
 
 module.exports = router;

@@ -34,7 +34,11 @@ function StudentBar(props) {
           성적조회
         </a>
         </Menu.Item>
-        <Menu.Item key="4">수강평가</Menu.Item>
+        <Menu.Item key="4">
+        <a className="logo" href="/user/eval">
+          수강평가
+        </a>
+        </Menu.Item>
       </Menu.ItemGroup>
     </SubMenu>
     <SubMenu

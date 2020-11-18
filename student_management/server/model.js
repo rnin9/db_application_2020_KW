@@ -4,7 +4,8 @@ const { Op } = Sequelize;
 const {
     USER  
   } = require('./models');
-const { GRADE } = require('./models');
+const { GRADE, EVALUATION } = require('./models');
+
 sequelize.query('SET NAMES utf8;');
 
 module.exports ={
@@ -50,6 +51,15 @@ module.exports ={
                 callback(data)
             })
             .catch(err =>{
+                throw err;
+            })
+        },
+        getUserEval:(callback) =>{        // 쿼리만 수행 (get)
+            EVALUATION.findAll()
+            .then(data=>{
+                callback(data)        // data를 controller로 보냄,
+            })
+            .catch(err=>{
                 throw err;
             })
         },
