@@ -111,7 +111,7 @@ module.exports ={
                         userPosition:body.position,
                         userEmail:body.email,
                         userAddress:body.address,
-                    }).then(() => callback(true));
+                    }).then(() => callback(true)).catch(err=>{throw err});
                 }
             })
         },
@@ -121,7 +121,19 @@ module.exports ={
             })
             .then(cnt => {
                 if(cnt > 0) {
-                     callback(false)     // 중복 확인하는함수
+                    FRIEND.findAll({
+                        // include: [
+                        //     {
+                        //       model: USER,
+                        //       where:{ userID: body.f_id },
+                        //       attributes: ['userName','userMajor'],
+                        //     }],
+                        where: {[Op.and]: [{userID: body.u_id, friendGrant: false}]},    //넣지 않고, 데이터 넘김
+                                
+                    }).then(data=>{
+                            let datas = {success:false,data:data}
+                            callback(datas)
+                        }).catch(err=>{throw err})
                  }
                  else{
                       FRIEND.create({
@@ -129,10 +141,10 @@ module.exports ={
                           friendID:body.f_id
                       }).then(() => {
                           FRIEND.findAll({
-                          where: {[Op.and]: [{userID: body.u_id, friendGrant: false}]}
+                          where: {[Op.and]: [{userID: body.u_id, friendGrant: false}]}  // 넣고 넘김
                           }).then(data=>{
                               callback(data)
-                          })
+                          }).catch(err=>{throw err})
                       })
                   }
               })

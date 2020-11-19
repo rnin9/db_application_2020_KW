@@ -82,8 +82,8 @@ module.exports = {
     friend:(req,res)=>{
       const data =req.body.data;
       model.add.friend(data,result=>{
-        if(result === false){
-          return res.json({ success:false})
+        if(result.success === false){
+          return res.json({ success:false, friendreqInfo:result.data})
         }
         else{
         return res.json({ success:true, friendreqInfo:result})

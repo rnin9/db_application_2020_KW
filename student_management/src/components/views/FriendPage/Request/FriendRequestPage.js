@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import {useSelector} from 'react-redux'
 import { UserAddOutlined} from '@ant-design/icons';
-import { Table,message, Space, Input, Button } from 'antd';
+import { Table, Tag, message, Space, Input, Button } from 'antd';
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
 import './FriendRequestPage.css'
@@ -25,6 +25,7 @@ const id = localStorage.getItem('id')
     }, [])
 
     const [data, setdata] = useState([]) //찾은user정보
+    const [position, setposition] = useState('')
     const [friendreq, setfriendreq] = useState({
       f_id :'',
       u_id :''
@@ -39,6 +40,7 @@ const id = localStorage.getItem('id')
         message.error('사용자가 없습니다!')
       }else{
      setdata(res.data);
+     setposition(res.data[0].userPosition);
      setfriendreq({
        f_id: res.data[0].userID,
        u_id: localStorage.getItem('id')})}
@@ -95,13 +97,18 @@ const id = localStorage.getItem('id')
     <Column title="학과" dataIndex="userMajor" key="major" />
     <Column
       title="직급"
-      dataIndex="userPosition"
-      key="tags"
-    />
+      key="position"
+      render={()=>(
+        position ==='학부생'?
+      <Tag color="blue">{position}</Tag>
+        : position==='교수'?
+      <Tag color="red">{position}</Tag>
+        :<Tag color="yellow">{position}</Tag>
+      )}/>
     <Column
       title=""
       key="action"
-      render={(text, record) => (
+      render={() => (
         <Space size="middle">
           <Button type="primary"style={{fontSize:15}} onClick={handleAdd}><UserAddOutlined /></Button>
         </Space>
