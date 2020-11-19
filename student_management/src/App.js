@@ -15,7 +15,6 @@ import MyInfoEditPage from './components/views/MyInfoPage/Edit/MyInfoEditPage'
 import Grade from './components/views/GradePage/GradePage.js'
 import Evaluation from './components/views/EvaluationPage/EvaluationPage.js'
 import './App.css';
-// import axios from 'axios';
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +24,6 @@ class App extends Component {
       position: "",           // 기본 state  admin은 직원, 교수용
       id:"",
       name:"",
-      friend: 0      //삭제!!
     }
   }
   componentDidMount(){
@@ -34,8 +32,7 @@ class App extends Component {
         login : true,
         position : localStorage.getItem('position'),
         id : localStorage.getItem('id'),
-        name : localStorage.getItem('name'), 
-        friend : localStorage.getItem('friend')
+        name : localStorage.getItem('name'),
       })
     }
   
@@ -51,11 +48,12 @@ class App extends Component {
   }
 
   render() {
-    const {login, position, name, id, friend} = this.state;
-    const { _login, _logout} = this;      // login , 권한정보 설정
+    const {login, position, name, id} = this.state;
+    const { _login, _logout} = this; // eslint-disable-line no-unused-vars    
+    // login , 권한정보 설정
     return(
       <Suspense fallback={(<div>Loading...</div>)}>
-      <Header login={login} id={id} name ={name} friend={friend}  _logout={_logout}/>     {/*path routing* , 정보 담아서 state or props로 사용*/}
+      <Header login={login} id={id} name ={name} _logout={_logout}/>     {/*path routing* , 정보 담아서 state or props로 사용*/}
       <NavBar login={login} position={position}/>
         
         <div className='App'>        

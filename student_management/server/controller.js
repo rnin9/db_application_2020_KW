@@ -65,6 +65,12 @@ module.exports = {
     
       });
     },
+    userFriendreq:(req,res)=>{
+      const body = req.query[0]
+      model.api.getUserFriendreq(body,result=>{
+       res.send(result)
+      })
+    },
   },
     add:{
     user : (req, res) => {   //add key를 이용한 values (user)
@@ -74,10 +80,15 @@ module.exports = {
     });
     },
     friend:(req,res)=>{
-      const data =req.body;
+      const data =req.body.data;
       model.add.friend(data,result=>{
-        res.send(result);
-      })
+        if(result === false){
+          return res.json({ success:false})
+        }
+        else{
+        return res.json({ success:true, friendreqInfo:result})
+        }
+        })
     },
   },
   update:{
@@ -88,8 +99,7 @@ module.exports = {
     })
     },
     userPhoto : (req, res)=>{
-      var obj={};
-      upload(req,res,err=>{
+       upload(req,res,err=>{
         if(err){
           return req.json({ success: false, err})
       }

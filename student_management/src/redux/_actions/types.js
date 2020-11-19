@@ -1,0 +1,7 @@
+export const FRIEND_REQUEST = 'friend_request'
+export const FRIEND_GET_REQUEST ='friend_get_request'
+export const FRIEND_REQUEST_DELETE = 'friend_request_delete'
+export const FRIEND_GET_LIST = 'friend_get_list'
+export const FRIEND_ACCEPT = 'friend_accept'
+export const FRIEND_DENY ='friend_deny'
+export const FRIEND_DELETE ='friend_delete'

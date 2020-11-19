@@ -1,33 +1,35 @@
 import React,{useState, useEffect} from 'react';
+import {useSelector} from 'react-redux'
 import { UserAddOutlined} from '@ant-design/icons';
-import { Table,message, Tag, Space, Input, Button } from 'antd';
+import { Table,message, Space, Input, Button } from 'antd';
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
 import './FriendRequestPage.css'
-import { requestHandle } from '../../../../store/modules/friendFunction';
+import { getFriendreq, requestFriend } from '../../../../redux/_actions/friend_actions';
 const { Column} = Table;
-
-
 const { Search } = Input;
 const id = localStorage.getItem('id')
+
+
   function FriendPage(){
-    const [data, setdata] = useState([]) //user정보
-    const [reqData, setreqData] = useState([])
+    //*************Redux************/
+    const dispatch = useDispatch()
+    const friendreqData = useSelector(state => state.friend.friendreqData)
+    //******************************/
+    useEffect(() => {
+     dispatch(getFriendreq(id))
+      .then(res=>{
+       message.success('불러오기완료!')
+      })
+        // eslint-disable-next-line react-hooks/exhaustive-deps   
+    }, [])
+
+    const [data, setdata] = useState([]) //찾은user정보
     const [friendreq, setfriendreq] = useState({
       f_id :'',
       u_id :''
     })
-    const dispatch = useDispatch()
-    const a =(id)=>{ axios('/api/userFriend',{ method:'GET', headers: new Headers(),params:id})
-    .then(res=>{
-      setreqData(res.data);
-      message.success('요청목록 불러오기 완료!')
-    })
-  }
-
-    useEffect(()=>{
-      a(id)
-    }, [])
+    
 
     const onSearch = value =>{
     value!=='' ?
@@ -50,13 +52,10 @@ const id = localStorage.getItem('id')
 
     const handleAdd=()=>{
       if(friendreq.f_id!==friendreq.u_id){
-      axios('/add/friend',{ method: 'POST', headers: new Headers(), data: friendreq})
-       .then(res=>{
-        if(res.data===true){
+        dispatch(requestFriend(friendreq.u_id,friendreq.f_id))
+        .then(res=>{
+        if(res.payload.success===true){
         message.success('친구요청하였습니다!')
-      
-        dispatch(requestHandle(0))
-
       }
         else{
           message.error('이미 친구신청한 상대입니다.')
@@ -73,7 +72,6 @@ const id = localStorage.getItem('id')
        }
       }
 
-     
       return (
         <div style={{margin:'auto'}}>
         <div className="friend_table_menu">
@@ -120,7 +118,7 @@ const id = localStorage.getItem('id')
        <div className="friend_table_user">
        
       
-    <Table dataSource={reqData} rowKey="userID">
+    <Table dataSource={ friendreqData } rowKey="friendID">
     <Column title="ID" dataIndex="friendID" key="ids" />
     <Column title="시간표공개여부" dataIndex="scheduleShare" key="s" />
     <Column title="성적공개여부" dataIndex="gradeShare" key="g" />

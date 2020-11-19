@@ -3,13 +3,10 @@ import { Menu ,Badge} from 'antd';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import {useSelector} from 'react-redux'
 import {MDBIcon}  from 'mdbreact';
 
 function LeftMenu(props) {
-  const {login, friend} = props
-  const a = parseInt(friend);
-  const head = useSelector(state => state.friendFunction.head)
+  const {login} = props
   
   return (
     <div className="menu_left">
@@ -29,7 +26,7 @@ function LeftMenu(props) {
     </Menu.Item>
     <Menu.Item key="friend">
       {login ?
-      <Badge count={head} size="default" offset={[4,0]}>
+      <Badge count={5} size="default" offset={[4,0]}>
       <a style={{marginLeft:2,fontSize:20}} href="/user/friend/list">
       <MDBIcon icon="user-friends" />
       </a>

@@ -29,7 +29,8 @@ function MyInfoEditPage({match,location}){
     const password = location.state.password
     const photo = location.state.photo
 
-    const [file, setFile] = useState(""); // 파일 base64
+    const [file, setFile] = useState("");  // eslint-disable-line no-unused-vars
+    // 파일 base64 
     const [previewURL, setPrevURL] = useState(sample);	//파일
     const [filename,setfilename] =useState('0');	  // 파일이름 default 0 => 수정사항없을 시.
 

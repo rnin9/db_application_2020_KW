@@ -13,7 +13,8 @@ router.post('/update/userPhoto',controller.update.userPhoto); //사진 업로드
 
 router.get('/api/user',controller.api.user);                // 모든 유저의 정보 get
 router.get('/api/userInfo',controller.api.userInfo);        // 특정 유저 정보 get
-router.get('/api/userFriend',controller.api.userFriend);
+router.get('/api/userFriend',controller.api.userFriend);    // 친구목록
+router.get('/api/userFriend/request',controller.api.userFriendreq); // 친구요청했고, 아직 응답받지않은 목록 
 router.get('/api/userGrade',controller.api.userGrade);
 router.get('/api/userEval',controller.api.userEval);
 

@@ -3,8 +3,7 @@ import { AutoComplete, Table, } from 'antd';
 import './EvaluationPage.css'
 import axios from 'axios';
 
-const userID = localStorage.getItem('id');
-const userName = localStorage.getItem('name');
+
 const columns = [
   {
     title: '번호',

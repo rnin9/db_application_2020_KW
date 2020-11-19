@@ -24,11 +24,11 @@ function MyInfoPage(props){
 });
     useEffect(() =>{
     userdata(userID)
+    // eslint-disable-next-line react-hooks/exhaustive-deps  
     }, [])
 
     const userdata = (uid)=> axios.get('/api/userInfo',{params:uid})
     .then(res=>{
-        console.log(res)
        setData(prevdata=>({
             data:{
                 ...prevdata,

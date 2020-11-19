@@ -65,3 +65,10 @@ ____________________________________________
 ### 2020-11-17
   * Friend Search
   * request friend <= not have pk(userID,friendID)
+
+### 2020-11-17
+  * FriendPage with Redux (demo)
+
+### 2020-11-19
+  * FriendPage request 
+

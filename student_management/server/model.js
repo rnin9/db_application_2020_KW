@@ -47,6 +47,17 @@ module.exports ={
         },
         getUserFriend:(body,callback)=>{
             FRIEND.findAll({
+                where: {[Op.and]: [{userID: body, friendGrant: true}]}
+            })
+            .then(data=>{
+                callback(data)
+            })
+            .catch(err=>{
+                throw err;
+            })
+        },
+        getUserFriendreq:(body,callback)=>{
+            FRIEND.findAll({
                 where: {[Op.and]: [{userID: body, friendGrant: false}]}
             })
             .then(data=>{
@@ -104,19 +115,25 @@ module.exports ={
                 }
             })
         },
-        friend:(body, callback)=>{
+        friend:(body,callback)=>{
             FRIEND.count({
                 where: {[Op.and]: [{userID: body.u_id, friendID: body.f_id}]}  
             })
             .then(cnt => {
                 if(cnt > 0) {
-                     callback(false);     // 중복 확인하는함수
+                     callback(false)     // 중복 확인하는함수
                  }
                  else{
                       FRIEND.create({
                           userID:body.u_id,  
                           friendID:body.f_id
-                      }).then(() => callback(true));
+                      }).then(() => {
+                          FRIEND.findAll({
+                          where: {[Op.and]: [{userID: body.u_id, friendGrant: false}]}
+                          }).then(data=>{
+                              callback(data)
+                          })
+                      })
                   }
               })
         } 
