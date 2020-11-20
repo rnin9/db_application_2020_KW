@@ -5,7 +5,7 @@ import { Table, Tag, message, Space, Input, Button } from 'antd';
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
 import './FriendRequestPage.css'
-import { getFriendreq, requestDelete, requestFriend } from '../../../../redux/_actions/friend_actions';
+import { getFriendreq, requestDelete, requestFriend} from '../../../../redux/_actions/friend_actions';
 const { Column} = Table;
 const { Search } = Input;
 const id = localStorage.getItem('id')

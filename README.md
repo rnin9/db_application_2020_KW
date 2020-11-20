@@ -74,4 +74,5 @@ ____________________________________________
 
 ## 2020-11-20
   * FriendPage UI update, request
+  * get FriendRequest Data
 

@@ -1,6 +1,7 @@
 const path = require('path');
 const model = require('./model');
 const multer = require('multer');
+const { ConsoleSqlOutlined } = require('@ant-design/icons');
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/image/')
@@ -70,6 +71,12 @@ module.exports = {
        return res.send(result)
       })
     },
+    userFriendreqrec:(req,res)=>{
+      const body =req.query[0]
+      model.api.getUserFriendreqrec(body,result=>{
+        return res.status(200).json({success:true, friendreqrec:result})
+      })
+    }
   },
     add:{
     user : (req, res) => {   //add key를 이용한 values (user)

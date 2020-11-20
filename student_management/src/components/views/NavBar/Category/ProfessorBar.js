@@ -2,6 +2,7 @@ import { Menu } from 'antd';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
+import {TeamOutlined} from'@ant-design/icons'
 import {MDBIcon}  from 'mdbreact';
 import React from 'react';
 import '../NavBar.css';
@@ -48,6 +49,9 @@ function ProfessorBar(props) {
       <Menu.Item key="3">공지사항</Menu.Item>
       <Menu.Item key="4">게시판</Menu.Item>
     </SubMenu>  
+    <SubMenu key="sub3" icon={<TeamOutlined />} title="친구">
+      <Menu.Item key="5"><a href="/user/friend/add">친구추가</a></Menu.Item>
+    </SubMenu>
   </Menu>  
   </div>
 

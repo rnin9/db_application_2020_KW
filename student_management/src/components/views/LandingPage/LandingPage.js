@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AutoComplete, Table, } from 'antd';
 import './LandingPage.css'
 import axios from 'axios';
+import { requestReceived } from '../../../redux/_actions/friend_actions';
 
 const columns = [
   {
@@ -40,6 +41,7 @@ class LandingPage extends Component{
           name : '',
           list : [],
           update : false,
+          reqData:[]
         }    
       }
     

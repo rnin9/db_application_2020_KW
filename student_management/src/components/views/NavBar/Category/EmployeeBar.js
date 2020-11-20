@@ -1,5 +1,5 @@
 import { Menu } from 'antd';
-import {FormOutlined} from '@ant-design/icons';
+import {FormOutlined, TeamOutlined} from '@ant-design/icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -59,6 +59,9 @@ function EmployeeBar(props) {
       <Menu.Item key="4">졸업생 정보</Menu.Item>
       <Menu.Item key="5">졸업사정</Menu.Item>
     </SubMenu>    
+    <SubMenu key="sub4" icon={<TeamOutlined />} title="친구">
+      <Menu.Item key="6"><a href="/user/friend/add">친구추가</a></Menu.Item>
+    </SubMenu>
   </Menu>  
   </div>
   )

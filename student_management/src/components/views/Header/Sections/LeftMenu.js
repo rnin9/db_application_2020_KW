@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux'
 import { Menu ,Badge} from 'antd';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
@@ -7,7 +8,7 @@ import {MDBIcon}  from 'mdbreact';
 
 function LeftMenu(props) {
   const {login} = props
-  
+  const friend = useSelector(state => state.friend.friendreqrec)
   return (
     <div className="menu_left">
     <Menu mode="horizontal">
@@ -26,7 +27,7 @@ function LeftMenu(props) {
     </Menu.Item>
     <Menu.Item key="friend">
       {login ?
-      <Badge count={5} size="default" offset={[4,0]}>
+      <Badge count={friend&&friend.length} size="default" offset={[4,0]}>
       <a style={{marginLeft:2,fontSize:20}} href="/user/friend/list">
       <MDBIcon icon="user-friends" />
       </a>
