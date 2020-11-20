@@ -42,7 +42,6 @@ module.exports = {
     userInfo:(req, res)=>{
       const body = req.query[0]
       model.api.getUserInfo(body,result=>{
-        // if(result[0])
         res.send(result);
         });
     },
@@ -107,4 +106,14 @@ module.exports = {
       })
     },
   },
+
+  delete:{
+    friendreq:(req,res)=>{
+      const data = req.body
+      model.delete.deleteFriendreq(data,result=>{
+        console.log(result)
+        return res.json({success:true,friendreqInfo:result})
+      })
+    }
+  }
 }

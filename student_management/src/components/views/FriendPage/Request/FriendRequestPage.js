@@ -5,7 +5,7 @@ import { Table, Tag, message, Space, Input, Button } from 'antd';
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
 import './FriendRequestPage.css'
-import { getFriendreq, requestFriend } from '../../../../redux/_actions/friend_actions';
+import { getFriendreq, requestDelete, requestFriend } from '../../../../redux/_actions/friend_actions';
 const { Column} = Table;
 const { Search } = Input;
 const id = localStorage.getItem('id')
@@ -70,6 +70,23 @@ const id = localStorage.getItem('id')
        else{
          message.error('본인은 친구신청할 수 없습니다.')
        }
+      }
+
+      const handleDelete=(event)=>{
+        let friendID = event.currentTarget.id
+        dispatch(requestDelete(id,friendID))
+        .then(res=>{
+          console.log(res.payload.friendreqInfo)
+          if(res.payload.success===true){
+            message.success('친구요청을 취소했습니다!')
+          }
+          else{
+            message.error('삭제에 실패했습니다!')
+          }
+        }).catch(err=>{
+          message.error('친구 삭제오류가 발생했습니다!',err)
+        })
+
       }
 
       return (
@@ -139,10 +156,10 @@ const id = localStorage.getItem('id')
     }</>)}
     />
   
-    <Column title="" dataIndex="friendDelete" key="d"
-       render={() => (
+    <Column title="" key="action"
+       render={(text,record) => (
         <Space size="middle">
-          <Button type="ghost"style={{fontSize:15}}><DeleteFilled/></Button>
+          <Button type="ghost"style={{fontSize:15}} onClick={handleDelete} id={record.friendID}><DeleteFilled/></Button>
         </Space>
       )}/>
   </Table>

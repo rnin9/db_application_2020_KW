@@ -12,6 +12,8 @@ export default function(state={},action){
             return{...state, friendreqData:action.payload}
         case FRIEND_REQUEST:
             return{...state, friendreqData:action.payload.friendreqInfo}
+        case FRIEND_REQUEST_DELETE:
+            return{...state, friendreqData:action.payload.friendreqInfo}
         default:
             return state;
     }

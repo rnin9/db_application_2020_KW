@@ -56,7 +56,6 @@ module.exports ={
             })
         },
         getUserFriendreq:(body,callback)=>{
-            console.log(body)
             FRIEND.findAll({
                 include: [
                     {
@@ -178,6 +177,25 @@ module.exports ={
           throw err;
          });
         },
-    }
+    },
+    delete:{
+        deleteFriendreq:(body,callback)=>{
+            FRIEND.destroy({
+                where:{[Op.and]: [{userID:body.u_id, friendID:body.f_id}]}
+            }).then(()=>{
+                FRIEND.findAll({
+                    include: [
+                        {
+                          model: USER,
+                          required:true,
+                          attributes: ['userName','userPosition'],
+                        }],
+                    where:{[Op.and]: [{userID:body.u_id, friendGrant:false}]}
+                }).then(data=>{
+                        callback(data)
+                }).catch(err=>{throw err})
+            }).catch(err=>{throw err})
+        }
+    },
        
 }

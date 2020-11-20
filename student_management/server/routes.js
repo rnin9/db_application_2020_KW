@@ -18,4 +18,6 @@ router.get('/api/userFriend/request',controller.api.userFriendreq); // 친구요
 router.get('/api/userGrade',controller.api.userGrade);
 router.get('/api/userEval',controller.api.userEval);
 
+router.delete('/delete/friend/request',controller.delete.friendreq);
+
 module.exports = router;

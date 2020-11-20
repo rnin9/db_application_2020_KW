@@ -25,3 +25,13 @@ export function requestFriend(userID,friendID){
    }
 }
 
+
+export function requestDelete(userID,friendID){
+    const datas = {u_id:userID, f_id:friendID}
+    const request= axios.delete('/delete/friend/request',{data:datas})
+    .then(res=>res.data);
+    return {
+        type:FRIEND_REQUEST_DELETE,
+        payload:request
+    }
+}
