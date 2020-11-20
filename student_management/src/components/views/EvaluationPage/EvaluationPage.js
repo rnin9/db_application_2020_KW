@@ -4,6 +4,7 @@ import './EvaluationPage.css'
 import axios from 'axios';
 
 
+
 const columns = [
   {
     title: '번호',
@@ -59,7 +60,10 @@ class EvaluationPage extends Component{
     }
 
     _getData = async () => {
-      const res = await axios.get('/api/userEval');     
+      const res = await axios.get('/api/userEval');
+
+
+
       if(res.data[0] === undefined) {
         let cover = [];
         cover.push(res.data);       // response 데이터들 push
@@ -71,7 +75,7 @@ class EvaluationPage extends Component{
 
     render(){
         const { list } = this.state;
-        
+       
         return(
           <div style={{margin: AutoComplete}}> 
           <div className="table">

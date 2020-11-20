@@ -2,6 +2,7 @@ module.exports = (sequelize, DataTypes) =>{
     return sequelize.define('EVALUATION',{   // evaluation 데이터 정의
       idx:{
          type: DataTypes.INTEGER,
+         unique: true,
          allowNull: false,
          autoIncrement: true
       },

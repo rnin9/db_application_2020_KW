@@ -16,6 +16,9 @@ router.get('/api/userInfo',controller.api.userInfo);        // 특정 유저 정
 router.get('/api/userFriend',controller.api.userFriend);    // 친구목록
 router.get('/api/userFriend/request',controller.api.userFriendreq); // 친구요청했고, 아직 응답받지않은 목록 
 router.get('/api/userGrade',controller.api.userGrade);
+router.get('/api/userAllCredit',controller.api.userAllCredit);
+router.get('/api/userGetCredit',controller.api.userGetCredit);
+router.get('/api/userAllGrade',controller.api.userAllGrade);
 router.get('/api/userEval',controller.api.userEval);
 
 router.delete('/delete/friend/request',controller.delete.friendreq);

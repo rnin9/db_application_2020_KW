@@ -73,6 +73,50 @@ module.exports ={
             })
         },
         getUserGrade:(body,callback)=>{
+            sequelize.query("select * from GRADEs where user_id=:user_id", {replacements :{user_id : body}})
+            .then(data=>{
+                //console.log("GRADE" +data);
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
+            /*
+            GRADE.findAll({
+                where: {user_id:body},
+                //include: COURSE
+            })
+            .then(data=>{
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
+            */
+        },
+        getUserAllCredit:(body,callback)=>{
+            sequelize.query("call grade_graph(:user_id)", {replacements :{user_id : body}})
+            .then(data=>{
+                console.log("GRADE" +data);
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserGetCredit:(body,callback)=>{
+            GRADE.findAll({
+                where: {user_id:body},
+                //include: COURSE
+            })
+            .then(data=>{
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserAllGrade:(body,callback)=>{
             GRADE.findAll({
                 where: {user_id:body},
                 //include: COURSE

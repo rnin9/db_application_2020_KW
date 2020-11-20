@@ -54,8 +54,33 @@ module.exports = {
     userGrade:(req, res)=>{
       const body = req.query[0]
       model.api.getUserGrade(body,result=>{
+        if(result[0]){
+          console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
+    userAllCredit:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserAllCredit(body,result=>{
+        if(result[0]){
+          console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
+    userGetCredit:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserGetCredit(body,result=>{
         if(result[0])
-        res.send(result);
+        res.send(result[0]);
+        });
+    },
+    userAllGrade:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserAllGrade(body,result=>{
+        if(result[0])
+        res.send(result[0]);
         });
     },
     userEval:(req, res)=>{        //api key를 이용한 values (user)
