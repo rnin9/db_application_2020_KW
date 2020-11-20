@@ -72,3 +72,6 @@ ____________________________________________
 ### 2020-11-19
   * FriendPage request 
 
+## 2020-11-20
+  * FriendPage UI update, request
+

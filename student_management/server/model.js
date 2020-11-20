@@ -6,7 +6,6 @@ const {
   } = require('./models');
 
 const { GRADE, EVALUATION } = require('./models');
-const friend = require('./models/friend');
 
 
 sequelize.query('SET NAMES utf8;');
@@ -57,8 +56,15 @@ module.exports ={
             })
         },
         getUserFriendreq:(body,callback)=>{
+            console.log(body)
             FRIEND.findAll({
-                where: {[Op.and]: [{userID: body, friendGrant: false}]}
+                include: [
+                    {
+                      model: USER,
+                      required:true,
+                      attributes: ['userName','userPosition'],
+                    }],
+                where: {[Op.and]: [{userID: body, friendGrant: false}]},   //INNER JOIN
             })
             .then(data=>{
                 callback(data)
@@ -122,12 +128,12 @@ module.exports ={
             .then(cnt => {
                 if(cnt > 0) {
                     FRIEND.findAll({
-                        // include: [
-                        //     {
-                        //       model: USER,
-                        //       where:{ userID: body.f_id },
-                        //       attributes: ['userName','userMajor'],
-                        //     }],
+                        include: [
+                            {
+                              model: USER,
+                              required:true,
+                              attributes: ['userName','userPosition'],
+                            }],
                         where: {[Op.and]: [{userID: body.u_id, friendGrant: false}]},    //넣지 않고, 데이터 넘김
                                 
                     }).then(data=>{
@@ -141,6 +147,12 @@ module.exports ={
                           friendID:body.f_id
                       }).then(() => {
                           FRIEND.findAll({
+                            include: [
+                                {
+                                  model: USER,
+                                  required:true,
+                                  attributes: ['userName','userPosition'],
+                                }],
                           where: {[Op.and]: [{userID: body.u_id, friendGrant: false}]}  // 넣고 넘김
                           }).then(data=>{
                               callback(data)

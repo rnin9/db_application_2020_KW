@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import {useSelector} from 'react-redux'
-import { UserAddOutlined} from '@ant-design/icons';
+import { UserAddOutlined, DeleteFilled} from '@ant-design/icons';
 import { Table, Tag, message, Space, Input, Button } from 'antd';
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
@@ -25,8 +25,7 @@ const id = localStorage.getItem('id')
     }, [])
 
     const [data, setdata] = useState([]) //찾은user정보
-    const [position, setposition] = useState('')
-    const [friendreq, setfriendreq] = useState({
+    const [friendreq, setfriendreq] = useState({  //찾을 userID, friendID
       f_id :'',
       u_id :''
     })
@@ -40,7 +39,6 @@ const id = localStorage.getItem('id')
         message.error('사용자가 없습니다!')
       }else{
      setdata(res.data);
-     setposition(res.data[0].userPosition);
      setfriendreq({
        f_id: res.data[0].userID,
        u_id: localStorage.getItem('id')})}
@@ -97,14 +95,16 @@ const id = localStorage.getItem('id')
     <Column title="학과" dataIndex="userMajor" key="major" />
     <Column
       title="직급"
-      key="position"
-      render={()=>(
-        position ==='학부생'?
-      <Tag color="blue">{position}</Tag>
-        : position==='교수'?
-      <Tag color="red">{position}</Tag>
-        :<Tag color="yellow">{position}</Tag>
-      )}/>
+      dataIndex="userPosition"
+      key="userPosition"
+      render={userPosition=>( 
+        <>
+        {userPosition==='학부생'?
+      <Tag color="blue">{userPosition}</Tag>
+        : userPosition==='교수'?
+      <Tag color="red">{userPosition}</Tag>
+        :<Tag color="green">{userPosition}</Tag>
+      }</>)}/>
     <Column
       title=""
       key="action"
@@ -127,9 +127,24 @@ const id = localStorage.getItem('id')
       
     <Table dataSource={ friendreqData } rowKey="friendID">
     <Column title="ID" dataIndex="friendID" key="ids" />
-    <Column title="시간표공개여부" dataIndex="scheduleShare" key="s" />
-    <Column title="성적공개여부" dataIndex="gradeShare" key="g" />
-    <Column title="상태" dataIndex="friendGrant" key="f" />
+      <Column title="이름" dataIndex={['USER','userName']}key="s" />
+    <Column title="직급" dataIndex={['USER','userPosition']} key="p"
+    render={p=>( 
+      <>
+      {p==='학부생'?
+    <Tag color="blue">{p}</Tag>
+      : p==='교수'?
+    <Tag color="red">{p}</Tag>
+      :<Tag color="green">{p}</Tag>
+    }</>)}
+    />
+  
+    <Column title="" dataIndex="friendDelete" key="d"
+       render={() => (
+        <Space size="middle">
+          <Button type="ghost"style={{fontSize:15}}><DeleteFilled/></Button>
+        </Space>
+      )}/>
   </Table>
       </div>
       </div>

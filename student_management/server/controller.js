@@ -68,7 +68,7 @@ module.exports = {
     userFriendreq:(req,res)=>{
       const body = req.query[0]
       model.api.getUserFriendreq(body,result=>{
-       res.send(result)
+       return res.send(result)
       })
     },
   },
