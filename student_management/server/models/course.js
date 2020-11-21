@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) =>{
          type: DataTypes.INTEGER,// year이 없어서 integer로 대체
          primaryKey: true,
       },
-      Course_num:{
+      semester:{
          type: DataTypes.DECIMAL(2,1),
          primaryKey: true,
       },
