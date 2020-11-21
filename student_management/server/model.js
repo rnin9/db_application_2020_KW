@@ -47,15 +47,19 @@ module.exports ={
             })
         },
         getUserFriendList:(body,callback)=>{
+            let infos=[]
             FRIEND.findAll({
-                where: {[Op.and]: [{userID: body, friendGrant: true}]}
+           where: {[Op.and]: [{friendID: body, friendGrant: true, }]},   //INNER JOIN
+             }).then((data)=>{
+                data.map(dataValues=>{
+                     USER.findAll({
+                         where:{userID:dataValues.userID}
+                     }).then(datas=>{
+                     infos.push(datas[0].dataValues)
+                     })
+                   }) 
             })
-            .then(data=>{
-                callback(data)
-            })
-            .catch(err=>{
-                throw err;
-            })
+            setTimeout(function(){callback(infos)},100) //임의로 시간줘서 데이터 다 받아오기
         },
         getUserFriendreq:(body,callback)=>{
             FRIEND.findAll({

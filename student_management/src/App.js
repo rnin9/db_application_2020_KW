@@ -9,6 +9,7 @@ import Header from './components/views/Header/Header.js'
 import AuthRoute from './helpers/AuthRoute.js'
 import FriendRequestPage from './components/views/FriendPage/Request/FriendRequestPage'
 import FriendHandlePage from './components/views/FriendPage/Handle/FriendHandlePage'
+import FriendListPage from './components/views/FriendPage/FriendPage'
 import Login from './components/views/LoginPage/LoginPage.js'
 import NavBar from './components/views/NavBar/NavBar.js'
 import MyInfoPage from './components/views/MyInfoPage/MyInfoPage.js'
@@ -65,7 +66,8 @@ class App extends Component {
 
           <AuthRoute exact path="/main" component={LandingPage}></AuthRoute>
           <AuthRoute exact path="/user/friend/add" component={FriendRequestPage}></AuthRoute>
-          <AuthRoute exact path="/user/friend/list" component={FriendHandlePage}></AuthRoute>
+          <AuthRoute exact path="/user/friend/handle" component={FriendHandlePage}></AuthRoute>
+          <AuthRoute exact path="/user/friend/list" component={FriendListPage}></AuthRoute>
           <AuthRoute exact path="/user/info" component={MyInfoPage}></AuthRoute>  
           <AuthRoute exact path="/user/info/modify/:id/:name" component={MyInfoEditPage}></AuthRoute>
           <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>

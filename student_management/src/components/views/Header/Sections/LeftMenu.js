@@ -28,7 +28,7 @@ function LeftMenu(props) {
     <Menu.Item key="friend">
       {login ?
       <Badge count={friend&&friend.length} size="default" offset={[4,0]}>
-      <a style={{marginLeft:2,fontSize:20}} href="/user/friend/list">
+      <a style={{marginLeft:2,fontSize:20}} href="/user/friend/handle">
       <MDBIcon icon="user-friends" />
       </a>
       </Badge>: null}

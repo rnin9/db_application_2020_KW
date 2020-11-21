@@ -48,7 +48,7 @@ module.exports = {
     },
     userFriendList:(req,res)=>{
       const body = req.query[0]
-      model.api.getUserFriend(body,result=>{
+      model.api.getUserFriendList(body,result=>{
         res.send(result);
       })
     },

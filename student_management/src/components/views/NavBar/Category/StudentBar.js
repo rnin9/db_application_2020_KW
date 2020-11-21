@@ -55,10 +55,11 @@ function StudentBar(props) {
       <Menu.Item key="7">휴학신청</Menu.Item>
     </SubMenu>
     <SubMenu key="sub3" icon={<TeamOutlined />} title="친구">
-      <Menu.Item key="8"><a href="/user/friend/add">친구추가</a></Menu.Item>
+      <Menu.Item key="8"><a href="/user/friend/list">친구목록</a></Menu.Item>
+      <Menu.Item key="9"><a href="/user/friend/add">친구추가</a></Menu.Item>
       <SubMenu key="sub4" title="공유">
-        <Menu.Item key="9">시간표</Menu.Item>
-        <Menu.Item key="10">성적</Menu.Item>
+        <Menu.Item key="10">시간표</Menu.Item>
+        <Menu.Item key="11">성적</Menu.Item>
       </SubMenu>
     </SubMenu>
   </Menu>  

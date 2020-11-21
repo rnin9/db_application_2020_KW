@@ -60,7 +60,8 @@ function EmployeeBar(props) {
       <Menu.Item key="5">졸업사정</Menu.Item>
     </SubMenu>    
     <SubMenu key="sub4" icon={<TeamOutlined />} title="친구">
-      <Menu.Item key="6"><a href="/user/friend/add">친구추가</a></Menu.Item>
+    <Menu.Item key="6"><a href="/user/friend/list">친구목록</a></Menu.Item>
+      <Menu.Item key="7"><a href="/user/friend/add">친구추가</a></Menu.Item>
     </SubMenu>
   </Menu>  
   </div>
