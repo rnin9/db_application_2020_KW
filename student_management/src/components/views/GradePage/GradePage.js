@@ -120,8 +120,8 @@ class GradePage extends Component{
 
           <div className="table">            
             <h3>{userName} 학생의 학기별 수강 정보입니다.</h3>
-          </div
-          >
+          </div>
+          
           <div className="table_grade">          
             {list.length !== 0
               ? 
