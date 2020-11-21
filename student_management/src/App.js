@@ -8,7 +8,7 @@ import LandingPage from './components/views/LandingPage/LandingPage.js'
 import Header from './components/views/Header/Header.js'
 import AuthRoute from './helpers/AuthRoute.js'
 import FriendRequestPage from './components/views/FriendPage/Request/FriendRequestPage'
-import FriendListPage from './components/views/FriendPage/List/FriendListPage'
+import FriendHandlePage from './components/views/FriendPage/Handle/FriendHandlePage'
 import Login from './components/views/LoginPage/LoginPage.js'
 import NavBar from './components/views/NavBar/NavBar.js'
 import MyInfoPage from './components/views/MyInfoPage/MyInfoPage.js'
@@ -63,9 +63,9 @@ class App extends Component {
           <Route exact path="/register" component={Register}></Route>
           <Route exact path="/login" component={Login}></Route>
 
-          <AuthRoute exact path="/main" component={Friend(LandingPage)}></AuthRoute>
-          <AuthRoute exact path="/user/friend/add" component={Friend(FriendRequestPage)}></AuthRoute>
-          <AuthRoute exact path="/user/friend/list" component={Friend(FriendListPage)}></AuthRoute>
+          <AuthRoute exact path="/main" component={LandingPage}></AuthRoute>
+          <AuthRoute exact path="/user/friend/add" component={FriendRequestPage}></AuthRoute>
+          <AuthRoute exact path="/user/friend/list" component={FriendHandlePage}></AuthRoute>
           <AuthRoute exact path="/user/info" component={MyInfoPage}></AuthRoute>  
           <AuthRoute exact path="/user/info/modify/:id/:name" component={MyInfoEditPage}></AuthRoute>
           <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>

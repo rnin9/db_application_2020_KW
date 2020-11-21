@@ -77,6 +77,7 @@ ____________________________________________
   * get FriendRequest Data
 
 ## 2020-11-21
-  * FriendRequestPage redux
+  * FriendRequestPage with redux
+  * FriendHandlePage with redux
 
 

@@ -10,8 +10,7 @@ export default function (SpecificComponent) {
         const dispatch = useDispatch();
         const id = localStorage.getItem('id')
         useEffect(()=>{
-            // dispatch(requestReceived(id))
-            // dispatch(getFriendreq(id))
+            // dispatch(getFriendList(id))
         }, [])
 
         return (

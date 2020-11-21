@@ -5,7 +5,8 @@ import {FRIEND_GET_REQUEST,
         FRIEND_GET_LIST,
         FRIEND_ACCEPT,
         FRIEND_DENY,
-        FRIEND_DELETE} from '../_actions/types'
+        FRIEND_DELETE,
+        FRIEND_REQUEST_HANDLE} from '../_actions/types'
 
 export default function(state={},action){
     switch(action.type){
@@ -20,6 +21,13 @@ export default function(state={},action){
                     ...state.friendreqData},
                  friendreqrec:action.payload.friendreqrec
             }
+        case FRIEND_GET_LIST:
+            return{...state, friendreqrec:{
+                    ...state.friendreqreq},
+                    friendList:action.payload.friendList
+            }
+        case FRIEND_REQUEST_HANDLE:
+            return{...state, friendreqrec:action.payload}
         default:
             return state;
     }

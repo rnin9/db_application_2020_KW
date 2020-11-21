@@ -46,7 +46,7 @@ module.exports ={
                 throw err;
             })
         },
-        getUserFriend:(body,callback)=>{
+        getUserFriendList:(body,callback)=>{
             FRIEND.findAll({
                 where: {[Op.and]: [{userID: body, friendGrant: true}]}
             })
@@ -193,6 +193,48 @@ module.exports ={
          callback(false);
           throw err;
          });
+        },
+
+        setHandle:(body,callback)=>{
+            FRIEND.update(
+                {friendGrant: body.data.grant},
+                {where:{[Op.and]: [{userID: body.data.f_id, friendID: body.data.u_id}]}}
+                )
+            .then(()=>{
+                 if(body.data.grant===false){
+                    FRIEND.destroy({
+                        where:{[Op.and]: [{userID:body.data.f_id, friendID: body.data.u_id}]}
+                    }).then(()=>{
+                        const infos=[]
+                        FRIEND.findAll({
+                       where: {[Op.and]: [{friendID: body.data.u_id, friendGrant: false, }]},   //INNER JOIN
+                         }).then((data)=>{
+                            data.map(dataValues=>{
+                                 USER.findAll({
+                                     where:{userID:dataValues.userID}
+                                 }).then(datas=>{
+                                 infos.push(datas[0].dataValues)
+                                 })
+                               }) 
+                        })
+                        setTimeout(function(){callback(infos)},100) //임의로 시간줘서 데이터 다 받아오기
+                    })    
+                } else{
+                    const infos=[]
+                    FRIEND.findAll({
+                   where: {[Op.and]: [{friendID: body.data.u_id, friendGrant: false, }]},   //INNER JOIN
+                     }).then((data)=>{
+                        data.map(dataValues=>{
+                             USER.findAll({
+                                 where:{userID:dataValues.userID}
+                             }).then(datas=>{
+                             infos.push(datas[0].dataValues)
+                             })
+                           }) 
+                    })
+                    setTimeout(function(){callback(infos)},100) //임의로 시간줘서 데이터 다 받아오기
+                }   
+            })              
         },
     },
     delete:{

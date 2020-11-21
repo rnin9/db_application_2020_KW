@@ -46,7 +46,7 @@ module.exports = {
         res.send(result);
         });
     },
-    userFriend:(req,res)=>{
+    userFriendList:(req,res)=>{
       const body = req.query[0]
       model.api.getUserFriend(body,result=>{
         res.send(result);
@@ -112,13 +112,18 @@ module.exports = {
       return res.json({ success: true, filepath: res.req.file.path, filename: res.req.file.filename})
       })
     },
-  },
-
+    requestHandle:(req,res)=>{
+      const data = req.body
+      model.update.setHandle(data,result=>{
+        console.log(result)
+        res.send(result)
+      })
+      },
+    },
   delete:{
     friendreq:(req,res)=>{
       const data = req.body
       model.delete.deleteFriendreq(data,result=>{
-        console.log(result)
         return res.json({success:true,friendreqInfo:result})
       })
     }
