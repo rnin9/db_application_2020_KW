@@ -10,11 +10,11 @@ import {FRIEND_GET_REQUEST,
 export default function(state={},action){
     switch(action.type){
         case FRIEND_GET_REQUEST:
-            return{...state, friendreqData:action.payload}
+            return{...state, friendreqData:action.payload, friendreqrec:{...state.friendreqrec}}    
         case FRIEND_REQUEST:
-            return{...state, friendreqData:action.payload.friendreqInfo}
+            return{...state, friendreqData:action.payload.friendreqInfo,  friendreqrec:{...state.friendreqrec}}
         case FRIEND_REQUEST_DELETE:
-            return{...state, friendreqData:action.payload.friendreqInfo}
+            return{...state, friendreqData:action.payload.friendreqInfo,  friendreqrec:{...state.friendreqrec}}
         case FRIEND_REQUEST_RECEIVED:
             return{...state, friendreqData:{
                     ...state.friendreqData},

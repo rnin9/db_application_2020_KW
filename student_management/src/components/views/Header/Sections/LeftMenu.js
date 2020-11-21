@@ -16,7 +16,7 @@ function LeftMenu(props) {
       <span role="img" aria-label="sun-flower"style={{fontSize:25, paddingLeft:7}}>
       🌻
       </span>
-      <a className="logo" href="/" style={{fontSize:25,marginLeft:20}}>
+      <a className="logo" href="/main" style={{fontSize:25,marginLeft:20}}>
       DB143
       </a>
     </Menu.Item>

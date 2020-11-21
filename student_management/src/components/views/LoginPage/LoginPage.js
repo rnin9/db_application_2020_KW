@@ -29,7 +29,7 @@ const onFinish = (values) => {
         localStorage.setItem('position',res.data.position);
         localStorage.setItem('id',res.data.id);
         localStorage.setItem('name',res.data.name);
-        return window.location.href='/';    //성공!
+        return window.location.href='/main';    //성공!
         }
         else
         message.error('로그인에 실패했습니다.') // 실패!

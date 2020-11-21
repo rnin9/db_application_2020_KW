@@ -1,25 +1,24 @@
 import React,{useState, useEffect} from 'react';
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import { UserAddOutlined, DeleteFilled} from '@ant-design/icons';
 import { Table, Tag, message, Space, Input, Button } from 'antd';
-import {useDispatch} from 'react-redux'
 import axios from 'axios'
 import './FriendListPage.css'
 import { requestReceived, requestDelete, requestFriend } from '../../../../redux/_actions/friend_actions';
 const { Column} = Table;
 
 function FriendListPage() {
-     const id = localStorage.getItem('id')
-     const dispatch = useDispatch()
-     const [friendreqData, setfriendreqData] = useState([])
-     useEffect(() => {
+   
+    const friendrec = useSelector(state => state.friend)
+    const dispatch = useDispatch()
+    const id = localStorage.getItem('id')
+      useEffect(() => {
          dispatch(requestReceived(id))
          .then(res=>{
-             console.log(res)
-             setfriendreqData(res.payload.friendreqrec)
+            //  console.log(res)
+            //  setfriendreqData(res.payload.friendreqrec)
          })         
      }, [])
-     console.log(friendreqData)
     return (
         <div>
         {/* <div className="friend_table_menu">
@@ -55,7 +54,7 @@ function FriendListPage() {
         <div className="friend_table_user">
        
       
-       <Table dataSource={ friendreqData } rowKey="userID">
+       <Table dataSource={ friendrec.friendreqrec } rowKey="userID">
        <Column title="ID" dataIndex="userID" key="ids" />
          <Column title="이름" dataIndex="userName"key="s" />
        <Column title="직급" dataIndex={'userPosition'} key="p"

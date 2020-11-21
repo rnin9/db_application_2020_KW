@@ -87,7 +87,7 @@ module.exports ={
                     })
                   }) 
            })
-           setTimeout(function(){callback(infos)},100) //이걸로 해냈다 와 ; //임의로 시간줘서 데이터 다 받아오기
+           setTimeout(function(){callback(infos)},100) //임의로 시간줘서 데이터 다 받아오기
         },
         getUserGrade:(body,callback)=>{
             GRADE.findAll({

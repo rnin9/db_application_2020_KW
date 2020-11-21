@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React,{useState, useEffect}from 'react';
+import {useDispatch} from 'react-redux'
 import { AutoComplete, Table, } from 'antd';
 import './LandingPage.css'
 import axios from 'axios';
-import { requestReceived } from '../../../redux/_actions/friend_actions';
+import { getFriendreq, requestFriend, requestReceived } from '../../../redux/_actions/friend_actions';
 
 const columns = [
   {
@@ -32,36 +33,25 @@ const columns = [
     key: 'add',
   },
 ];
-
-class LandingPage extends Component{
-
-    constructor(props) {
-        super(props)
-        this.state = {
-          name : '',
-          list : [],
-          update : false,
-          reqData:[]
-        }    
-      }
+const id = localStorage.getItem('id')
+function LandingPage (props){
+    const [list, setlist] = useState([])
+    const dispatch = useDispatch()
     
-    componentDidMount(){
-      this._getData()
-    }
+    useEffect(() => {
+      _getData()
+      dispatch(requestReceived(id))
+    }, [])
 
-    _getData = async () => {
+    const _getData = async () => {
       const res = await axios.get('/api/user');     
       if(res.data[0] === undefined) {
         let cover = [];
         cover.push(res.data);       // response 데이터들 push
-        return this.setState({ list : cover })
-      }
-      this.setState({ list : res.data });
+        setlist(cover)
+      }else
+      setlist(res.data);
     }
-
-
-    render(){
-        const { list } = this.state;
         
         return(
           <div style={{margin: AutoComplete}}> 
@@ -79,6 +69,5 @@ class LandingPage extends Component{
           </div>
             
         )};
-}
 
 export default LandingPage;

@@ -11,26 +11,22 @@ const { Search } = Input;
 const id = localStorage.getItem('id')
 
 
-  function FriendPage(){
+  function FriendRequestPage(){
     //*************Redux************/
     const dispatch = useDispatch()
-    const friendreqData = useSelector(state => state.friend.friendreqData)
+    const friend = useSelector(state => state.friend)
     //******************************/
-    useEffect(() => {
-     dispatch(getFriendreq(id))
-      .then(res=>{
-       message.success('불러오기완료!')
-      })
-        // eslint-disable-next-line react-hooks/exhaustive-deps   
+    const [data, setdata] = useState([])
+      useEffect(() => {
+      dispatch(getFriendreq(id))
+    // eslint-disable-next-line react-hooks/exhaustive-deps   
     }, [])
-
-    const [data, setdata] = useState([]) //찾은user정보
+  
     const [friendreq, setfriendreq] = useState({  //찾을 userID, friendID
       f_id :'',
       u_id :''
     })
     
-
     const onSearch = value =>{
     value!=='' ?
     axios.get('/api/userInfo',{params:value})
@@ -142,7 +138,7 @@ const id = localStorage.getItem('id')
        <div className="friend_table_user">
        
       
-    <Table dataSource={ friendreqData } rowKey="friendID">
+    <Table dataSource={friend.friendreqData} rowKey="friendID">
     <Column title="ID" dataIndex="friendID" key="ids" />
       <Column title="이름" dataIndex={['USER','userName']}key="s" />
     <Column title="직급" dataIndex={['USER','userPosition']} key="p"
@@ -168,4 +164,4 @@ const id = localStorage.getItem('id')
        
       );
 }
-  export default FriendPage;
+  export default FriendRequestPage;

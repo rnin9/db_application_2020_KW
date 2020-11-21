@@ -1,6 +1,7 @@
 /* src/app.js */
 
 import React, { Component, Suspense } from 'react';
+import Friend from'./hoc/friend'
 import { Route, BrowserRouter} from 'react-router-dom';
 import Register from './components/views/RegisterPage/RegisterPage.js'
 import LandingPage from './components/views/LandingPage/LandingPage.js'
@@ -62,8 +63,9 @@ class App extends Component {
           <Route exact path="/register" component={Register}></Route>
           <Route exact path="/login" component={Login}></Route>
 
-          <AuthRoute exact path="/user/friend/add" component={FriendRequestPage}></AuthRoute>
-          <AuthRoute exact path="/user/friend/list" component={FriendListPage}></AuthRoute>
+          <AuthRoute exact path="/main" component={Friend(LandingPage)}></AuthRoute>
+          <AuthRoute exact path="/user/friend/add" component={Friend(FriendRequestPage)}></AuthRoute>
+          <AuthRoute exact path="/user/friend/list" component={Friend(FriendListPage)}></AuthRoute>
           <AuthRoute exact path="/user/info" component={MyInfoPage}></AuthRoute>  
           <AuthRoute exact path="/user/info/modify/:id/:name" component={MyInfoEditPage}></AuthRoute>
           <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>
