@@ -33,6 +33,7 @@ let sequelize = new Sequalize(
     db.USER = require('./USER')(sequelize,Sequalize);
     db.FRIEND = require('./friend')(sequelize,Sequalize);
     db.GRADE = require('./GRADE')(sequelize,Sequalize);
+	db.COURSE = require('./COURSE')(sequelize,Sequalize);
     db.EVALUATION = require('./EVALUATION')(sequelize,Sequalize);
     db.TAG = require('./TAG')(sequelize,Sequalize);
     db.UPVOTE = require('./UPVOTE')(sequelize,Sequalize);
