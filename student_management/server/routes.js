@@ -20,6 +20,9 @@ router.get('/api/userFriend/request',controller.api.userFriendreq); // 친구요
 router.get('/api/userFriend/request/received',controller.api.userFriendreqrec); // 친구요청받은목록들 
 
 router.get('/api/userGrade',controller.api.userGrade);
+router.get('/api/userAllCredit',controller.api.userAllCredit);
+router.get('/api/userGetCredit',controller.api.userGetCredit);
+router.get('/api/userAllGrade',controller.api.userAllGrade);
 router.get('/api/userEval',controller.api.userEval);
 
 router.get('/api/course',controller.api.course);

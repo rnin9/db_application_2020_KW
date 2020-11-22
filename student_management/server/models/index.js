@@ -43,18 +43,30 @@ let sequelize = new Sequalize(
     db.FRIEND.belongsTo(db.USER,{foreignKey:"userID",sourceKey:"userID"});
     db.FRIEND.belongsTo(db.USER,{foreignKey:"friendID",sourceKey:"userID"});
     
-/*
-    db.USER.hasMany(db.GRADE);
-    db.GRADE.belongsTo(db.USER);
 
-    db.USER.hasMany(db.EVALUATION);
-    db.EVALUATION.belongsTo(db.USER);
+    db.USER.hasMany(db.GRADE, {foreignKey:"user_id",targetKey:"userID"});
+    db.GRADE.belongsTo(db.USER, {foreignKey:"user_id",sourceKey:"userID"});
+    /*
+    db.COURSE.hasMany(db.GRADE, {foreignKey:"course_code",targetKey:"Course_num"});
+    db.GRADE.belongsTo(db.USER, {foreignKey:"course_code",sourceKey:"Course_num"});
+    */
+    db.USER.hasMany(db.EVALUATION, {foreignKey:"user_id",targetKey:"userID"});
+    db.EVALUATION.belongsTo(db.USER, {foreignKey:"user_id",sourceKey:"userID"});
+    /*
+    db.COURSE.hasMany(db.EVALUATION, {foreignKey:"course_code",targetKey:"Course_num"});
+    db.EVALUATION.belongsTo(db.USER, {foreignKey:"course_code",sourceKey:"Course_num"});
+    */
+    db.EVALUATION.hasMany(db.TAG, {foreignKey:"user_id",targetKey:"user_id"});
+    db.TAG.belongsTo(db.EVALUATION, {foreignKey:"user_id",targetKey:"user_id"});
+    db.EVALUATION.hasMany(db.TAG, {foreignKey:"course_code",targetKey:"course_code"});
+    db.TAG.belongsTo(db.EVALUATION, {foreignKey:"course_code",targetKey:"course_code"});
 
-    db.EVALUATION.hasMany(db.TAG);
-    db.TAG.belongsTo(db.EVALUATION);
+    db.EVALUATION.hasMany(db.UPVOTE, {foreignKey:"reviewer_id",targetKey:"user_id"});
+    db.UPVOTE.belongsTo(db.EVALUATION, {foreignKey:"reviewer_id",targetKey:"user_id"});
+    db.EVALUATION.hasMany(db.UPVOTE, {foreignKey:"upvote_id",targetKey:"user_id"});
+    db.UPVOTE.belongsTo(db.EVALUATION, {foreignKey:"upvote_id",targetKey:"user_id"});
+    db.EVALUATION.hasMany(db.UPVOTE, {foreignKey:"course_code",targetKey:"course_code"});
+    db.UPVOTE.belongsTo(db.EVALUATION, {foreignKey:"course_code",targetKey:"course_code"});
 
-    db.EVALUATION.hasMany(db.UPVOTE);
-    db.UPVOTE.belongsTo(db.EVALUATION);
-*/
 db.secret = '(9*)5$&!3%^0%^@@2$1!#5@2!4';
 module.exports = db;
