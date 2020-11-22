@@ -93,6 +93,15 @@ module.exports ={
            })
            setTimeout(function(){callback(infos)},100) //임의로 시간줘서 데이터 다 받아오기
         },
+        getCourse:(callback)=>{//강의 목록 가져오기.
+            COURSE.findAll()
+            .then(data=>{
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
         getUserGrade:(body,callback)=>{
             GRADE.findAll({
                 where: {user_id:body},
