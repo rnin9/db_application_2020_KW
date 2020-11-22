@@ -71,6 +71,11 @@ module.exports = {
        return res.send(result)
       })
     },
+    course:(req, res)=>{
+      model.api.getCourse(result=>{
+          res.send(result);
+        });
+    },
     userFriendreqrec:(req,res)=>{
       const body =req.query[0]
       model.api.getUserFriendreqrec(body,result=>{
