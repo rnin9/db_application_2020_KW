@@ -22,6 +22,8 @@ router.get('/api/userFriend/request/received',controller.api.userFriendreqrec); 
 router.get('/api/userGrade',controller.api.userGrade);
 router.get('/api/userEval',controller.api.userEval);
 
+router.get('/api/course',controller.api.course);
+
 router.delete('/delete/friend/request',controller.delete.friendreq);
 
 module.exports = router;
