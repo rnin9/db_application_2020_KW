@@ -1,5 +1,4 @@
 import axios from 'axios'
-import friend from '../../hoc/friend';
 import { FRIEND_GET_REQUEST,
          FRIEND_REQUEST,
          FRIEND_REQUEST_DELETE,

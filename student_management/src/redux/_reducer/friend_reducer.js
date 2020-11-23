@@ -3,8 +3,6 @@ import {FRIEND_GET_REQUEST,
         FRIEND_REQUEST_DELETE,
         FRIEND_REQUEST_RECEIVED,
         FRIEND_GET_LIST,
-        FRIEND_ACCEPT,
-        FRIEND_DENY,
         FRIEND_DELETE,
         FRIEND_REQUEST_HANDLE} from '../_actions/types'
 

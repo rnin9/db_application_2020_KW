@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React,{useState, useEffect} from 'react'
-import { Table, Tag, message, Space, Input, Button } from 'antd';
+import { Table, Tag } from 'antd';
 import axios from 'axios'
 import './Request/FriendRequestPage.css'
 const { Column} = Table;
@@ -15,6 +16,7 @@ function FriendPage() {
             setFriend(res.data)
         })
     }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps   
     return (
 
         <div>

@@ -1,7 +1,6 @@
 /* src/app.js */
 
 import React, { Component, Suspense } from 'react';
-import Friend from'./hoc/friend'
 import { Route, BrowserRouter} from 'react-router-dom';
 import Register from './components/views/RegisterPage/RegisterPage.js'
 import LandingPage from './components/views/LandingPage/LandingPage.js'
@@ -17,6 +16,7 @@ import MyInfoEditPage from './components/views/MyInfoPage/Edit/MyInfoEditPage'
 import Grade from './components/views/GradePage/GradePage.js'
 import Evaluation from './components/views/EvaluationPage/EvaluationPage.js'
 import CoursePage from './components/views/CoursePage/CoursePage.js'
+import StudentInfoPage from './components/views/StudentInfoPage/StudentInfoPage'
 import './App.css';
 
 class App extends Component {
@@ -75,6 +75,7 @@ class App extends Component {
           <AuthRoute exact path="/user/grade" component={Grade}></AuthRoute> {/*유저권한확인*/}
           <AuthRoute exact path="/course" component={CoursePage}></AuthRoute>
           
+          <AuthRoute exact path="/professor/studentInfo" component={StudentInfoPage}></AuthRoute>
 
         </BrowserRouter>        
     </div>

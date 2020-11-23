@@ -1,7 +1,8 @@
-import React,{useState, useEffect} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import { CheckCircleTwoTone, CloseCircleTwoTone} from '@ant-design/icons';
-import { Table, Tag, message, Space, Input, Button } from 'antd';
+import { Table, Tag, message, Space, Button } from 'antd';
 import './FriendHandlePage.css'
 import { requestReceived, requestHandle } from '../../../../redux/_actions/friend_actions';
 const { Column} = Table;

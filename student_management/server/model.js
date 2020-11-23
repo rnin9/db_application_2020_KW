@@ -167,6 +167,14 @@ module.exports ={
                 throw err;
             })
         },
+        getStudentList:(body,callback)=>{
+            console.log(body)
+            USER.findAll({
+                where: {[Op.and]: [{userCollege:body.college, userMajor: body.major, userPosition:"학부생" }]},   //INNER JOIN
+            }).then(data=>{
+                callback(data)
+            })
+        }
     },
 
     add:{

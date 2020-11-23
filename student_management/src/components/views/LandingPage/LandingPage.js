@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React,{useState, useEffect}from 'react';
 import {useDispatch} from 'react-redux'
 import { AutoComplete, Table, } from 'antd';
 import './LandingPage.css'
 import axios from 'axios';
-import { getFriendreq, requestFriend, requestReceived } from '../../../redux/_actions/friend_actions';
+import {requestReceived } from '../../../redux/_actions/friend_actions';
 
 const columns = [
   {
