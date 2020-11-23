@@ -79,5 +79,7 @@ ____________________________________________
 ## 2020-11-21
   * FriendRequestPage with redux
   * FriendHandlePage with redux
-
+  
+## 2020-11-23
+  * Find Student for professor
 

@@ -17,7 +17,9 @@ import Grade from './components/views/GradePage/GradePage.js'
 import Evaluation from './components/views/EvaluationPage/EvaluationPage.js'
 import CoursePage from './components/views/CoursePage/CoursePage.js'
 import StudentInfoPage from './components/views/StudentInfoPage/StudentInfoPage'
+import AbsenseRequestPage from './components/views/AbsensePage/Request/AbsenseRequest'
 import './App.css';
+import ProfessorRoute from './helpers/ProfessorRoute.js';
 
 class App extends Component {
   constructor(props) {
@@ -71,11 +73,16 @@ class App extends Component {
           <AuthRoute exact path="/user/friend/list" component={FriendListPage}></AuthRoute>
           <AuthRoute exact path="/user/info" component={MyInfoPage}></AuthRoute>  
           <AuthRoute exact path="/user/info/modify/:id/:name" component={MyInfoEditPage}></AuthRoute>
+          <AuthRoute exact path="/user/absense/request" component={AbsenseRequestPage}></AuthRoute>  
+          
+          
           <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>
           <AuthRoute exact path="/user/grade" component={Grade}></AuthRoute> {/*유저권한확인*/}
           <AuthRoute exact path="/course" component={CoursePage}></AuthRoute>
           
           <AuthRoute exact path="/professor/studentInfo" component={StudentInfoPage}></AuthRoute>
+          <AuthRoute exact path="/employee/studentInfo" component={StudentInfoPage}></AuthRoute>
+
 
         </BrowserRouter>        
     </div>

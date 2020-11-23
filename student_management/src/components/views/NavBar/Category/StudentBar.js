@@ -52,7 +52,7 @@ function StudentBar(props) {
     >
       <Menu.Item key="5">공지사항</Menu.Item>
       <Menu.Item key="6">게시판</Menu.Item>
-      <Menu.Item key="7">휴학신청</Menu.Item>
+      <Menu.Item key="7"><a href="/user/absense/request">휴학신청</a></Menu.Item>
     </SubMenu>
     <SubMenu key="sub3" icon={<TeamOutlined />} title="친구">
       <Menu.Item key="8"><a href="/user/friend/list">친구목록</a></Menu.Item>
