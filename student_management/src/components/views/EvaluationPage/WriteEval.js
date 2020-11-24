@@ -36,11 +36,12 @@ const menu = (
 );
 
 const onFinish = values => {                      // 제출 시 , POST 형식으로 /add/user request, response 대기
+  /*
   const datas={ 
                user_id=userID,
                content:value.content
                };       
-    /*      
+    
     axios('/add/eval',{ method: 'POST', headers: new Headers(), data: datas}) // 성공, 실패시 메시지
     .then(res=>{
       if(res.data){
