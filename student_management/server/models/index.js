@@ -32,6 +32,7 @@ let sequelize = new Sequalize(
 
     db.USER = require('./USER')(sequelize,Sequalize);
     db.FRIEND = require('./friend')(sequelize,Sequalize);
+    db.ABSENSE = require('./absense')(sequelize,Sequalize);
     db.GRADE = require('./GRADE')(sequelize,Sequalize);
 	db.COURSE = require('./COURSE')(sequelize,Sequalize);
     db.EVALUATION = require('./EVALUATION')(sequelize,Sequalize);
@@ -42,6 +43,9 @@ let sequelize = new Sequalize(
     db.USER.hasMany(db.FRIEND,{foreignKey:"friendID",targetKey:"userID"});
     db.FRIEND.belongsTo(db.USER,{foreignKey:"userID",sourceKey:"userID"});
     db.FRIEND.belongsTo(db.USER,{foreignKey:"friendID",sourceKey:"userID"});
+
+    db.USER.hasMany(db.ABSENSE,{foreignKey:"userID",targetKey:"userID"});
+    db.ABSENSE.belongsTo(db.USER,{foreignKey:"userID",sourceKey:"userID"});
     
 
     db.USER.hasMany(db.GRADE, {foreignKey:"user_id",targetKey:"userID"});

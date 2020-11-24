@@ -4,7 +4,7 @@ const { AccessDeniedError } = require('sequelize');
 const Sequelize = require('sequelize');
 const { Op } = Sequelize;
 const {
-    USER, FRIEND  
+    USER, FRIEND, ABSENSE  
   } = require('./models');
 
 const { GRADE, EVALUATION } = require('./models');
@@ -168,9 +168,34 @@ module.exports ={
             })
         },
         getStudentList:(body,callback)=>{
-            console.log(body)
             USER.findAll({
                 where: {[Op.and]: [{userCollege:body.college, userMajor: body.major, userPosition:"학부생" }]},   //INNER JOIN
+            }).then(data=>{
+                callback(data)
+            })
+        },
+        getAbsenseList:(body, callback)=>{
+            ABSENSE.findAll({
+                include: [
+                    {
+                      model: USER,
+                      required:true,
+                      attributes: ['userName','userGrade'],
+                    }],
+                where:{userID:body}
+            }).then(data=>{
+                callback(data)
+            })
+        },
+        getAbsensectnList:(body, callback)=>{
+            ABSENSE.findAll({
+                include: [
+                    {
+                      model: USER,
+                      required:true,
+                      attributes: ['userName','userGrade'],
+                    }],
+                    where: {[Op.and]: [{userID:body,absenseReturning:false }]},
             }).then(data=>{
                 callback(data)
             })
@@ -241,7 +266,39 @@ module.exports ={
                       })
                   }
               })
-        } 
+        },
+        absense:(body,callback)=>{
+            ABSENSE.count({
+                where : { userID : body.id, absenseStart : body.start}
+            })
+            .then(cnt => {
+              if(cnt > 0) {
+                   let data={success:false, reason: 'duplicate'}
+                   callback(data);     // 중복 확인하는함수
+                }
+                ABSENSE.count({
+                    where : {[Op.and]: [{userID: body.id, absenseReturning: false}]}
+                }).then(cnt=>{
+                    if(cnt >0){
+                   let data={success:false, reason: 'manyAbsense'}
+                        callback(data)
+                    }
+                    else{
+                        ABSENSE.create({
+                            userID:body.id,  
+                            absenseStart: body.start,
+                            absenseFinish: body.finish,
+                            absenseCriteria: body.criteria,
+                        }).then(() =>{
+                            USER.update(
+                                {leaveOfAbsense:true},
+                                {where: {userID: body.id}})
+                        .then(callback({success:true}));
+                        }).catch(err=>{throw err});
+                    }
+                })
+            })
+        }, 
     },
     update:{
         setUserInfo:(body,callback)=>{      // 유저정보 업데이트
@@ -301,6 +358,19 @@ module.exports ={
                 }   
             })              
         },
+        absenseReturning:(body,callback)=>{
+            ABSENSE.update(
+                {absenseReturning: body.data.return},
+                {where:{[Op.and]: [{userID: body.data.id, absenseStart: body.data.start}]}}
+            ).then(()=>{
+                USER.update(
+                    {leaveOfAbsense : false},
+                    {where:{userID: body.data.id}}
+                ).then(
+                    callback(true)
+                )
+            })
+        }
     },
     delete:{
         deleteFriendreq:(body,callback)=>{
@@ -319,6 +389,16 @@ module.exports ={
                         callback(data)
                 }).catch(err=>{throw err})
             }).catch(err=>{throw err})
+        },
+        deleteAbsense:(body,callback)=>{
+            ABSENSE.destroy({
+                where:{[Op.and]: [{userID:body.id, absenseStart:body.start, absenseReturning: false }]}
+            }).then(()=>{
+                USER.update(
+                    {leaveOfAbsense:false},
+                    {where: {userID: body.id}})
+            .then(callback(true));
+            }).catch((err)=>{throw err})
         }
     },
        

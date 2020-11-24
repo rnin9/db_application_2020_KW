@@ -43,7 +43,7 @@ function EmployeeBar(props) {
         </span>
       }
     >
-      <Menu.Item key="3">휴학생 정보</Menu.Item>
+      <Menu.Item key="3"><a href="/employee/studentAbsense">휴학생 정보</a></Menu.Item>
     </SubMenu>
     <SubMenu
       key="sub3"

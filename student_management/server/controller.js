@@ -9,158 +9,192 @@ var storage = multer.diskStorage({
     cb(null, `${Date.now()}_${file.originalname}`)
   }
 })
- 
-var upload = multer({storage: storage}).single('file')
+
+var upload = multer({ storage: storage }).single('file')
 
 
 module.exports = {
 
-  api:{
-    sendLogin : (req, res) =>{        //api key를 이용한 values (sendLogin)
+  api: {
+    sendLogin: (req, res) => {        //api key를 이용한 values (sendLogin)
       const body = req.body;
-    model.api.searchUser(body, result => {
-      var obj={};
-      if(result[0]){                
-        obj['success'] = true;
-        obj['id'] = result[0].dataValues.userID;
-        obj['name'] = result[0].dataValues.userName;
-        obj['position'] = result[0].dataValues.userPosition; //로그인시 정보 보내기
-         
-      } else{
-        obj['success'] = false;
-      }
-      res.send(obj);                // result를 대기했던 axios로 전달
+      model.api.searchUser(body, result => {
+        var obj = {};
+        if (result[0]) {
+          obj['success'] = true;
+          obj['id'] = result[0].dataValues.userID;
+          obj['name'] = result[0].dataValues.userName;
+          obj['position'] = result[0].dataValues.userPosition; //로그인시 정보 보내기
 
-    });
-    },
-    user :(req, res)=>{        //api key를 이용한 values (user)
-      model.api.getUser(result=>{
-          res.send(result);     // result를 대기했던 axios로 전달
-    
+        } else {
+          obj['success'] = false;
+        }
+        res.send(obj);                // result를 대기했던 axios로 전달
+
       });
     },
-    userInfo:(req, res)=>{
-      const body = req.query[0]
-      model.api.getUserInfo(body,result=>{
-        res.send(result);
-        });
+    user: (req, res) => {        //api key를 이용한 values (user)
+      model.api.getUser(result => {
+        res.send(result);     // result를 대기했던 axios로 전달
+
+      });
     },
-    userFriendList:(req,res)=>{
+    userInfo: (req, res) => {
       const body = req.query[0]
-      model.api.getUserFriendList(body,result=>{
+      model.api.getUserInfo(body, result => {
+        res.send(result);
+      });
+    },
+    userFriendList: (req, res) => {
+      const body = req.query[0]
+      model.api.getUserFriendList(body, result => {
         res.send(result);
       })
     },
-    userGrade:(req, res)=>{
+    userGrade: (req, res) => {
       const body = req.query[0]
-      model.api.getUserGrade(body,result=>{
-        if(result[0]){
+      model.api.getUserGrade(body, result => {
+        if (result[0]) {
           console.log(result[0]);
           res.send(result[0]);
         }
-        });
+      });
     },
-    userAllCredit:(req, res)=>{
+    userAllCredit: (req, res) => {
       const body = req.query[0]
-      model.api.getUserAllCredit(body,result=>{
-        if(result[0]){
+      model.api.getUserAllCredit(body, result => {
+        if (result[0]) {
           console.log(result[0]);
           res.send(result[0]);
         }
-        });
-    },
-    userGetCredit:(req, res)=>{
-      const body = req.query[0]
-      model.api.getUserGetCredit(body,result=>{
-        if(result[0])
-        res.send(result[0]);
-        });
-    },
-    userAllGrade:(req, res)=>{
-      const body = req.query[0]
-      model.api.getUserAllGrade(body,result=>{
-        if(result[0])
-        res.send(result[0]);
-        });
-    },
-    userEval:(req, res)=>{        //api key를 이용한 values (user)
-      model.api.getUserEval(result=>{
-          res.send(result);     // result를 대기했던 axios로 전달
-    
       });
     },
-    userFriendreq:(req,res)=>{
+    userGetCredit: (req, res) => {
       const body = req.query[0]
-      model.api.getUserFriendreq(body,result=>{
-       return res.send(result)
+      model.api.getUserGetCredit(body, result => {
+        if (result[0])
+          res.send(result[0]);
+      });
+    },
+    userAllGrade: (req, res) => {
+      const body = req.query[0]
+      model.api.getUserAllGrade(body, result => {
+        if (result[0])
+          res.send(result[0]);
+      });
+    },
+    userEval: (req, res) => {        //api key를 이용한 values (user)
+      model.api.getUserEval(result => {
+        res.send(result);     // result를 대기했던 axios로 전달
+  });
+    },
+    userFriendreq: (req, res) => {
+      const body = req.query[0]
+      model.api.getUserFriendreq(body, result => {
+        return res.send(result)
       })
     },
-    course:(req, res)=>{
-      model.api.getCourse(result=>{
-          res.send(result);
-        });
+    course: (req, res) => {
+      model.api.getCourse(result => {
+        res.send(result);
+      });
     },
-    userFriendreqrec:(req,res)=>{
-      const body =req.query[0]
-      model.api.getUserFriendreqrec(body,result=>{
-        return res.status(200).json({success:true, friendreqrec:result})
+    userFriendreqrec: (req, res) => {
+      const body = req.query[0]
+      model.api.getUserFriendreqrec(body, result => {
+        return res.status(200).json({ success: true, friendreqrec: result })
       })
     },
-    studentList:(req,res)=>{
+    studentList: (req, res) => {
       const body = req.query
-      model.api.getStudentList(body,result=>{
+      model.api.getStudentList(body, result => {
         res.send(result)
       })
     },
+    absenseList:(req, res)=>{
+      const body = req.query[0]
+      model.api.getAbsenseList(body, result=>{
+        if(result[0])
+        res.send(result)
+        else
+        res.send(false)
+      })
+    },
+    absensectnList:(req, res)=>{
+      const body = req.query[0]
+      model.api.getAbsensectnList(body, result=>{
+        if(result[0])
+        res.send(result)
+        else
+        res.send(false)
+      })
+    },
   },
-    add:{
-    user : (req, res) => {   //add key를 이용한 values (user)
+  add: {
+    user: (req, res) => {   //add key를 이용한 values (user)
       const data = req.body;
-    model.add.user(data, result=>{
+      model.add.user(data, result => {
         res.send(result);   // result를 대기했던 axios로 전달
-    });
+      });
     },
-    friend:(req,res)=>{
-      const data =req.body.data;
-      model.add.friend(data,result=>{
-        if(result.success === false){
-          return res.json({ success:false, friendreqInfo:result.data})
+    friend: (req, res) => {
+      const data = req.body.data;
+      model.add.friend(data, result => {
+        if (result.success === false) {
+          return res.json({ success: false, friendreqInfo: result.data })
         }
-        else{
-        return res.json({ success:true, friendreqInfo:result})
+        else {
+          return res.json({ success: true, friendreqInfo: result })
         }
-        })
-    },
-  },
-  update:{
-      userInfo : (req, res)=>{
-      const data = req.body
-    model.update.setUserInfo(data, result=>{
-      res.send(result);
-    })
-    },
-    userPhoto : (req, res)=>{
-       upload(req,res,err=>{
-        if(err){
-          return req.json({ success: false, err})
-      }
-      return res.json({ success: true, filepath: res.req.file.path, filename: res.req.file.filename})
       })
     },
-    requestHandle:(req,res)=>{
-      const data = req.body
-      model.update.setHandle(data,result=>{
-        console.log(result)
-        res.send(result)
-      })
-      },
-    },
-  delete:{
-    friendreq:(req,res)=>{
-      const data = req.body
-      model.delete.deleteFriendreq(data,result=>{
-        return res.json({success:true,friendreqInfo:result})
+    absense: (req, res) => {
+      const data = req.body.data;
+      model.add.absense(data, result => {
+        return res.send(result)
       })
     }
+  },
+  update: {
+    userInfo: (req, res) => {
+      const data = req.body
+      model.update.setUserInfo(data, result => {
+        res.send(result);
+      })
+    },
+    userPhoto: (req, res) => {
+      upload(req, res, err => {
+        if (err) {
+          return req.json({ success: false, err })
+        }
+        return res.json({ success: true, filepath: res.req.file.path, filename: res.req.file.filename })
+      })
+    },
+    requestHandle: (req, res) => {
+      const data = req.body
+      model.update.setHandle(data, result => {
+        res.send(result)
+      })
+    },
+    absense:(req,res)=>{
+      const data = req.body
+      model.update.absenseReturning(data,result=>{
+        res.send(result)
+      })
+    }
+  },
+  delete: {
+    friendreq: (req, res) => {
+      const data = req.body
+      model.delete.deleteFriendreq(data, result => {
+        return res.json({ success: true, friendreqInfo: result })
+      })
+    },
+    absense:(req,res)=>{
+      const data = req.body
+      model.delete.deleteAbsense(data,result=>{
+        res.send(result)
+      })
+    },
   }
 }

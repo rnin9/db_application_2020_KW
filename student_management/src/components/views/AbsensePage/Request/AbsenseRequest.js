@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { DatePicker, Space, Select, Button, Modal, message} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import Axios from 'axios'
 import absense from './absense.jpg'
 import './AbsenseRequest.css'
 const { Option } = Select;
@@ -9,12 +10,13 @@ const { confirm } = Modal;
 const { RangePicker } = DatePicker;
 
 function AbsenseRequest() {
-    const [data, setdata] = useState({start:'',end:'',criteria:''})
+    const id = localStorage.getItem('id')
+    const [data, setdata] = useState({id:id ,start:'',finish:'',criteria:''})
     const handleChange=(value)=>{
       setdata({...data,criteria:value})
     }
     const handleDate=(date,dateString)=>{
-        setdata({...data,start:dateString[0], end:dateString[1]})
+        setdata({...data,start:dateString[0], finish:dateString[1]})
     }
     const showModal =()=>{
         confirm({
@@ -25,11 +27,21 @@ function AbsenseRequest() {
         okType: 'danger',
         cancelText: 'No',
         onOk() {
-          console.log(data);
+          Axios.post('/add/absense',{data:data})
+          .then(res=>{
+          if(res.data.success===true)
           message.success('신청이 완료되었습니다!')
+          else{
+            if(res.data.reason==='duplicate'){
+            message.error('이미 신청한 휴학계 입니다. 지원팀에 문의하세요')
+          }
+          else if(res.data.reason==='manyAbsense'){
+            message.error('여러종류의 휴학계를 제출할 수 없습니다. 지원팀에 문의하세요')
+          }}
+        })
         },
         onCancel() {
-          console.log('Cancel');
+          message.success('휴학계가 취소되었습니다.')
         },
       });
     }

@@ -18,8 +18,10 @@ import Evaluation from './components/views/EvaluationPage/EvaluationPage.js'
 import CoursePage from './components/views/CoursePage/CoursePage.js'
 import StudentInfoPage from './components/views/StudentInfoPage/StudentInfoPage'
 import AbsenseRequestPage from './components/views/AbsensePage/Request/AbsenseRequest'
+import AbsenseHandlePage from './components/views/AbsensePage/Handle/AbsenseHandlePage'
 import './App.css';
 import ProfessorRoute from './helpers/ProfessorRoute.js';
+import EmployeeRoute from './helpers/EmployeeRoute';
 
 class App extends Component {
   constructor(props) {
@@ -82,6 +84,7 @@ class App extends Component {
           
           <AuthRoute exact path="/professor/studentInfo" component={StudentInfoPage}></AuthRoute>
           <AuthRoute exact path="/employee/studentInfo" component={StudentInfoPage}></AuthRoute>
+          <EmployeeRoute exact path="/employee/studentAbsense" component={AbsenseHandlePage}></EmployeeRoute>
 
 
         </BrowserRouter>        
