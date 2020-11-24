@@ -31,8 +31,17 @@ function ProfessorBar(props) {
         </span>
       }
     >
+<<<<<<< HEAD
       <Menu.Item key="1"><a href="/professor/studentInfo">학생조회</a></Menu.Item>
       <Menu.Item key="2">성적조회</Menu.Item>
+=======
+      <Menu.Item key="1">학생조회</Menu.Item>
+      <Menu.Item key="2">
+        <a className="logo" href="/prof/grade">
+          성적관리
+        </a>
+      </Menu.Item>
+>>>>>>> origin/Grade,Eval
     </SubMenu>
 
     <SubMenu

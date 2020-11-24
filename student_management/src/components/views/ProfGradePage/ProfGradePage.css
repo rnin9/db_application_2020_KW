@@ -10,21 +10,9 @@
   padding-top: 20px;
   text-align: center;
 }
-.table_eval {
+.table_grade {
   font-family: Chosunilbo_myungjo;
   display: inline-block;
   width: 60vw;
   text-align-last: center;
-}
-.write_content {
-  font-family: Chosunilbo_myungjo;
-  display: inline-block;
-  width: 60vw;
-  text-align-last: center;
-}
-.button {
-  font-family: Chosunilbo_myungjo;
-  position: relative;
-  right: 100%;
-  padding: 20px;
 }

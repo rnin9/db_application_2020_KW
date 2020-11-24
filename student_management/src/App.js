@@ -15,10 +15,14 @@ import MyInfoPage from './components/views/MyInfoPage/MyInfoPage.js'
 import MyInfoEditPage from './components/views/MyInfoPage/Edit/MyInfoEditPage'
 import Grade from './components/views/GradePage/GradePage.js'
 import Evaluation from './components/views/EvaluationPage/EvaluationPage.js'
+import WriteEval from './components/views/EvaluationPage/WriteEval.js'
 import CoursePage from './components/views/CoursePage/CoursePage.js'
+
 import StudentInfoPage from './components/views/StudentInfoPage/StudentInfoPage'
 import AbsenseRequestPage from './components/views/AbsensePage/Request/AbsenseRequest'
 import AbsenseHandlePage from './components/views/AbsensePage/Handle/AbsenseHandlePage'
+
+import ProfGrade from './components/views/ProfGradePage/ProfGradePage.js'
 import './App.css';
 import ProfessorRoute from './helpers/ProfessorRoute.js';
 import EmployeeRoute from './helpers/EmployeeRoute';
@@ -79,6 +83,7 @@ class App extends Component {
           
           
           <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>
+          <AuthRoute exact path="/write/eval" component={WriteEval}></AuthRoute>
           <AuthRoute exact path="/user/grade" component={Grade}></AuthRoute> {/*유저권한확인*/}
           <AuthRoute exact path="/course" component={CoursePage}></AuthRoute>
           
@@ -86,6 +91,7 @@ class App extends Component {
           <AuthRoute exact path="/employee/studentInfo" component={StudentInfoPage}></AuthRoute>
           <EmployeeRoute exact path="/employee/studentAbsense" component={AbsenseHandlePage}></EmployeeRoute>
 
+          <ProfessorRoute exact path="/prof/grade" component={ProfGrade}></ProfessorRoute>
 
         </BrowserRouter>        
     </div>

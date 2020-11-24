@@ -53,17 +53,83 @@ module.exports = {
     },
     userGrade: (req, res) => {
       const body = req.query[0]
-      model.api.getUserGrade(body, result => {
-        if (result[0]) {
+
+      model.api.getUserGrade(body,result=>{
+        if(result[0]){
+          //console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
+    userMajorSubCredit:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserMajorSubCredit(body,result=>{
+        if(result[0]){
+          console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
+    userLiberalSubCredit:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserLiberalSubCredit(body,result=>{
+        if(result[0]){
+          console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
+    userEtcSubCredit:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserEtcSubCredit(body,result=>{
+        if(result[0]){
+          console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
+    userAllSubCredit:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserAllSubCredit(body,result=>{
+        if(result[0]){
+          console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
+    userMajorGetCredit:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserMajorGetCredit(body,result=>{
+        if(result[0]){
+          console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
+    userLiberalGetCredit:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserLiberalGetCredit(body,result=>{
+        if(result[0]){
           console.log(result[0]);
           res.send(result[0]);
         }
       });
     },
-    userAllCredit: (req, res) => {
+
+
+    userEtcGetCredit:(req, res)=>{
       const body = req.query[0]
-      model.api.getUserAllCredit(body, result => {
-        if (result[0]) {
+      model.api.getUserEtcGetCredit(body,result=>{
+        if(result[0]){
+          console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
+    userAllGetCredit:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserAllGetCredit(body,result=>{
+        if(result[0]){
           console.log(result[0]);
           res.send(result[0]);
         }
@@ -76,7 +142,29 @@ module.exports = {
           res.send(result[0]);
       });
     },
-    userAllGrade: (req, res) => {
+
+    userMajorGrade:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserMajorGrade(body,result=>{
+        if(result[0])
+        res.send(result[0]);
+        });
+    },
+    userLiberalGrade:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserLiberalGrade(body,result=>{
+        if(result[0])
+        res.send(result[0]);
+        });
+    },
+    userEtcGrade:(req, res)=>{
+      const body = req.query[0]
+      model.api.getUserEtcGrade(body,result=>{
+        if(result[0])
+        res.send(result[0]);
+        });
+    },
+    userAllGrade:(req, res)=>{
       const body = req.query[0]
       model.api.getUserAllGrade(body, result => {
         if (result[0])
@@ -94,9 +182,26 @@ module.exports = {
         return res.send(result)
       })
     },
+
     course: (req, res) => {
       model.api.getCourse(result => {
-        res.send(result);
+        res.send(result);})
+      },
+      
+    userEval:(req, res)=>{        //api key를 이용한 values (user)
+      model.api.getUserEval(result=>{
+        if(result[0])
+          console.log(result[0]);
+          res.send(result);     // result를 대기했던 axios로 전달    
+      });
+    },
+    userEvalTag:(req, res)=>{
+      const body = req.query;
+      console.log(req.query);
+      model.api.getUserEvalTag(body,result=>{
+        if(result[0])
+          console.log(result[0]);
+          res.send(result[0]);
       });
     },
     userFriendreqrec: (req, res) => {
@@ -148,12 +253,18 @@ module.exports = {
         }
       })
     },
-    absense: (req, res) => {
-      const data = req.body.data;
-      model.add.absense(data, result => {
-        return res.send(result)
-      })
-    }
+
+    eval:(req,res)=>{
+      const data =req.body.data;
+      model.add.eval(data,result=>{
+        if(result.success === false){
+          return res.json({ success:false, friendreqInfo:result.data})
+        }
+        else{
+        return res.json({ success:true, friendreqInfo:result})
+        }
+        })
+    },
   },
   update: {
     userInfo: (req, res) => {

@@ -103,7 +103,7 @@ module.exports ={
             })
         },
         getUserGrade:(body,callback)=>{
-            sequelize.query("select * from GRADEs where user_id=:user_id", {replacements :{user_id : body}})
+            sequelize.query("select * from GRADEs where user_id=:user_id;", {replacements :{user_id : body}})
             .then(data=>{
                 //console.log("GRADE" +data);
                 callback(data)
@@ -111,24 +111,90 @@ module.exports ={
             .catch(err =>{
                 throw err;
             })
-            /*
-            GRADE.findAll({
-                where: {user_id:body},
-                //include: COURSE
-            })
+        },
+        getUserMajorSubCredit:(body,callback)=>{
+            //sequelize.query("call grade_graph(:user_id)", {replacements :{user_id : body}})
+            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_major from GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "where g.user_id=:user_id and c.classification like '전%'  order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
             .then(data=>{
-                callback(data)
+                //console.log(data);
+                callback(data);
             })
             .catch(err =>{
                 throw err;
             })
-            */
         },
-        getUserAllCredit:(body,callback)=>{
-            sequelize.query("call grade_graph(:user_id)", {replacements :{user_id : body}})
+        getUserLiberalSubCredit:(body,callback)=>{
+            //sequelize.query("call grade_graph(:user_id)", {replacements :{user_id : body}})
+            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_liberal from GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "where g.user_id=:user_id and c.classification like '교%' order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
             .then(data=>{
-                console.log("GRADE" +data);
-                callback(data)
+                //console.log(data);
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserEtcSubCredit:(body,callback)=>{
+            //sequelize.query("call grade_graph(:user_id)", {replacements :{user_id : body}})
+            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_etc from GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "where g.user_id=:user_id and c.classification not like '교%' and c.classification not like '전%' order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
+            .then(data=>{
+                //console.log(data);
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserAllSubCredit:(body,callback)=>{
+            //sequelize.query("call grade_graph(:user_id)", {replacements :{user_id : body}})
+            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_sum from GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "where g.user_id=:user_id order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
+            .then(data=>{
+                //console.log(data);
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserMajorGetCredit:(body,callback)=>{
+            sequelize.query("select IFNULL(SUM(c.credit),0) as get_major from GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "where g.user_id=:user_id and g.retake != true and c.classification like '전%'  order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
+            .then(data=>{
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserLiberalGetCredit:(body,callback)=>{
+            sequelize.query("select IFNULL(SUM(c.credit),0) as get_liberal from GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "where g.user_id=:user_id and g.retake != true and c.classification like '교%' order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
+            .then(data=>{
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserEtcGetCredit:(body,callback)=>{
+            sequelize.query("select IFNULL(SUM(c.credit),0) as get_etc from GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "where g.user_id=:user_id and g.retake != true and c.classification not like '교%' and c.classification not like '전%' order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
+            .then(data=>{
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserAllGetCredit:(body,callback)=>{
+            sequelize.query("select IFNULL(SUM(c.credit),0) as get_sum from GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "where g.user_id=:user_id and g.retake != true order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
+            .then(data=>{
+                callback(data);
             })
             .catch(err =>{
                 throw err;
@@ -146,13 +212,45 @@ module.exports ={
                 throw err;
             })
         },
-        getUserAllGrade:(body,callback)=>{
-            GRADE.findAll({
-                where: {user_id:body},
-                //include: COURSE
-            })
+        getUserMajorGrade:(body,callback)=>{
+            sequelize.query("SELECT IFNULL(ROUND((SUM(g.grade*c.credit))/SUM(c.credit),2),0) as grade_major "+
+           "FROM GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "WHERE user_id=:user_id and c.classification like '전%' and grade<5 and Retake=false;", {replacements :{user_id : body}})
             .then(data=>{
-                callback(data)
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserLiberalGrade:(body,callback)=>{
+            sequelize.query("SELECT IFNULL(ROUND((SUM(g.grade*c.credit))/SUM(c.credit),2),0) as grade_liberal "+
+           "FROM GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "WHERE user_id=:user_id and c.classification like '교%' and grade<5 and Retake=false;", {replacements :{user_id : body}})
+            .then(data=>{
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserEtcGrade:(body,callback)=>{
+            sequelize.query("SELECT IFNULL(ROUND((SUM(g.grade*c.credit))/SUM(c.credit),2),0) as grade_etc "+
+           "FROM GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "WHERE user_id=:user_id and c.classification not like '전%' and c.classification not like '교%' and grade<5 and Retake=false;", {replacements :{user_id : body}})
+            .then(data=>{
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getUserAllGrade:(body,callback)=>{
+            sequelize.query("SELECT IFNULL(ROUND((SUM(g.grade*c.credit))/SUM(c.credit),2),0) as grade_sum "+
+           "FROM GRADEs g join SAMPLE_COURSE c on g.course_code=c.course_code "+
+           "WHERE user_id=:user_id and grade<5 and Retake=false;", {replacements :{user_id : body}})
+            .then(data=>{
+                callback(data);
             })
             .catch(err =>{
                 throw err;
@@ -167,6 +265,7 @@ module.exports ={
                 throw err;
             })
         },
+
         getStudentList:(body,callback)=>{
             USER.findAll({
                 where: {[Op.and]: [{userCollege:body.college, userMajor: body.major, userPosition:"학부생" }]},   //INNER JOIN
@@ -199,7 +298,16 @@ module.exports ={
             }).then(data=>{
                 callback(data)
             })
-        }
+        },
+        getUserEvalTag:(body,callback) =>{        // 쿼리만 수행 (get)
+            sequelize.query("select tag from TAGs where user_id=:user_id and course_code=:course_code;",{replacements : {user_id :body.user_id, course_code:body.course_code}})
+            .then(data=>{
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
     },
 
     add:{
@@ -299,6 +407,16 @@ module.exports ={
                 })
             })
         }, 
+        Eval:(body,callback) =>{
+            sequelize.query("insert into EVALUATION(user_id,course_code,year,semester,rating,content) value(:user_id,:course_code, :year, :semester,:rating,:content);",
+            {replacements : {user_id :body.user_id, course_code:body.course_code, year:body.year, semester:body.semester, rating:body.rating, content:body.content}})
+            .then(data=>{
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
     },
     update:{
         setUserInfo:(body,callback)=>{      // 유저정보 업데이트

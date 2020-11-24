@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AutoComplete, Table, } from 'antd';
+import { AutoComplete, Table, Tag, Button } from 'antd';
 import './EvaluationPage.css'
 import axios from 'axios';
 
@@ -42,7 +42,35 @@ const columns = [
     dataIndex: 'upvote',
     key: 'upvote',
   },
+  {
+    title: '태그',
+    dataIndex : 'tags',
+    key : 'tags',
+    render: tags =>(
+      <>
+        {tags.map(tag => {
+          let color;
+          if(tag === '꿀잼보장' || tag === 'A폭격기' || tag === '인터넷강의'){
+            color = 'green';
+          }
+          else if(tag ==='F폭격기' || tag === '수면제수업' || tag === '조별과제'){
+            color = 'volcano';
+          }
+          else{
+            color = 'stop';
+          }
+          return(
+            <Tag color={color} key={tag}>
+              {tag.toUpperCase()}
+            </Tag>
+          );
+        })}
+      </>
+    )
+  }
 ];
+
+
 
 class EvaluationPage extends Component{
 
@@ -52,8 +80,8 @@ class EvaluationPage extends Component{
           name : '',
           list : [],
           update : false,
-        }    
       }
+    }
     
     componentDidMount(){
       this._getData()
@@ -61,15 +89,37 @@ class EvaluationPage extends Component{
 
     _getData = async () => {
       const res = await axios.get('/api/userEval');
-
-
-
-      if(res.data[0] === undefined) {
-        let cover = [];
-        cover.push(res.data);       // response 데이터들 push
-        return this.setState({ list : cover })
+      let cover2=[];
+      for(let i=0;i<res.data.length;i++){
+        var cover = {
+          idx:0,
+          user_id:'',
+          course_code:'',
+          year:0,
+          semester:0,
+          rating:0,
+          content:'',
+          upvote:0,
+          tags:[],
+        }
+        cover.idx=res.data[i].idx;
+        cover.user_id=res.data[i].user_id;
+        cover.course_code=res.data[i].course_code;
+        cover.year=res.data[i].year;
+        cover.semester=res.data[i].semester;
+        cover.rating=res.data[i].rating;
+        cover.content=res.data[i].content;
+        cover.upvote=res.data[i].upvote;
+        
+        
+        const res2 = await axios.get('/api/userEvalTag',{params:{user_id:cover.user_id, course_code:cover.course_code}});
+        for(let j=0;j<res2.data.length;j++){
+          cover.tags.push(res2.data[j].tag);
+        }
+        cover2.push(cover);
       }
-      this.setState({ list : res.data });
+      
+      this.setState({ list : cover2 });
     }
 
 
@@ -82,17 +132,22 @@ class EvaluationPage extends Component{
             <h2>수업 평가</h2>
           </div>
           
-          <div className="table">
-            
           
-          </div>
           <div className="table_eval">
-          
+            <div className="add_Eval">
+              <Button type="primary">
+                <a href="/write/eval">
+                수강평 작성
+                </a>
+              </Button>
+            </div>
+
             {list.length !== 0
               ? 
               <Table dataSource={list} columns={columns} size="small" rowKey="course_code"/>
               : null}
-          
+              
+
           </div>
           <br></br>
           <br></br>
