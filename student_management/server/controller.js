@@ -253,7 +253,12 @@ module.exports = {
         }
       })
     },
-
+    absense: (req, res) => {
+      const data = req.body.data;
+      model.add.absense(data, result => {
+        return res.send(result)
+      })
+    },
     eval:(req,res)=>{
       const data =req.body.data;
       model.add.eval(data,result=>{
