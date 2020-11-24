@@ -5,6 +5,7 @@ const controller = require('./controller');
 
 router.post('/add/user', controller.add.user);              // signup 정보 추가
 router.post('/add/friend',controller.add.friend);
+router.post('/add/eval',controller.add.eval);
 
 router.post('/api/sendLogin',controller.api.sendLogin);     // login request
 router.post('/update/userInfo',controller.update.userInfo); // update 유저 정보
@@ -20,10 +21,21 @@ router.get('/api/userFriend/request',controller.api.userFriendreq); // 친구요
 router.get('/api/userFriend/request/received',controller.api.userFriendreqrec); // 친구요청받은목록들 
 
 router.get('/api/userGrade',controller.api.userGrade);
-router.get('/api/userAllCredit',controller.api.userAllCredit);
-router.get('/api/userGetCredit',controller.api.userGetCredit);
+router.get('/api/userMajorSubCredit',controller.api.userMajorSubCredit);
+router.get('/api/userLiberalSubCredit',controller.api.userLiberalSubCredit);
+router.get('/api/userEtcSubCredit',controller.api.userEtcSubCredit);
+router.get('/api/userAllSubCredit',controller.api.userAllSubCredit);
+router.get('/api/userMajorGetCredit',controller.api.userMajorGetCredit);
+router.get('/api/userLiberalGetCredit',controller.api.userLiberalGetCredit);
+router.get('/api/userEtcGetCredit',controller.api.userEtcGetCredit);
+router.get('/api/userAllGetCredit',controller.api.userAllGetCredit);
+router.get('/api/userMajorGrade',controller.api.userMajorGrade);
+router.get('/api/userLiberalGrade',controller.api.userLiberalGrade);
+router.get('/api/userEtcGrade',controller.api.userEtcGrade);
 router.get('/api/userAllGrade',controller.api.userAllGrade);
+
 router.get('/api/userEval',controller.api.userEval);
+router.get('/api/userEvalTag',controller.api.userEvalTag);
 
 router.get('/api/course',controller.api.course);
 

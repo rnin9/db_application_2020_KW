@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { AutoComplete, Col, Table, } from 'antd';
-import './GradePage.css'
+import './ProfGradePage.css'
 import axios from 'axios';
 import ColumnGroup from 'antd/lib/table/ColumnGroup';
 import Column from 'antd/lib/table/Column';
-
-
 
 
 const userID = localStorage.getItem('id');
