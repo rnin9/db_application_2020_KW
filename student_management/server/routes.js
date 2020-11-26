@@ -45,6 +45,8 @@ router.get('/api/userEvalTag',controller.api.userEvalTag);
 router.get('/api/absense/list',controller.api.absenseList);
 router.get('/api/absense/continue/list',controller.api.absensectnList);
 
+router.get('/api/notice/course',controller.api.noticeCourse);
+router.get('/api/notice/list',controller.api.noticeList);
 
 router.get('/api/course',controller.api.course);
 

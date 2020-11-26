@@ -22,6 +22,9 @@ import StudentInfoPage from './components/views/StudentInfoPage/StudentInfoPage'
 import AbsenseRequestPage from './components/views/AbsensePage/Request/AbsenseRequest'
 import AbsenseHandlePage from './components/views/AbsensePage/Handle/AbsenseHandlePage'
 
+import NoticePage from './components/views/NoticePage/NoticePage'
+import NoticeSpec from './components/views/NoticePage/NoticeSpec'
+
 import ProfGrade from './components/views/ProfGradePage/ProfGradePage.js'
 import './App.css';
 import ProfessorRoute from './helpers/ProfessorRoute.js';
@@ -80,7 +83,10 @@ class App extends Component {
           <AuthRoute exact path="/user/info" component={MyInfoPage}></AuthRoute>  
           <AuthRoute exact path="/user/info/modify/:id/:name" component={MyInfoEditPage}></AuthRoute>
           <AuthRoute exact path="/user/absense/request" component={AbsenseRequestPage}></AuthRoute>  
-          
+
+          <AuthRoute exact path="/user/notice" component={NoticePage}></AuthRoute>
+          <AuthRoute exact path="/user/notice/spec" component={NoticeSpec}></AuthRoute>
+
           
           <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>
           <AuthRoute exact path="/write/eval" component={WriteEval}></AuthRoute>

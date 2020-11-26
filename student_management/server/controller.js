@@ -234,6 +234,18 @@ module.exports = {
         res.send(false)
       })
     },
+    noticeCourse:(req,res)=>{
+      const body = req.query
+      model.api.getNoticeCourse(body, result=>{
+        res.send(result)
+      })
+    },
+    noticeList:(req,res)=>{
+      const body =req.query
+      model.api.getNoticeList(body,result=>{
+        res.send(result)
+      })
+    }
   },
   add: {
     user: (req, res) => {   //add key를 이용한 values (user)

@@ -12,8 +12,6 @@ const { SubMenu } = Menu;
 
 function ProfessorBar(props) {
   return (
-    
-    // /*if position === student*/
 
   <div className="navigation" style={{height: '100vh'}}>
    <Menu

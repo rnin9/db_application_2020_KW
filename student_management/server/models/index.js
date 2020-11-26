@@ -1,5 +1,6 @@
 'use strict';
 
+const { request } = require('express');
 const path = require('path');
 const Sequalize = require('sequelize');     //연결정보가 들어있는 index.js
 
@@ -38,7 +39,8 @@ let sequelize = new Sequalize(
     db.EVALUATION = require('./EVALUATION')(sequelize,Sequalize);
     db.TAG = require('./TAG')(sequelize,Sequalize);
     db.UPVOTE = require('./UPVOTE')(sequelize,Sequalize);
-    
+    db.NOTICE = require('./notice')(sequelize,Sequalize);
+
     db.USER.hasMany(db.FRIEND,{foreignKey:"userID",targetKey:"userID"});
     db.USER.hasMany(db.FRIEND,{foreignKey:"friendID",targetKey:"userID"});
     db.FRIEND.belongsTo(db.USER,{foreignKey:"userID",sourceKey:"userID"});
@@ -47,6 +49,8 @@ let sequelize = new Sequalize(
     db.USER.hasMany(db.ABSENSE,{foreignKey:"userID",targetKey:"userID"});
     db.ABSENSE.belongsTo(db.USER,{foreignKey:"userID",sourceKey:"userID"});
     
+    db.USER.hasMany(db.NOTICE,{foreignKey:"userID",targetKey:"userID"});
+    db.NOTICE.belongsTo(db.USER,{foreignKey:"userID",sourceKey:"userID"});
 
     db.USER.hasMany(db.GRADE, {foreignKey:"user_id",targetKey:"userID"});
     db.GRADE.belongsTo(db.USER, {foreignKey:"user_id",sourceKey:"userID"});

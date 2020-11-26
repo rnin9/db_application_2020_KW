@@ -81,6 +81,12 @@ ____________________________________________
   * FriendHandlePage with redux
   
 ## 2020-11-23
+* rnin9  
   * Find Student for professor
   * Absense Request page design
-  * 0-Honey merge
+* oyh
+  * Add sequelize db
+  * Add Grade page
+## 2020-11-26
+
+ * notice Page / spec page

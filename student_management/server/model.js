@@ -4,7 +4,7 @@ const { AccessDeniedError } = require('sequelize');
 const Sequelize = require('sequelize');
 const { Op } = Sequelize;
 const {
-    USER, FRIEND, ABSENSE  
+    USER, FRIEND, ABSENSE, NOTICE  
   } = require('./models');
 
 const { GRADE, EVALUATION } = require('./models');
@@ -308,6 +308,22 @@ module.exports ={
                 throw err;
             })
         },
+        getNoticeCourse:(body, callback)=>{
+            GRADE.findAll({
+                // include: [
+                //     {
+                //       model: COURSE,
+                //       required:true,
+                //       attributes: ['courseName'],
+                //     }],
+                    where: {[Op.and]: [{user_id:body.id, year:body.year, semester:body.term }]},
+            }).then(data=>{callback(data)})
+        },
+        getNoticeList:(body, callback)=>{
+            NOTICE.findAll({
+                where: {[Op.and]: [{courseID:body.code /*userID:body.id*/ }]},
+            }).then(data=>callback(data))
+        }
     },
 
     add:{
