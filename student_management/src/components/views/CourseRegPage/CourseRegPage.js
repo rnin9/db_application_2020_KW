@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AutoComplete, Table, } from 'antd';
-import './CoursePage.css'
+import './CourseRegPage.css'
 import axios from 'axios';
 
 const columns = [
@@ -17,11 +17,11 @@ const columns = [
   
   {
     title: '학과',
-    dataIndex: 'department',
-    key: 'department',
+    dataIndex: 'major',
+    key: 'major',
   },
   {
-    title: '분류',
+    title: '이수',
     dataIndex: 'classification',
     key: 'classification',
   },
@@ -31,23 +31,13 @@ const columns = [
     key: 'credit',
   },
   {
-    title: '장소',
-    dataIndex: 'room',
-    key: 'room',
-  },
-  {
-    title: '년도',
-    dataIndex: 'course_year',
-    key: 'year',
-  },
-  {
-    title: '학기',
-    dataIndex: 'semester',
-    key: 'semester',
+    title: '강의시간',
+    dataIndex: 'class_time',
+    key: 'class_time',
   },
 ];
 
-class CoursePage extends Component{
+class CourseRegPage extends Component{
 
     constructor(props) {
         super(props)
@@ -94,4 +84,4 @@ class CoursePage extends Component{
         )};
 }
 
-export default CoursePage;
+export default CourseRegPage;
