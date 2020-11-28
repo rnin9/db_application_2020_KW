@@ -11,6 +11,7 @@ import '../NavBar.css';
 const { SubMenu } = Menu;
 
 function ProfessorBar(props) {
+
   return (
 
   <div className="navigation" style={{height: '100vh'}}>
@@ -49,7 +50,7 @@ function ProfessorBar(props) {
         </span>
       }
     >
-      <Menu.Item key="3">공지사항</Menu.Item>
+      <Menu.Item key="3"><a href="/prof/notice">공지사항</a></Menu.Item>
       <Menu.Item key="4">게시판</Menu.Item>
     </SubMenu>  
     <SubMenu key="sub3" icon={<TeamOutlined />} title="친구">

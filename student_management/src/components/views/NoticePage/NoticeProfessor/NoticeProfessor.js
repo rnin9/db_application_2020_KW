@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from "react-router";
 import { Table, Form, Select, Button, Tag, Space, Collapse } from 'antd';
+import {useHistory} from "react-router";
 import { SaveTwoTone } from '@ant-design/icons';
 
 import Axios from 'axios';
-import './NoticePage.css'
+import '../NoticePage.css'
 
 const { Column } = Table;
 const { Option } = Select;
@@ -13,38 +13,58 @@ const termData = ['2020년도 1학기', '2020년도 2학기', '2019년도 1학�
 
 
 
-function NoticePage() {
+function NoticeProfessor(props) {
+
+    useEffect(() => {       //사용해보자
+        
+    }, [])
     const [course, setcourse] = useState([])
     const [notice, setnotice] = useState([])
-
+    const history = useHistory();
     const id = localStorage.getItem('id')
     const handleTermChange = value => {  // 단과대학 변할 때 state 변화
         const number = value.replace(/[^0-9]/g, '');
         const courses = []
         if (number % 2 === 0) {
             let date = { id: id, year: (number - 2) / 10, term: 2 }
-            Axios.get('/api/notice/course', { params: date })
+            Axios.get('/api/notice/course/professor', { params: date })
                 .then(res => {
+                    console.log(res.data)
                     setcourse(res.data)
                 })
 
         } else {
             let date = { id: id, year: (number - 1) / 10, term: 1 }
-            Axios.get('/api/notice/course', { params: date })
+            Axios.get('/api/notice/course/professor', { params: date })
                 .then(res => {
-                  setcourse(res.data)
+                    console.log(res.data)
+                    setcourse(res.data)
                 })
 
         }
+        setTimeout(function () {
+            setcourse(courses)
+        }, 100) //임의로 시간줘서 데이터 다 받아오기
     };
 
-    const onCourseChange = value => {      // 전공 선택시
+    const onCourseChange = value => {      // 과목 선택시
         const data = { code: value, year: course[0].year, term: course[0].semester }
         Axios.get('/api/notice/list', { params: data })
             .then(res => {
                 setnotice(res.data)
             })
     };
+
+    const handleWrite = ()=>{
+        let date = { id: id, year: 2020, term: 2 }
+        Axios.get('/api/notice/course/professor', { params: date })
+            .then(res => {
+                history.push({
+                    pathname: "/prof/notice/write",
+                    state: { course:res.data
+                    }})
+            })
+    }
 
     return (
         <div className="font_ntc">
@@ -65,7 +85,7 @@ function NoticePage() {
             >
                 {course.map(Course => (
                     // console.log(Course)
-                   <Option key={Course.Course_num}>{'['+Course.Course_num+'] '}{Course.Course_name}</Option>
+                    <Option key={Course.Course_num}>{'['+Course.Course_num+'] '}{Course.Course_name}</Option>
                 ))}
             </Select>
 
@@ -106,11 +126,13 @@ function NoticePage() {
                     />
 
                 </Table>
+                <div style={{paddingTop:20}}>
+                <Button type="primary" style={{ fontSize: 15 ,float:"right"}} onClick={handleWrite}>작성</Button>
+                </div>
             </div>
         </div>
 
 
     )
 }
-
-export default NoticePage
+export default NoticeProfessor

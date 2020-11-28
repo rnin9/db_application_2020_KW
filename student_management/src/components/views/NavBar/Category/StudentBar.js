@@ -50,7 +50,7 @@ function StudentBar(props) {
         </span>
       }
     >
-      <Menu.Item key="5">공지사항</Menu.Item>
+      <Menu.Item key="5"><a href="/user/notice">공지사항</a></Menu.Item>
       <Menu.Item key="6">게시판</Menu.Item>
       <Menu.Item key="7"><a href="/user/absense/request">휴학신청</a></Menu.Item>
     </SubMenu>

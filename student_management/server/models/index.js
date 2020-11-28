@@ -54,10 +54,10 @@ let sequelize = new Sequalize(
 
     db.USER.hasMany(db.GRADE, {foreignKey:"user_id",targetKey:"userID"});
     db.GRADE.belongsTo(db.USER, {foreignKey:"user_id",sourceKey:"userID"});
-    /*
+    
     db.COURSE.hasMany(db.GRADE, {foreignKey:"course_code",targetKey:"Course_num"});
     db.GRADE.belongsTo(db.USER, {foreignKey:"course_code",sourceKey:"Course_num"});
-    */
+    
     db.USER.hasMany(db.EVALUATION, {foreignKey:"user_id",targetKey:"userID"});
     db.EVALUATION.belongsTo(db.USER, {foreignKey:"user_id",sourceKey:"userID"});
     /*

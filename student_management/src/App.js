@@ -23,7 +23,8 @@ import AbsenseRequestPage from './components/views/AbsensePage/Request/AbsenseRe
 import AbsenseHandlePage from './components/views/AbsensePage/Handle/AbsenseHandlePage'
 
 import NoticePage from './components/views/NoticePage/NoticePage'
-import NoticeSpec from './components/views/NoticePage/NoticeSpec'
+import ProfNotice from './components/views/NoticePage/NoticeProfessor/NoticeProfessor'
+import ProfNoticeWrite from './components/views/NoticePage/NoticeProfessor/NoticeWrite'
 
 import ProfGrade from './components/views/ProfGradePage/ProfGradePage.js'
 import './App.css';
@@ -85,7 +86,6 @@ class App extends Component {
           <AuthRoute exact path="/user/absense/request" component={AbsenseRequestPage}></AuthRoute>  
 
           <AuthRoute exact path="/user/notice" component={NoticePage}></AuthRoute>
-          <AuthRoute exact path="/user/notice/spec" component={NoticeSpec}></AuthRoute>
 
           
           <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>
@@ -98,7 +98,8 @@ class App extends Component {
           <EmployeeRoute exact path="/employee/studentAbsense" component={AbsenseHandlePage}></EmployeeRoute>
 
           <ProfessorRoute exact path="/prof/grade" component={ProfGrade}></ProfessorRoute>
-
+          <ProfessorRoute exact path="/prof/notice" component={ProfNotice}></ProfessorRoute>
+          <ProfessorRoute exact path="/prof/notice/write" component={ProfNoticeWrite}></ProfessorRoute>
         </BrowserRouter>        
     </div>
     </Suspense>

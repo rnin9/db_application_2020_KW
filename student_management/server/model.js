@@ -7,7 +7,7 @@ const {
     USER, FRIEND, ABSENSE, NOTICE  
   } = require('./models');
 
-const { GRADE, EVALUATION } = require('./models');
+const { COURSE, GRADE, EVALUATION } = require('./models');
 
 
 sequelize.query('SET NAMES utf8;');
@@ -309,15 +309,18 @@ module.exports ={
             })
         },
         getNoticeCourse:(body, callback)=>{
-            GRADE.findAll({
-                // include: [
-                //     {
-                //       model: COURSE,
-                //       required:true,
-                //       attributes: ['courseName'],
-                //     }],
-                    where: {[Op.and]: [{user_id:body.id, year:body.year, semester:body.term }]},
-            }).then(data=>{callback(data)})
+                sequelize.query("SELECT COURSEs.Course_num, COURSEs.Course_name"+
+                " FROM COURSEs JOIN GRADEs "+"ON GRADEs.course_code = COURSEs.Course_num "+
+                "WHERE GRADEs.user_id=:user_id and GRADEs.year=:year and GRADEs.semester=:semester;", 
+                {replacements :{user_id : body.id, year :body.year, semester: body.term}})
+            .then(data=>{
+                callback(data[0])})
+        },
+        getNoticeCourseProf:(body, callback)=>{
+            sequelize.query("SELECT Course_num, Course_name"+
+                " FROM COURSEs" +" WHERE professor_id=:user_id and course_year=:year and semester=:semester;", 
+                {replacements :{user_id : body.id, year :body.year, semester: body.term}})
+            .then(data=>{callback(data[0])})
         },
         getNoticeList:(body, callback)=>{
             NOTICE.findAll({

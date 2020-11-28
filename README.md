@@ -88,5 +88,7 @@ ____________________________________________
   * Add sequelize db
   * Add Grade page
 ## 2020-11-26
-
  * notice Page / spec page
+
+## 2020-11-28
+ * notice Writing, noticePage

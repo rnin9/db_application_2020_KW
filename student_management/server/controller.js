@@ -240,6 +240,12 @@ module.exports = {
         res.send(result)
       })
     },
+    noticeCourseProf:(req,res)=>{
+      const body =req.query
+      model.api.getNoticeCourseProf(body, result=>{
+        res.send(result)
+      })
+    },
     noticeList:(req,res)=>{
       const body =req.query
       model.api.getNoticeList(body,result=>{

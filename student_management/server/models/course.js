@@ -16,8 +16,11 @@ module.exports = (sequelize, DataTypes) =>{
       department:{
          type: DataTypes.STRING(12)
       },
+      major:{
+         type: DataTypes.STRING(12)
+      },
       classification:{
-         type: DataTypes.INTEGER//TINYINT가 존재하지 않아서 일단 INTEGER로 대체.
+         type: DataTypes.STRING(5)
       },
       Course_name:{
          type: DataTypes.STRING(20)
@@ -25,22 +28,14 @@ module.exports = (sequelize, DataTypes) =>{
       headcount_now:{
          type: DataTypes.INTEGER.UNSIGNED//SMALLINT가 없어서 INTEGER로 대체
       },
-      headcount_maximum:{
-         type: DataTypes.INTEGER.UNSIGNED//SMALLINT가 없어서 INTEGER로 대체
+      class_time:{
+         type: DataTypes.STRING(10)
       },
-      ct_mon:{//class time monday
+      ct_mw:{//class time monday 월수 0000 1000 0001 0000 -> 월 3 수 4
          type: DataTypes.INTEGER.UNSIGNED,//TINYINT가 존재하지 않아서 일단 INTEGER로 대체.
 		 defaultValue : 0
       },
-      ct_tue:{
-         type: DataTypes.INTEGER.UNSIGNED,//TINYINT가 존재하지 않아서 일단 INTEGER로 대체.
-		 defaultValue : 0
-      },
-      ct_wed:{
-         type: DataTypes.INTEGER.UNSIGNED,//TINYINT가 존재하지 않아서 일단 INTEGER로 대체.
-		 defaultValue : 0
-      },
-      ct_thr:{
+      ct_tt:{//화목 0000 0100 0000 0010 -> 화 2 목 1
          type: DataTypes.INTEGER.UNSIGNED,//TINYINT가 존재하지 않아서 일단 INTEGER로 대체.
 		 defaultValue : 0
       },
