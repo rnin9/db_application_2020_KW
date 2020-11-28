@@ -7,6 +7,7 @@ router.post('/add/user', controller.add.user);              // signup 정보 추
 router.post('/add/friend',controller.add.friend);
 router.post('/add/absense',controller.add.absense);
 router.post('/add/eval',controller.add.eval);
+router.post('/add/notice',controller.add.notice);
 
 router.post('/api/sendLogin',controller.api.sendLogin);     // login request
 router.post('/update/userInfo',controller.update.userInfo); // update 유저 정보

@@ -8,6 +8,7 @@ const {
 } = require('./models');
 
 const { COURSE, GRADE, EVALUATION } = require('./models');
+const notice = require('./models/notice');
 
 
 sequelize.query('SET NAMES utf8;');
@@ -49,7 +50,7 @@ module.exports = {
         getUserFriendList: (body, callback) => {
             let infos = []
             FRIEND.findAll({
-                where: { [Op.and]: [{friendID: body, friendGrant: true, }] },   //INNER JOIN
+                where: { [Op.and]: [{ friendID: body, friendGrant: true, }] },   //INNER JOIN
             }).then((data) => {
                 data.map(dataValues => {
                     USER.findAll({
@@ -59,7 +60,8 @@ module.exports = {
                     })
                 })
             })
-            setTimeout(function () { callback(infos)
+            setTimeout(function () {
+                callback(infos)
             }, 100) //임의로 시간줘서 데이터 다 받아오기
         },
         getUserFriendreq: (body, callback) => {
@@ -438,6 +440,19 @@ module.exports = {
                     throw err;
                 })
         },
+        notice: (body, callback)=>{
+            NOTICE.create({
+                userID:body.id,
+                noticeName:body.title,
+                courseID: body.name,
+                noticeContent: body.content,
+                noticeCriteria: body.criteria}
+            ).then(()=>{
+                callback(true)
+            }).catch(()=>{
+                callback(false)
+            })
+        }
     },
     update: {
         setUserInfo: (body, callback) => {      // 유저정보 업데이트
@@ -486,7 +501,7 @@ module.exports = {
                         FRIEND.create({
                             userID: body.data.u_id,
                             friendID: body.data.f_id,
-                            friendGrant: true  
+                            friendGrant: true
                         })
                         const infos = []
                         FRIEND.findAll({

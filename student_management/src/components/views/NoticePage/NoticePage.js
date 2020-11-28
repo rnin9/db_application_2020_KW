@@ -20,19 +20,24 @@ function NoticePage() {
     const id = localStorage.getItem('id')
     const handleTermChange = value => {  // 단과대학 변할 때 state 변화
         const number = value.replace(/[^0-9]/g, '');
-        const courses = []
         if (number % 2 === 0) {
             let date = { id: id, year: (number - 2) / 10, term: 2 }
             Axios.get('/api/notice/course', { params: date })
                 .then(res => {
+                    setTimeout(
                     setcourse(res.data)
+                        ,100
+                    )
                 })
 
         } else {
             let date = { id: id, year: (number - 1) / 10, term: 1 }
             Axios.get('/api/notice/course', { params: date })
                 .then(res => {
-                  setcourse(res.data)
+                    setTimeout(
+                        setcourse(res.data)
+                            ,100
+                )
                 })
 
         }
@@ -64,7 +69,6 @@ function NoticePage() {
                 onSelect={onCourseChange}
             >
                 {course.map(Course => (
-                    // console.log(Course)
                    <Option key={Course.Course_num}>{'['+Course.Course_num+'] '}{Course.Course_name}</Option>
                 ))}
             </Select>

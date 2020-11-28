@@ -1,11 +1,12 @@
 import React from 'react'
 import { useLocation } from "react-router";
-import { Table, Form, Select, Button, Input} from 'antd';
+import { Table, Form, Select, Button, Input, message} from 'antd';
 import {BookOutlined} from '@ant-design/icons';
 
 import {useHistory} from "react-router";
 
 import './NoticeWrite.css'
+import Axios from 'axios';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -23,13 +24,21 @@ function NoticeWrite() {
     }
 
     const onFinish = (value) => {
-        const data = { id:id, 
+        const datas = { id:id, 
                     title:value.notice.title, 
                     name:value.notice.name, 
                     content:value.notice.content,
                     criteria:value.notice.criteria}
-        
-        console.log(data)
+        Axios.post('/add/notice',{data:datas})
+        .then(res=>{
+            if(res.data===true){
+                message.success('작성에 성공했습니다!')
+                history.push('/prof/notice')
+            }
+            else{
+                message.error('작성에 실패했습니다!')
+            }
+        })
         
     }
 

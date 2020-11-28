@@ -288,6 +288,12 @@ module.exports = {
         }
         })
     },
+    notice:(req,res)=>{
+      const data =req.body.data;
+      model.add.notice(data,result=>{
+        res.send(result)
+      })
+    }
   },
   update: {
     userInfo: (req, res) => {
