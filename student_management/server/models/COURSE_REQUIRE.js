@@ -1,11 +1,11 @@
 module.exports = (sequelize, DataTypes) =>{
    return sequelize.define('COURSE_REQUIRE',{   // COURSE_REQUIRE table
       department:{
-         type: DataTypes.varchar(12),
+         type: DataTypes.STRING(12),
          primaryKey: true,
       },
       course_name:{
-         type: DataTypes.varchar(20),
+         type: DataTypes.STRING(20),
          primaryKey: true,
       },
       EITHER:{
