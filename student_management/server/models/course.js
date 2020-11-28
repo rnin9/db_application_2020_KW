@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) =>{
          allowNull: false,
          primaryKey: true,
       },
-      course_year:{
+      year:{
          type: DataTypes.INTEGER,// year이 없어서 integer로 대체
          primaryKey: true,
       },
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) =>{
          type: DataTypes.STRING(5)
       },
       Course_name:{
-         type: DataTypes.STRING(20)
+         type: DataTypes.STRING(30)
       },
       headcount_now:{
          type: DataTypes.INTEGER.UNSIGNED//SMALLINT가 없어서 INTEGER로 대체

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AutoComplete, Table, } from 'antd';
+import { AutoComplete, Table, Radio, Divider, Button } from 'antd';
 import './CourseRegPage.css'
 import axios from 'axios';
 
@@ -7,12 +7,12 @@ const columns = [
   {
     title: '학정번호',
     dataIndex: 'Course_num',
-    key: 'cid',
+    key: 'Course_num',
   },
   {
     title: '과목명',
-    dataIndex: 'course_code',
-    key: 'cname',
+    dataIndex: 'Course_name',
+    key: 'Course_name',
   },
   
   {
@@ -37,7 +37,14 @@ const columns = [
   },
 ];
 
+const rowSelection = {
+  onChange:(selectedRowKeys, selectedRows) => {
+    console.log(selectedRowKeys+' / '+selectedRows);
+  }
+}
+
 class CourseRegPage extends Component{
+  
 
     constructor(props) {
         super(props)
@@ -68,17 +75,21 @@ class CourseRegPage extends Component{
         
         return(
           <div style={{margin: AutoComplete}}> 
-          <div className="table">
-            <h2>강의 정보</h2>
-          </div>
-           <div className="table_course">
-           
-            {list.length !== 0
-              ? 
-              <Table dataSource={list} columns={columns} size="small" rowKey="Course_num"/>
-              : null}
+            <div className="table">
+              <h2>강의 정보</h2>
+            </div>
+            <div className="table_course">
           
-          </div>
+              {list.length !== 0
+                ? 
+                <Table rowSelection={{type:Radio}} pagination={{ pageSize : 30 }} dataSource={list} columns={columns} size="small" rowKey="Course_num"/>
+                : null}
+            
+            </div>
+            
+            <div>
+              <Button type="primary">수강 신청</Button>
+            </div>
           </div>
             
         )};
