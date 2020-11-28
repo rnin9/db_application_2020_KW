@@ -1,6 +1,8 @@
 import React from 'react'
 import { useLocation } from "react-router";
 import { Table, Form, Select, Button, Input} from 'antd';
+import {BookOutlined} from '@ant-design/icons';
+
 import {useHistory} from "react-router";
 
 import './NoticeWrite.css'
@@ -21,7 +23,14 @@ function NoticeWrite() {
     }
 
     const onFinish = (value) => {
-        console.log(value,id)
+        const data = { id:id, 
+                    title:value.notice.title, 
+                    name:value.notice.name, 
+                    content:value.notice.content,
+                    criteria:value.notice.criteria}
+        
+        console.log(data)
+        
     }
 
     const handleCancel=()=>{
@@ -40,6 +49,9 @@ function NoticeWrite() {
                             <Option key={c.Course_num}>{"[" + c.Course_num + "] "}{c.Course_name}</Option>
                         ))}
                     </Select>
+                </Form.Item>
+                <Form.Item name={['notice','title']}>
+                <Input placeholder="Notice Title" prefix={<BookOutlined />}/>
                 </Form.Item>
                 <div className="nwt_menu2">
                     <Form.Item name={['notice', 'criteria']}>
@@ -64,7 +76,7 @@ function NoticeWrite() {
                     
                 </div>
                 <Form.Item name={['notice','content']}>
-                <TextArea rows={10} />
+                <TextArea rows={10} placeholder="Content" />
                 </Form.Item>
                 <Button type="primary" style={{marginRight:10}} htmlType="submit">
                         완료

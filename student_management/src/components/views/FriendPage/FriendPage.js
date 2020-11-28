@@ -12,7 +12,6 @@ function FriendPage() {
     useEffect(() => {
         axios.get('/api/userFriend/list',{params:id})
         .then(res=>{
-            console.log(res)
             setFriend(res.data)
         })
     }, [])
