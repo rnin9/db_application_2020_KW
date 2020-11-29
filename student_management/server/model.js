@@ -130,12 +130,13 @@ module.exports = {
         getTimeTable: (body, callback) =>{
             sequelize.query("select c.Course_name, c.class_time, c.ct_mw, c.ct_tt, c.ct_fri from GRADEs g join COURSEs c on g.course_code=c.Course_num where g.user_id=:user_id and g.year=:year and g.semester=:semester;",
              { replacements: {
-                  user_id: body.userID,
+                  user_id: body.user_id,
                   year : body.year,
-                  semester : body.semester
+                  semester : body.sem
                 } })
             .then(data => {
-                callback(data)
+                console.log(data[0]);
+                callback(data[0])
             })
             .catch(err => {
                 throw err;
@@ -592,8 +593,8 @@ module.exports = {
             })
         },
         grade:(body, callback) => {
-            sequelize.query("update GRADEs set grade=:grade where user_id=:user_id and course_code=:course_code and Retake=false;",
-                    { replacements: { user_id: body.user_id, course_code: body.course_code, grade: body.grade } })
+            sequelize.query("update GRADEs set grade=:grade where user_id=:user_id and course_code=:course_code and year=:year and semester=:sem;",
+                    { replacements: { user_id: body.id, course_code: body.code, grade: body.grade, year:body.year,sem:body.sem } })
                     .then(data => {
                         callback(data);
                     })

@@ -64,7 +64,8 @@ module.exports = {
       })
     },
     timeTable: (req, res) => {
-      const body = req.query[0]
+      const body = req.query
+      console.log(body);
       model.api.getTimeTable(body, result => {
         res.send(result);
       })

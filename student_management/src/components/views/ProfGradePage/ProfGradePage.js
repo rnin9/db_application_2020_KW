@@ -85,8 +85,7 @@ function GradePage(){
             csem : split[2],
             cname : split[3],
         }
-    })
-
+      })
     }
 
         return(
