@@ -1,5 +1,8 @@
 module.exports = (sequelize, DataTypes) =>{
    return sequelize.define('PREREQUISITE',{   // PREREQUISITE table
+      major:{
+         type: DataTypes.STRING(12),
+      },
       post_course:{
          type: DataTypes.STRING(20),
          allowNull: false,
@@ -7,9 +10,12 @@ module.exports = (sequelize, DataTypes) =>{
       },
       pre_course:{
          type: DataTypes.STRING(20),
+<<<<<<< HEAD
       },
       department:{
          type: DataTypes.STRING(12),
+=======
+>>>>>>> origin/Grade,Eval
       },
    },{ timestamps: false});
 }

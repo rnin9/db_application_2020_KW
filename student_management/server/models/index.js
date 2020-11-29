@@ -39,8 +39,14 @@ let sequelize = new Sequalize(
     db.EVALUATION = require('./EVALUATION')(sequelize,Sequalize);
     db.TAG = require('./TAG')(sequelize,Sequalize);
     db.UPVOTE = require('./UPVOTE')(sequelize,Sequalize);
+<<<<<<< HEAD
     db.NOTICE = require('./notice')(sequelize,Sequalize);
 
+=======
+    db.REQUIREMENT = require('./REQUIREMENT')(sequelize,Sequalize);
+    db.PREREQUISITE = require('./PREREQUISITE')(sequelize,Sequalize);
+    
+>>>>>>> origin/Grade,Eval
     db.USER.hasMany(db.FRIEND,{foreignKey:"userID",targetKey:"userID"});
     db.USER.hasMany(db.FRIEND,{foreignKey:"friendID",targetKey:"userID"});
     db.FRIEND.belongsTo(db.USER,{foreignKey:"userID",sourceKey:"userID"});

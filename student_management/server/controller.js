@@ -197,8 +197,10 @@ module.exports = {
 
     course: (req, res) => {
       model.api.getCourse(result => {
-        res.send(result);})
-      },
+        console.log(result[0]);
+        res.send(result[0]);
+      })
+    },
       
     userEval:(req, res)=>{        //api key를 이용한 values (user)
       model.api.getUserEval(result=>{

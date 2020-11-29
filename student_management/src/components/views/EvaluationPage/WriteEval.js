@@ -5,6 +5,7 @@ import axios from 'axios';
 import { BankOutlined, CodeOutlined, DesktopOutlined, DownOutlined, GlobalOutlined, ThunderboltOutlined, UserOutlined } from '@ant-design/icons';
 
 const { Option } = Mentions;
+
 const userID = localStorage.getItem('id');
 var depart = '';
 
@@ -54,8 +55,11 @@ const onFinish = values => {                      // 제출 시 , POST 형식으
     
 };
 
+
+
 class WriteEval extends Component{
 
+    
     constructor(props) {
         super(props)
         this.state = {
@@ -93,19 +97,24 @@ class WriteEval extends Component{
               </Dropdown>
             </div>
             <div className="write_content">
-              <Form.Item name="content" label="내 용" labelCol={{span:1}} wrapperCol={{span: 14}} rules={[{ required:true}]} onFinish={onFinish} >
-                <Mentions rows="4" placeholder="수강평을 작성해주세요.(300자 이내)" value="content">
-                </Mentions>
-              </Form.Item>
-              <Form.Item wrapperCol={{span: 14, offset:5}}>
-                <Button htmlType="submit" type="primary">
-                  작성 완료
-                </Button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Button htmlType="button" href="/user/eval">
-                  취소
-                </Button>
-              </Form.Item>
+              <Form layout="horizontal" onFinish={onFinish}>
+                <Form.Item name="content" label="내 용" labelCol={{span:1}} wrapperCol={{span: 14}} rules={[{ required:true}]}  >
+                  <Mentions rows="4" placeholder="수강평을 작성해주세요.(300자 이내)" value="content">
+                    <Option value="afc163">afc163</Option>
+                    <Option value="zombieJ">zombieJ</Option>
+                    <Option value="yesmeck">yesmeck</Option>
+                  </Mentions>
+                </Form.Item>
+                <Form.Item wrapperCol={{span: 14, offset:5}}>
+                  <Button htmlType="submit" type="primary">
+                    작성 완료
+                  </Button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <Button htmlType="button" href="/user/eval">
+                    취소
+                  </Button>
+                </Form.Item>
+              </Form>
             </div>
           </div>
             
