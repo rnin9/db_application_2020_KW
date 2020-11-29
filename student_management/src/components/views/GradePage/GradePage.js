@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { AutoComplete, Col, Table, } from 'antd';
+import { AutoComplete, Col, Table} from 'antd';
+import { LoadingOutlined} from '@ant-design/icons';
 import './GradePage.css'
 import axios from 'axios';
 import ColumnGroup from 'antd/lib/table/ColumnGroup';
@@ -26,6 +27,48 @@ const columns = [
     title: '개설학과',
     dataIndex: 'major',
     key: 'major',
+  },
+  {
+    title: '년도',
+    dataIndex: 'year',
+    key: 'year',
+    filters: [
+      {
+        text: '2020',
+        value: '컴퓨터정보공학',
+      },
+      {
+        text: '2019',
+        value: '2019',
+      },
+      {
+        text: '2018',
+        value: '2018',
+      },
+    ],
+    filterMultiple: false,
+    onFilter: (value, record) => record.year.indexOf(""+value) !== -1
+  },
+  {
+    title: '학기',
+    dataIndex: 'semester',
+    key: 'semester',
+    // filters: [
+    //   {
+    //     text: '컴정공',
+    //     value: '컴퓨터정보공학',
+    //   },
+    //   {
+    //     text: '컴소',
+    //     value: '컴퓨터소프트웨어',
+    //   },
+    //   {
+    //     text: '전기공',
+    //     value: '전기공학',
+    //   },
+    // ],
+    // filterMultiple: false,
+    // onFilter: (value, record) => record.major.indexOf(value) !== -1
   },
   {
     title: '이수구분',
@@ -101,6 +144,7 @@ class GradePage extends Component{
           list : [],
           credit : [],
           update : false,
+          isLoading : true,
         }    
       }
     
@@ -115,8 +159,9 @@ class GradePage extends Component{
       if(res.data === undefined) {
         let cover = [];
         cover.push(res.data);       // response 데이터들 push
-        return this.setState({ list : cover })
+        return this.setState({ list : cover, isLoading :false })
       }
+      console.log(res.data)
       this.setState({ list : res.data });
       cover3.sub_major= res2.data[0].sub_major;
       res2 = await axios.get('/api/userAllSubCredit',{params:userID});
@@ -147,7 +192,7 @@ class GradePage extends Component{
 
       let cover2 = [];
       cover2.push(cover3);
-      this.setState({ credit : cover2 })
+      this.setState({ credit : cover2 , isLoading :false})
       /*
       if(res2.data[0] === undefined){
         cover2[0]=(res2.data);
@@ -171,14 +216,15 @@ class GradePage extends Component{
     render(){
         const { list } = this.state;
         const { credit } = this.state;
+        const { isLoading } = this.state;
         return(
-          <div style={{margin: AutoComplete}}> 
+          <div style={{margin: AutoComplete}}>
+            {!isLoading ? (<div>
           <div className="table">
             <h2>성적/수강 정보</h2>
           </div>
-          
           <div className="table_grade">
-            <Table size="small" bordered dataSource={credit} loading={false}>
+            <Table size="small" bordered dataSource={credit} loading={false} rowKey="sub_major">
                 <ColumnGroup title="신청학점">
                   <Column title="전공" dataIndex="sub_major" key="sub_major"/>
                   <Column title="교양" dataIndex="sub_liberal" key="sub_liberal"/>
@@ -199,7 +245,7 @@ class GradePage extends Component{
                 </ColumnGroup>
               </Table>
           </div>
-
+          <div>
           <div className="table">            
             <h3>{userName} 학생의 학기별 수강 정보입니다.</h3>
           </div>
@@ -208,15 +254,16 @@ class GradePage extends Component{
             {list.length !== 0
               ? 
               <Table dataSource={list} columns={columns} size="small" rowKey="course_code"/>
-              : null}          
+              :null}         
           </div>
-
+          </div>
+          </div>
+          ):  (<div className="grade_loading"><LoadingOutlined style={{fontSize:30, marginRight:10}}/> Loading...</div>)}
           
 
           <br></br>
           <br></br>
           </div>
-            
         )};
 }
 
