@@ -106,8 +106,32 @@ module.exports = {
                 throw err;
             })
         },
+        getProfCourse:(body,callback)=>{//교수의 강의 목록 가져오기.
+            sequelize.query("select * from COURSEs where professor_id=:user_id;", {replacements : {user_id:body}})
+            .then(data=>{
+                console.log(data);
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getTimeTable: (body, callback) =>{
+            sequelize.query("select c.Course_name, c.class_time, c.ct_mw, c.ct_tt, c.ct_fri from GRADEs g join COURSEs c on g.course_code=c.Course_num where g.user_id=:user_id and g.year=:year and g.semester=:semester;",
+             { replacements: {
+                  user_id: body.userID,
+                  year : body.year,
+                  semester : body.semester
+                } })
+            .then(data => {
+                callback(data)
+            })
+            .catch(err => {
+                throw err;
+            })
+        },
         getUserGrade: (body, callback) => {
-            sequelize.query("select * from GRADEs where user_id=:user_id;", { replacements: { user_id: body } })
+            sequelize.query("select * from GRADEs g join COURSEs c on g.course_code=c.Course_num where g.user_id=:user_id;", { replacements: { user_id: body } })
                 .then(data => {
                     //console.log("GRADE" +data);
                     callback(data)
@@ -264,13 +288,13 @@ module.exports = {
             })
         },
         getUserEval: (callback) => {        // 쿼리만 수행 (get)
-            EVALUATION.findAll()
-                .then(data => {
-                    callback(data)        // data를 controller로 보냄,
-                })
-                .catch(err => {
-                    throw err;
-                })
+            sequelize.query("select * from EVALUATIONs e join COURSEs c on e.course_code=c.Course_num;")
+            .then(data=>{
+                callback(data);
+            })
+            .catch(err =>{
+                throw err;
+            })
         },
 
         getStudentList: (body, callback) => {
@@ -307,6 +331,7 @@ module.exports = {
             })
         },
         getUserEvalTag: (body, callback) => {        // 쿼리만 수행 (get)
+            console.log(body);
             sequelize.query("select tag from TAGs where user_id=:user_id and course_code=:course_code;", { replacements: { user_id: body.user_id, course_code: body.course_code } })
                 .then(data => {
                     callback(data);
@@ -440,6 +465,17 @@ module.exports = {
                     })
                 })
         },
+        course: (body, callback) => {
+            console.log(body);
+            sequelize.query("call insert_grade(:course_code, :year, :semester, :user_id);",
+                { replacements: { user_id: body.userID, course_code: body.Course_num, year: body.year, semester: body.semester } })
+                .then(data => {
+                    callback(data);
+                })
+                .catch(err => {
+                    throw err;
+                })
+        },
         Eval: (body, callback) => {
             sequelize.query("insert into EVALUATION(user_id,course_code,year,semester,rating,content) value(:user_id,:course_code, :year, :semester,:rating,:content);",
                 { replacements: { user_id: body.user_id, course_code: body.course_code, year: body.year, semester: body.semester, rating: body.rating, content: body.content } })
@@ -543,8 +579,18 @@ module.exports = {
                     callback(true)
                 )
             })
-        }
-    },
+        },
+        grade:(body, callback) => {
+            sequelize.query("update GRADEs set grade=:grade where user_id=:user_id and course_code=:course_code and Retake=false;",
+                    { replacements: { user_id: body.user_id, course_code: body.course_code, grade: body.grade } })
+                    .then(data => {
+                        callback(data);
+                    })
+                    .catch(err => {
+                        throw err;
+                    })
+        },
+    },        
     delete: {
         deleteFriendreq: (body, callback) => {
             FRIEND.destroy({

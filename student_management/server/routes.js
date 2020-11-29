@@ -6,8 +6,10 @@ const controller = require('./controller');
 router.post('/add/user', controller.add.user);              // signup 정보 추가
 router.post('/add/friend',controller.add.friend);
 router.post('/add/absense',controller.add.absense);
-router.post('/add/eval',controller.add.eval);
+router.post('/add/eval',controller.add.eval);//수강 평가 추가
 router.post('/add/notice',controller.add.notice);
+
+router.post('/add/course',controller.add.course);//수강 내용 추가
 
 router.post('/api/sendLogin',controller.api.sendLogin);     // login request
 router.post('/update/userInfo',controller.update.userInfo); // update 유저 정보
@@ -15,6 +17,7 @@ router.post('/update/userPhoto',controller.update.userPhoto); //사진 업로드
 router.post('/update/userFriend/request',controller.update.requestHandle); //친구요청 받기 or 거절하기
 router.post('/update/absense',controller.update.absense);
 router.post('/update/noticeFile',controller.update.noticeFile);
+router.post('/update/grade',controller.update.grade); // (교수가) 학생 성적 변경
 
 
 router.get('/api/user',controller.api.user);                // 모든 유저의 정보 get
@@ -52,6 +55,8 @@ router.get('/api/notice/course/professor',controller.api.noticeCourseProf);
 router.get('/api/notice/list',controller.api.noticeList);
 
 router.get('/api/course',controller.api.course);
+router.get('/api/profCourse',controller.api.profCourse);
+router.get('/api/timetable',controller.api.timeTable);
 
 router.delete('/delete/friend/request',controller.delete.friendreq);
 router.delete('/delete/absense',controller.delete.absense);

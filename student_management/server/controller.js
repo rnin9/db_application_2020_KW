@@ -63,6 +63,12 @@ module.exports = {
         res.send(result);
       })
     },
+    timeTable: (req, res) => {
+      const body = req.query[0]
+      model.api.getTimeTable(body, result => {
+        res.send(result);
+      })
+    },
     userGrade: (req, res) => {
       const body = req.query[0]
 
@@ -201,12 +207,17 @@ module.exports = {
         res.send(result[0]);
       })
     },
-      
+    profCourse: (req, res) => {
+      const body = req.query[0];
+      console.log(req.query[0]);
+      model.api.getProfCourse(body,result => {
+        
+        res.send(result[0]);
+      })
+    },
     userEval:(req, res)=>{        //api key를 이용한 values (user)
       model.api.getUserEval(result=>{
-        if(result[0])
-          console.log(result[0]);
-          res.send(result);     // result를 대기했던 axios로 전달    
+        res.send(result[0]);     // result를 대기했던 axios로 전달    
       });
     },
     userEvalTag:(req, res)=>{
@@ -292,16 +303,17 @@ module.exports = {
         return res.send(result)
       })
     },
+    course:(req,res) => {
+      const data = req.body;
+      model.add.course(data, result => {
+        return res.send(result)
+      })
+    },
     eval:(req,res)=>{
       const data =req.body.data;
       model.add.eval(data,result=>{
-        if(result.success === false){
-          return res.json({ success:false, friendreqInfo:result.data})
-        }
-        else{
-        return res.json({ success:true, friendreqInfo:result})
-        }
-        })
+          return res.send(result)
+      })
     },
     notice:(req,res)=>{
       const data =req.body.data;
@@ -334,6 +346,12 @@ module.exports = {
     absense:(req,res)=>{
       const data = req.body
       model.update.absenseReturning(data,result=>{
+        res.send(result)
+      })
+    },
+    grade:(req,res)=>{
+      const data = req.body
+      model.update.grade(data,result=>{
         res.send(result)
       })
     },
