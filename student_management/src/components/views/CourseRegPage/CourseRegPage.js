@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AutoComplete, Table, Form, Button } from 'antd';
+import { AutoComplete, Table, Form, Button, message } from 'antd';
 import './CourseRegPage.css'
 import axios from 'axios';
 import { parseTwoDigitYear } from 'moment';
@@ -112,9 +112,17 @@ class CourseRegPage extends Component{
 
 
     handleData = ()=>{
-      
-      const data ={userID:id, Course_num: this.state.row.Course_num, year: this.state.row.year, semester: this.state.row.semester}
-      
+      const datas ={userID:id, Course_num: this.state.row.Course_num, year: this.state.row.year, semester: this.state.row.semester}
+      axios('/add/course',{ method: 'POST', headers: new Headers(), data: datas}) // 성공, 실패시 메시지
+        .then(res=>{
+          console.log(res.data[0].cnt);
+          if(res.data[0].cnt>0){
+          message.success("수강신청이 성공했습니다.")
+          //return window.location.href='/course/register';
+          } else{
+          message.error("수강신청에 실패했습니다. 강의 시간을 확인해주세요.")
+          }
+      });      
     }
 
     onChange = (rowSelection, selectedRows)=>{

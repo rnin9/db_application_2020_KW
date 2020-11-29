@@ -13,7 +13,7 @@ const columns = [
   },
   {
     title: '과목명',
-    dataIndex: 'course_code',
+    dataIndex: 'Course_name',
     key: 'cname',
   },
   
@@ -94,6 +94,7 @@ class EvaluationPage extends Component{
         var cover = {
           idx:0,
           user_id:'',
+          Course_name:'',
           course_code:'',
           year:0,
           semester:0,
@@ -104,13 +105,14 @@ class EvaluationPage extends Component{
         }
         cover.idx=res.data[i].idx;
         cover.user_id=res.data[i].user_id;
+        cover.Course_name=res.data[i].Course_name;
         cover.course_code=res.data[i].course_code;
         cover.year=res.data[i].year;
         cover.semester=res.data[i].semester;
         cover.rating=res.data[i].rating;
         cover.content=res.data[i].content;
         cover.upvote=res.data[i].upvote;
-        
+        console.log(cover.user_id);
         
         const res2 = await axios.get('/api/userEvalTag',{params:{user_id:cover.user_id, course_code:cover.course_code}});
         for(let j=0;j<res2.data.length;j++){

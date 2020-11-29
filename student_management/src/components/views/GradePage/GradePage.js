@@ -13,24 +13,24 @@ const userName = localStorage.getItem('name');
 const columns = [
   {
     title: '학정번호',
-    dataIndex: 'user_id',
-    key: 'cid',
+    dataIndex: 'course_code',
+    key: 'course_code',
   },
   {
     title: '과목명',
-    dataIndex: 'course_code',
+    dataIndex: 'Course_name',
     key: 'cname',
   },
   
   {
     title: '개설학과',
-    dataIndex: 'depart',
-    key: 'depart',
+    dataIndex: 'major',
+    key: 'major',
   },
   {
     title: '이수구분',
-    dataIndex: 'userEmail',
-    key: 'email',
+    dataIndex: 'classification',
+    key: 'classification',
   },
   {
     title: '학점',
@@ -44,8 +44,8 @@ const columns = [
   },
   {
     title: '인증구분',
-    dataIndex: 'grade',
-    key: 'add',
+    dataIndex: 'classification',
+    key: 'classification',
   },
   {
     title: '재수강여부',
