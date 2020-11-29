@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Form, Select, Button, Tag, Space, Collapse } from 'antd';
+import { Table, Form, Select, Button, Tag, Space, Pagination } from 'antd';
 import {useHistory} from "react-router";
 import { SaveTwoTone } from '@ant-design/icons';
 
@@ -48,7 +48,7 @@ function NoticeProfessor(props) {
     };
 
     const onCourseChange = value => {      // 과목 선택시
-        const data = { code: value, year: course[0].year, term: course[0].semester }
+        const data = { code: value, year: course[0].year, term: course[0].semester, id: id }
         Axios.get('/api/notice/list', { params: data })
             .then(res => {
                 setnotice(res.data)
@@ -84,7 +84,6 @@ function NoticeProfessor(props) {
                 onSelect={onCourseChange}
             >
                 {course.map(Course => (
-                    // console.log(Course)
                     <Option key={Course.Course_num}>{'['+Course.Course_num+'] '}{Course.Course_name}</Option>
                 ))}
             </Select>
@@ -111,7 +110,7 @@ function NoticeProfessor(props) {
                                         : <Tag color="green">{c}</Tag>
                                 }</>)}
                     />
-                    <Column title="작성자" dataIndex="userID" key="u" />
+                    <Column title="작성자" dataIndex={['USER','userName']} key="u" />
 
                     <Column title="작성일" dataIndex="createdAt" key="c" />
 
@@ -124,7 +123,10 @@ function NoticeProfessor(props) {
                             </Space>
                         )}
                     />
-
+                <Pagination defaultCurrent={1}
+                                defaultPageSize={4}
+                                total={2}
+                    ></Pagination>
                 </Table>
                 <div style={{paddingTop:20}}>
                 <Button type="primary" style={{ fontSize: 15 ,float:"right"}} onClick={handleWrite}>작성</Button>

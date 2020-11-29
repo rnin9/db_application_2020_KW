@@ -248,6 +248,7 @@ module.exports = {
     },
     noticeList:(req,res)=>{
       const body =req.query
+      console.log(body)
       model.api.getNoticeList(body,result=>{
         res.send(result)
       })

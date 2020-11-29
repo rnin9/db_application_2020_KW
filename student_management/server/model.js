@@ -322,13 +322,19 @@ module.exports = {
         },
         getNoticeCourseProf: (body, callback) => {
             sequelize.query("SELECT Course_num, Course_name" +
-                " FROM COURSEs" + " WHERE professor_id=:user_id and course_year=:year and semester=:semester;",
+                " FROM COURSEs" + " WHERE professor_id=:user_id and year=:year and semester=:semester;",
                 { replacements: { user_id: body.id, year: body.year, semester: body.term } })
                 .then(data => { callback(data[0]) })
         },
         getNoticeList: (body, callback) => {
             NOTICE.findAll({
-                where: { [Op.and]: [{ courseID: body.code /*userID:body.id*/ }] },
+                include: [
+                    {
+                        model: USER,
+                        required: true,
+                        attributes: ['userName'],
+                    }],
+                where: { [Op.and]: [{ courseID: body.code , userID:body.id }] },
             }).then(data => callback(data))
         }
     },

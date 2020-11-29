@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from "react-router";
-import { Table, Form, Select, Button, Tag, Space, Collapse } from 'antd';
+import { Table, Form, Select, Button, Tag, Space, Collapse, Pagination } from 'antd';
 import { SaveTwoTone } from '@ant-design/icons';
 
 import Axios from 'axios';
@@ -24,29 +24,25 @@ function NoticePage() {
             let date = { id: id, year: (number - 2) / 10, term: 2 }
             Axios.get('/api/notice/course', { params: date })
                 .then(res => {
-                    setTimeout(
                     setcourse(res.data)
-                        ,100
-                    )
                 })
 
         } else {
             let date = { id: id, year: (number - 1) / 10, term: 1 }
             Axios.get('/api/notice/course', { params: date })
                 .then(res => {
-                    setTimeout(
                         setcourse(res.data)
-                            ,100
-                )
+                   
                 })
 
         }
     };
 
     const onCourseChange = value => {      // 전공 선택시
-        const data = { code: value, year: course[0].year, term: course[0].semester }
+        const data = { code: value, year: course[0].year, term: course[0].semester, id: id }
         Axios.get('/api/notice/list', { params: data })
             .then(res => {
+                console.log(res.data)
                 setnotice(res.data)
             })
     };
@@ -95,7 +91,7 @@ function NoticePage() {
                                         : <Tag color="green">{c}</Tag>
                                 }</>)}
                     />
-                    <Column title="작성자" dataIndex="userID" key="u" />
+                    <Column title="작성자" dataIndex={['USER','userName']} key="u" />
 
                     <Column title="작성일" dataIndex="createdAt" key="c" />
 
@@ -108,7 +104,10 @@ function NoticePage() {
                             </Space>
                         )}
                     />
-
+                    {/* <Pagination defaultCurrent={1}
+                                defaultPageSize={4}
+                                total={2}
+                    ></Pagination> */}
                 </Table>
             </div>
         </div>
