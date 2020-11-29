@@ -352,7 +352,7 @@ module.exports = {
                 })
         },
         getNoticeCourse: (body, callback) => {
-            sequelize.query("SELECT COURSEs.Course_num, COURSEs.Course_name" +
+            sequelize.query("SELECT COURSEs.Course_num, COURSEs.Course_name, COURSEs.professor_id" +
                 " FROM COURSEs JOIN GRADEs " + "ON GRADEs.course_code = COURSEs.Course_num " +
                 "WHERE GRADEs.user_id=:user_id and GRADEs.year=:year and GRADEs.semester=:semester;",
                 { replacements: { user_id: body.id, year: body.year, semester: body.term } })

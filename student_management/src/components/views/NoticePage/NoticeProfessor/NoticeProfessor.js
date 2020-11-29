@@ -129,7 +129,7 @@ function NoticeProfessor(props) {
                             <Space size="middle">
                             { f !=='0'?
                             <a href={`/file/${f}`} target="_blank" rel="noopener noreferrer">
-                            <Button type="text" style={{ fontSize: 18 }} onClick={handleClick} id={f}><SaveTwoTone /></Button>
+                            <Button type="text" style={{ fontSize: 18 }} id={f}><SaveTwoTone /></Button>
                             </a>
                             : null}
                             </Space>

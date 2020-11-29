@@ -38,17 +38,13 @@ function NoticePage() {
     };
 
     const onCourseChange = value => {      // 전공 선택시
-        const data = { code: value, year: course[0].year, term: course[0].semester, id: id }
+        const data = { code: value, year: course[0].year, term: course[0].semester, id: course[0].professor_id }
         Axios.get('/api/notice/list', { params: data })
             .then(res => {
-                console.log(res.data)
                 setnotice(res.data)
             })
     };
 
-    const handleClick = (e)=>{
-            console.log(e.currnetTarget.name)
-    }
     return (
         <div className="font_ntc">
 
@@ -104,7 +100,9 @@ function NoticePage() {
                         render={f => (
                             <Space size="middle">
                             { f !=='0'?
-                            <Button type="text" style={{ fontSize: 18 }} onClick={handleClick} name={f}><SaveTwoTone /></Button>
+                            <a href={`/file/${f}`} target="_blank" rel="noopener noreferrer">
+                            <Button type="text" style={{ fontSize: 18 }} id={f}><SaveTwoTone /></Button>
+                            </a>
                             : null}
                             </Space>
                         )}
