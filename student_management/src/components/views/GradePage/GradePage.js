@@ -3,6 +3,7 @@ import { AutoComplete, Col, Table} from 'antd';
 import { LoadingOutlined} from '@ant-design/icons';
 import './GradePage.css'
 import axios from 'axios';
+import { select } from 'd3';
 import ColumnGroup from 'antd/lib/table/ColumnGroup';
 import Column from 'antd/lib/table/Column';
 
@@ -143,6 +144,7 @@ class GradePage extends Component{
           name : '',
           list : [],
           credit : [],
+          data : [],
           update : false,
           isLoading : true,
         }    
@@ -193,23 +195,6 @@ class GradePage extends Component{
       let cover2 = [];
       cover2.push(cover3);
       this.setState({ credit : cover2 , isLoading :false})
-      /*
-      if(res2.data[0] === undefined){
-        cover2[0]=(res2.data);
-        console.log("CREDIT : "+res2.data);
-        return this.setState({ credit : cover2 })
-      }
-      this.setState({ credit : res2.data });
-
-      const res3 = await axios.get('/api/userAllSubCredit',{params:userID});
-
-      if(res3.data[0] === undefined){
-        cover2[1]=(res3.data);
-        console.log("CREDIT : "+res3.data);
-        return this.setState({ credit : cover2 })
-      }
-      this.setState({ credit : cover2 });
-      */
     }
 
 
@@ -223,6 +208,7 @@ class GradePage extends Component{
           <div className="table">
             <h2>성적/수강 정보</h2>
           </div>
+          
           <div className="table_grade">
             <Table size="small" bordered dataSource={credit} loading={false} rowKey="sub_major">
                 <ColumnGroup title="신청학점">
@@ -246,6 +232,7 @@ class GradePage extends Component{
               </Table>
           </div>
           <div>
+
           <div className="table">            
             <h3>{userName} 학생의 학기별 수강 정보입니다.</h3>
           </div>
@@ -264,6 +251,7 @@ class GradePage extends Component{
           <br></br>
           <br></br>
           </div>
+            
         )};
 }
 

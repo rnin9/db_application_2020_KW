@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AutoComplete, Col, Table, } from 'antd';
-import './ProfGradePage.css'
+import './ProfGradeCoursePage.css'
 import axios from 'axios';
 import ColumnGroup from 'antd/lib/table/ColumnGroup';
 import Column from 'antd/lib/table/Column';
@@ -75,7 +75,7 @@ class GradeCoursePage extends Component{
           
 
           <div className="table">            
-            <h3>{userName} 교수님의 수업 목록입니다.</h3>
+            <h3>{userName} 교수님의 XXX 수업입니다.</h3>
           </div>
           
           <div className="table_grade">          
