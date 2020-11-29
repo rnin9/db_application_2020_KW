@@ -1,94 +1,77 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from "react-router";
 import { AutoComplete, Table, Tag, Button } from 'antd';
 import './EvaluationPage.css'
 import axios from 'axios';
 
+const userID = localStorage.getItem('id');
+const userName = localStorage.getItem('name');
 
+function EvaluationPage(){
 
-const columns = [
-  {
-    title: '번호',
-    dataIndex: 'idx',
-    key: 'idx',
-  },
-  {
-    title: '과목명',
-    dataIndex: 'Course_name',
-    key: 'cname',
-  },
-  
-  {
-    title: '수강연도',
-    dataIndex: 'year',
-    key: 'year',
-  },
-  {
-    title: '수강학기',
-    dataIndex: 'semester',
-    key: 'semester',
-  },
-  {
-    title: '평점',
-    dataIndex: 'rating',
-    key: 'rating',
-  },
-  {
-    title: '내용',
-    dataIndex: 'content',
-    key: 'content',
-  },
-  {
-    title: '좋아요',
-    dataIndex: 'upvote',
-    key: 'upvote',
-  },
-  {
-    title: '태그',
-    dataIndex : 'tags',
-    key : 'tags',
-    render: tags =>(
-      <>
-        {tags.map(tag => {
-          let color;
-          if(tag === '꿀잼보장' || tag === 'A폭격기' || tag === '인터넷강의'){
-            color = 'green';
-          }
-          else if(tag ==='F폭격기' || tag === '수면제수업' || tag === '조별과제'){
-            color = 'volcano';
-          }
-          else{
-            color = 'stop';
-          }
-          return(
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    )
-  }
-];
+  const [list, setlist] = useState([])
+  const history = useHistory();
 
-
-
-class EvaluationPage extends Component{
-
-    constructor(props) {
-        super(props)
-        this.state = {
-          name : '',
-          list : [],
-          update : false,
-      }
-    }
+  const columns = [
+    {
+      title: '과목명',
+      dataIndex: 'Course_name',
+      key: 'cname',
+    },
     
-    componentDidMount(){
-      this._getData()
-    }
+    {
+      title: '교수명',
+      dataIndex: 'userName',
+      key: 'professor',
+    },
+    {
+      title: '평점',
+      dataIndex: 'rating',
+      key: 'rating',
+    },
+    {
+      title: '태그',
+      dataIndex: 'upvote',
+      key: 'upvote',
+    },/*
+    {
+      title: '태그',
+      dataIndex : 'tags',
+      key : 'tags',
+      render: tags =>(
+        <>
+          {tags.map(tag => {
+            let color;
+            if(tag === '꿀잼' || tag === 'A폭격기' || tag === '인터넷강의'){
+              color = 'green';
+            }
+            else if(tag ==='F폭격기' || tag === '노잼' || tag === '조별과제'){
+              color = 'volcano';
+            }
+            else{
+              color = 'default';
+            }
+            return(
+              <Tag color={color} key={tag}>
+                {tag.toUpperCase()}
+              </Tag>
+            );
+          })}
+        </>
+      )
+    }*/
+  ];
 
-    _getData = async () => {
+  useEffect(() => {
+    _getData()
+  }, [])
+
+  const _getData = async () => {
       const res = await axios.get('/api/userEval');
+      setlist(res.data);
+      console.log(list);
+      //const res2 = await axios.get('/api/EvalTagOne',{params:res.data.course_code});
+      /*
       let cover2=[];
       for(let i=0;i<res.data.length;i++){
         var cover = {
@@ -119,15 +102,14 @@ class EvaluationPage extends Component{
           cover.tags.push(res2.data[j].tag);
         }
         cover2.push(cover);
+        
       }
       
-      this.setState({ list : cover2 });
+      setlist(cover2);
+      */
     }
 
 
-    render(){
-        const { list } = this.state;
-       
         return(
           <div style={{margin: AutoComplete}}> 
           <div className="table">
@@ -155,7 +137,7 @@ class EvaluationPage extends Component{
           <br></br>
           </div>
             
-        )};
+        );
 }
 
 export default EvaluationPage;

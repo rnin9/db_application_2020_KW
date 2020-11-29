@@ -300,9 +300,14 @@ module.exports = {
             })
         },
         getUserEval: (callback) => {        // 쿼리만 수행 (get)
-            sequelize.query("select * from EVALUATIONs e join COURSEs c on e.course_code=c.Course_num;")
+            sequelize.query("select course_code, rating, c.Course_name, u.userName from "+
+            "(select course_code, ROUND(avg(rating),2) as rating from EVALUATIONs e join COURSEs c on e.course_code=c.Course_num, USERs u where u.userID=c.professor_id group by course_code) com "+
+            "join COURSEs c on com.course_code=c.Course_num, USERs u "+
+            "where u.userID=c.professor_id order by rating desc;")
             .then(data=>{
+                console.log(data[0]);
                 callback(data);
+
             })
             .catch(err =>{
                 throw err;
