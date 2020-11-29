@@ -25,7 +25,7 @@ function StudentBar(props) {
       }
     >
       <Menu.ItemGroup key="g1" title="수강관리">
-        <Menu.Item key="1">시간표</Menu.Item>
+        <Menu.Item key="1"><a href="/user/timetable">시간표</a></Menu.Item>
         <Menu.Item key="2"><a href="/course/register">수강신청</a></Menu.Item>
       </Menu.ItemGroup>
       <Menu.ItemGroup key="g2" title="학습결과">

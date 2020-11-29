@@ -17,6 +17,7 @@ import Grade from './components/views/GradePage/GradePage.js'
 import Evaluation from './components/views/EvaluationPage/EvaluationPage.js'
 import WriteEval from './components/views/EvaluationPage/WriteEval.js'
 import CourseRegPage from './components/views/CourseRegPage/CourseRegPage.js'
+import TimeTablePage from './components/views/TimeTablePage/TimeTablePage.js'
 
 import StudentInfoPage from './components/views/StudentInfoPage/StudentInfoPage'
 import AbsenseRequestPage from './components/views/AbsensePage/Request/AbsenseRequest'
@@ -88,7 +89,7 @@ class App extends Component {
 
           <AuthRoute exact path="/user/notice" component={NoticePage}></AuthRoute>
 
-          
+          <AuthRoute exact path="/user/timetable" component={TimeTablePage}></AuthRoute>
           <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>
           <AuthRoute exact path="/write/eval" component={WriteEval}></AuthRoute>
           <AuthRoute exact path="/user/grade" component={Grade}></AuthRoute> {/*유저권한확인*/}
