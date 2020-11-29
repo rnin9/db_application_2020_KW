@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AutoComplete, Col, Table} from 'antd';
 import { LoadingOutlined} from '@ant-design/icons';
 import './GradePage.css'
@@ -136,24 +136,17 @@ const cover3 ={
   grade_major:0,
 }
 
-class GradePage extends Component{
+function GradePage (){
+    const [list, setlist] = useState([])
+    const [credit, setcredit] = useState([])
+    const [isLoading, setisLoading] = useState(true)
 
-    constructor(props) {
-        super(props)
-        this.state = {
-          name : '',
-          list : [],
-          credit : [],
-          data : [],
-          update : false,
-          isLoading : true,
-        }    
-      }
+    useEffect(() => {
+      _getData()
+      
+    }, [])  
     
-    componentDidMount(){
-      this._getData()
-    }
-    _getData = async () => {
+    const _getData = async () => {
       
       const res = await axios.get('/api/userGrade',{params:userID});     
       var res2 = await axios.get('/api/userMajorSubCredit',{params:userID});
@@ -161,10 +154,11 @@ class GradePage extends Component{
       if(res.data === undefined) {
         let cover = [];
         cover.push(res.data);       // response 데이터들 push
-        return this.setState({ list : cover, isLoading :false })
+        setlist(cover)
+        setisLoading(false)
+        return
       }
-      console.log(res.data)
-      this.setState({ list : res.data });
+      setlist(res.data);
       cover3.sub_major= res2.data[0].sub_major;
       res2 = await axios.get('/api/userAllSubCredit',{params:userID});
       cover3.sub_sum=res2.data[0].sub_sum;
@@ -194,14 +188,10 @@ class GradePage extends Component{
 
       let cover2 = [];
       cover2.push(cover3);
-      this.setState({ credit : cover2 , isLoading :false})
+      setcredit(cover2)
+      setisLoading(false)
     }
 
-
-    render(){
-        const { list } = this.state;
-        const { credit } = this.state;
-        const { isLoading } = this.state;
         return(
           <div style={{margin: AutoComplete}}>
             {!isLoading ? (<div>
@@ -252,7 +242,7 @@ class GradePage extends Component{
           <br></br>
           </div>
             
-        )};
+        )
 }
 
 export default GradePage;
