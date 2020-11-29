@@ -27,6 +27,7 @@ import ProfNotice from './components/views/NoticePage/NoticeProfessor/NoticeProf
 import ProfNoticeWrite from './components/views/NoticePage/NoticeProfessor/NoticeWrite'
 
 import ProfGrade from './components/views/ProfGradePage/ProfGradePage.js'
+import ProfGradeCourse from './components/views/ProfGradeCoursePage/ProfGradeCoursePage.js'
 import './App.css';
 import ProfessorRoute from './helpers/ProfessorRoute.js';
 import EmployeeRoute from './helpers/EmployeeRoute';
@@ -98,6 +99,7 @@ class App extends Component {
           <EmployeeRoute exact path="/employee/studentAbsense" component={AbsenseHandlePage}></EmployeeRoute>
 
           <ProfessorRoute exact path="/prof/grade" component={ProfGrade}></ProfessorRoute>
+          <ProfessorRoute exact path="/prof/grade/course" component={ProfGradeCourse}></ProfessorRoute>
           <ProfessorRoute exact path="/prof/notice" component={ProfNotice}></ProfessorRoute>
           <ProfessorRoute exact path="/prof/notice/write" component={ProfNoticeWrite}></ProfessorRoute>
         </BrowserRouter>        
