@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, {useEffect, useState } from 'react';
+import { useHistory } from "react-router";
 import { AutoComplete, Col, Table, } from 'antd';
 import './ProfGradePage.css'
 import axios from 'axios';
@@ -8,67 +9,73 @@ import Column from 'antd/lib/table/Column';
 
 const userID = localStorage.getItem('id');
 const userName = localStorage.getItem('name');
-const columns = [
-  {
-    title: '학정번호',
-    dataIndex: 'Course_num',
-    key: 'cid',
-  },
-  {
-    title: '과목명',
-    dataIndex: 'Course_name',
-    key: 'cname',
-  },
-  
-  {
-    title: '수업시간',
-    dataIndex: 'class_time',
-    key: 'ctime',
-  },
-  {
-    title: '이수구분',
-    dataIndex: 'classification',
-    key: 'cf',
-  },
-  {
-    title: '수강생',
-    dataIndex: 'headcount_now',
-    key: 'hn',
-  },
-];
 
+function GradePage(){
 
-class GradePage extends Component{
+  const [list, setlist] = useState([])
+  const history = useHistory();
 
-    constructor(props) {
-        super(props)
-        this.state = {
-          name : '',
-          list : [],
-          credit : [],
-          update : false,
-        }    
-      }
+  useEffect(() => {
+    _getData()
+  }, [])
+
+  // const [name, setname] = useState('')
+  // const [update, setupdate] = useState(false)
+  const columns = [
+    {
+      title: '학정번호',
+      dataIndex: 'Course_num',
+      key: 'cid',
+      render: cid => (
+          <a onClick={handleClick} id={cid}>{cid}</a>
+        
+      )
+    },
+    {
+      title: '과목명',
+      dataIndex: 'Course_name',
+      key: 'cname',
+    },
     
-    componentDidMount(){
-      this._getData()
-    }
-    _getData = async () => {
+    {
+      title: '수업시간',
+      dataIndex: 'class_time',
+      key: 'ctime',
+    },
+    {
+      title: '이수구분',
+      dataIndex: 'classification',
+      key: 'cf',
+    },
+    {
+      title: '수강생',
+      dataIndex: 'headcount_now',
+      key: 'hn',
+    },
+  ];
+  
+    const _getData = async () => {
       
       const res = await axios.get('/api/profCourse',{params:userID});
       //let cover2 = {};
       if(res.data === undefined) {
         let cover = [];
         cover.push(res.data);       // response 데이터들 push
-        return this.setState({ list : cover })
+        return setlist(cover)
       }
-      this.setState({ list : res.data });
+      setlist(res.data);
+    }
+    
+    const handleClick = (e)=>{
+      history.push({
+        pathname: "/prof/grade/course",
+        state: {
+            ccode: e.currentTarget.id
+        }
+    })
+
     }
 
-
-    render(){
-        const { list } = this.state;
-        const { credit } = this.state;
         return(
           <div style={{margin: AutoComplete}}>
           
@@ -90,7 +97,7 @@ class GradePage extends Component{
           <br></br>
           </div>
             
-        )};
+        );
 }
 
 export default GradePage;

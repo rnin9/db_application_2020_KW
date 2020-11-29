@@ -29,6 +29,48 @@ const columns = [
     key: 'major',
   },
   {
+    title: '년도',
+    dataIndex: 'year',
+    key: 'year',
+    filters: [
+      {
+        text: '2020',
+        value: '컴퓨터정보공학',
+      },
+      {
+        text: '2019',
+        value: '2019',
+      },
+      {
+        text: '2018',
+        value: '2018',
+      },
+    ],
+    filterMultiple: false,
+    onFilter: (value, record) => record.year.indexOf(""+value) !== -1
+  },
+  {
+    title: '학기',
+    dataIndex: 'semester',
+    key: 'semester',
+    // filters: [
+    //   {
+    //     text: '컴정공',
+    //     value: '컴퓨터정보공학',
+    //   },
+    //   {
+    //     text: '컴소',
+    //     value: '컴퓨터소프트웨어',
+    //   },
+    //   {
+    //     text: '전기공',
+    //     value: '전기공학',
+    //   },
+    // ],
+    // filterMultiple: false,
+    // onFilter: (value, record) => record.major.indexOf(value) !== -1
+  },
+  {
     title: '이수구분',
     dataIndex: 'classification',
     key: 'classification',
@@ -119,6 +161,7 @@ class GradePage extends Component{
         cover.push(res.data);       // response 데이터들 push
         return this.setState({ list : cover, isLoading :false })
       }
+      console.log(res.data)
       this.setState({ list : res.data });
       cover3.sub_major= res2.data[0].sub_major;
       res2 = await axios.get('/api/userAllSubCredit',{params:userID});
