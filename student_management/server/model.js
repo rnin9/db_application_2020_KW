@@ -116,6 +116,17 @@ module.exports = {
                 throw err;
             })
         },
+        getProfCourseStudent:(body,callback)=>{//교수의 강의 목록 가져오기.
+            sequelize.query("select * from GRADEs g join USERs u on g.user_id=u.userID where g.course_code=:code and g.year=:year and g.semester=:sem;"
+            , {replacements : {code:body.Ccode, year:body.Cyear, sem:body.Csem}})
+            .then(data=>{
+                //console.log(data);
+                callback(data)
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
         getTimeTable: (body, callback) =>{
             sequelize.query("select c.Course_name, c.class_time, c.ct_mw, c.ct_tt, c.ct_fri from GRADEs g join COURSEs c on g.course_code=c.Course_num where g.user_id=:user_id and g.year=:year and g.semester=:semester;",
              { replacements: {

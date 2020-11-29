@@ -215,6 +215,13 @@ module.exports = {
         res.send(result[0]);
       })
     },
+    profCourseStudent: (req, res) => {
+      const body = req.query;
+      model.api.getProfCourseStudent(body,result => {
+        
+        res.send(result[0]);
+      })
+    },
     userEval:(req, res)=>{        //api key를 이용한 values (user)
       model.api.getUserEval(result=>{
         res.send(result[0]);     // result를 대기했던 axios로 전달    

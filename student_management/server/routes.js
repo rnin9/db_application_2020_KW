@@ -56,6 +56,7 @@ router.get('/api/notice/list',controller.api.noticeList);
 
 router.get('/api/course',controller.api.course);
 router.get('/api/profCourse',controller.api.profCourse);
+router.get('/api/profCourseStudent',controller.api.profCourseStudent);
 router.get('/api/timetable',controller.api.timeTable);
 
 router.delete('/delete/friend/request',controller.delete.friendreq);
