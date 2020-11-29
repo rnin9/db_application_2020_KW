@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AutoComplete, Col, Table, } from 'antd';
+import { useLocation } from "react-router";
 import './ProfGradeCoursePage.css'
 import axios from 'axios';
 import ColumnGroup from 'antd/lib/table/ColumnGroup';
@@ -8,7 +9,7 @@ import Column from 'antd/lib/table/Column';
 
 const userID = localStorage.getItem('id');
 const userName = localStorage.getItem('name');
-//const cCode = this.props.location.state.ccode;
+
 const columns = [
   {
     title: '학정번호',
@@ -39,39 +40,30 @@ const columns = [
 ];
 
 
-class GradeCoursePage extends Component{
+function GradeCoursePage (){
 
-    constructor(props) {
-        super(props)
-        this.state = {
-          name : '',
-          list : [],
-          credit : [],
-          update : false,
-        }    
-      }
-    
-    componentDidMount(){
-      this._getData()
-    }
-    _getData = async () => {
+    const [list, setlist] = useState([])
+    const location = useLocation();
+    const Ccode = location.state.ccode;
+    useEffect(() => {
+      _getData()
       
+    }, [])  
+
+    const _getData = async () => {
+      console.log(Ccode)
       const res = await axios.get('/api/profCourse',{params:userID});
       //let cover2 = {};
       if(res.data === undefined) {
         let cover = [];
         cover.push(res.data);       // response 데이터들 push
-        return this.setState({ list : cover })
+        return setlist(cover)
       }
-      this.setState({ list : res.data });
+      setlist(res.data);
     }
 
-
-    render(){
-        const { list } = this.state;
-        const { credit } = this.state;
-        return(
-          <div style={{margin: AutoComplete}}>
+    return(
+        <div style={{margin: AutoComplete}}>
           
 
           <div className="table">            
@@ -91,7 +83,7 @@ class GradeCoursePage extends Component{
           <br></br>
           </div>
             
-        )};
+    )
 }
 
 export default GradeCoursePage;

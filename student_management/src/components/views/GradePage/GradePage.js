@@ -3,7 +3,7 @@ import { AutoComplete, Col, Table} from 'antd';
 import { LoadingOutlined} from '@ant-design/icons';
 import './GradePage.css'
 import axios from 'axios';
-import { select } from 'd3';
+// import { select } from 'd3';
 import ColumnGroup from 'antd/lib/table/ColumnGroup';
 import Column from 'antd/lib/table/Column';
 
