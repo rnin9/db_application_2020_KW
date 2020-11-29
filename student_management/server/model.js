@@ -452,7 +452,9 @@ module.exports = {
                 noticeName:body.title,
                 courseID: body.name,
                 noticeContent: body.content,
-                noticeCriteria: body.criteria}
+                noticeCriteria: body.criteria,
+                noticeFiles: body.file
+            }
             ).then(()=>{
                 callback(true)
             }).catch(()=>{

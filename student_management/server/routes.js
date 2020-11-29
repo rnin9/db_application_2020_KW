@@ -13,8 +13,8 @@ router.post('/api/sendLogin',controller.api.sendLogin);     // login request
 router.post('/update/userInfo',controller.update.userInfo); // update 유저 정보
 router.post('/update/userPhoto',controller.update.userPhoto); //사진 업로드시, 받음
 router.post('/update/userFriend/request',controller.update.requestHandle); //친구요청 받기 or 거절하기
-
 router.post('/update/absense',controller.update.absense);
+router.post('/update/noticeFile',controller.update.noticeFile);
 
 
 router.get('/api/user',controller.api.user);                // 모든 유저의 정보 get

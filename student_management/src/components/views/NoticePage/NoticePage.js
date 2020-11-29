@@ -31,8 +31,7 @@ function NoticePage() {
             let date = { id: id, year: (number - 1) / 10, term: 1 }
             Axios.get('/api/notice/course', { params: date })
                 .then(res => {
-                        setcourse(res.data)
-                   
+                        setcourse(res.data)                   
                 })
 
         }
@@ -47,6 +46,9 @@ function NoticePage() {
             })
     };
 
+    const handleClick = (e)=>{
+            console.log(e.currnetTarget.name)
+    }
     return (
         <div className="font_ntc">
 
@@ -97,10 +99,13 @@ function NoticePage() {
 
                     <Column
                         title=""
-                        key="action"
-                        render={() => (
+                        key="f"
+                        dataIndex="noticeFiles"
+                        render={f => (
                             <Space size="middle">
-                            <Button type="text" style={{ fontSize: 18 }}><SaveTwoTone /></Button>
+                            { f !=='0'?
+                            <Button type="text" style={{ fontSize: 18 }} onClick={handleClick} name={f}><SaveTwoTone /></Button>
+                            : null}
                             </Space>
                         )}
                     />

@@ -10,7 +10,19 @@ var storage = multer.diskStorage({
   }
 })
 
+var storages = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/file/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}_${file.originalname}`)
+  }
+})
+
+
 var upload = multer({ storage: storage }).single('file')
+var uploads = multer({ storage: storages }).single('file')
+
 
 
 module.exports = {
@@ -322,7 +334,15 @@ module.exports = {
       model.update.absenseReturning(data,result=>{
         res.send(result)
       })
-    }
+    },
+    noticeFile:(req,res)=>{
+      uploads(req, res, err => {
+        if (err) {
+          return req.json({ success: false, err })
+        }
+        return res.json({ success: true, filepath: res.req.file.path, filename: res.req.file.filename })
+       })
+    },
   },
   delete: {
     friendreq: (req, res) => {

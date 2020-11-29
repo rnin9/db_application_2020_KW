@@ -18,7 +18,7 @@ ____________________________________________
     }
 }
 ```
-3. make 'image' folder in '/public' directory 
+3. make 'image' folder and 'file' folder in '/public' directory 
 4. Type 'npm install' in root directory
 5. Type 'npm run dev' in root directory to Run This project
 ____________________________________________
@@ -92,3 +92,6 @@ ____________________________________________
 
 ## 2020-11-28
  * notice Writing, noticePage
+
+## 2020-11-29
+* friend bug fix, notice update

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Form, Select, Button, Tag, Space, Pagination } from 'antd';
-import {useHistory} from "react-router";
+import { useHistory } from "react-router";
 import { SaveTwoTone } from '@ant-design/icons';
 
 import Axios from 'axios';
@@ -16,7 +16,7 @@ const termData = ['2020년도 1학기', '2020년도 2학기', '2019년도 1학�
 function NoticeProfessor(props) {
 
     useEffect(() => {       //사용해보자
-        
+
     }, [])
     const [course, setcourse] = useState([])
     const [notice, setnotice] = useState([])
@@ -52,24 +52,31 @@ function NoticeProfessor(props) {
         Axios.get('/api/notice/list', { params: data })
             .then(res => {
                 setnotice(res.data)
+                console.log(res.data)
             })
     };
 
-    const handleWrite = ()=>{
+    const handleWrite = () => {
         let date = { id: id, year: 2020, term: 2 }
         Axios.get('/api/notice/course/professor', { params: date })
             .then(res => {
                 history.push({
                     pathname: "/prof/notice/write",
-                    state: { course:res.data
-                    }})
+                    state: {
+                        course: res.data
+                    }
+                })
             })
+    }
+
+    const handleClick = (e) => {
+       
     }
 
     return (
         <div className="font_ntc">
 
-            <h2 style={{paddingTop:30, marginBottom:20}}>공지사항</h2>
+            <h2 style={{ paddingTop: 30, marginBottom: 20 }}>공지사항</h2>
             <Select
 
                 style={{ width: 203 }}
@@ -84,14 +91,14 @@ function NoticeProfessor(props) {
                 onSelect={onCourseChange}
             >
                 {course.map(Course => (
-                    <Option key={Course.Course_num}>{'['+Course.Course_num+'] '}{Course.Course_name}</Option>
+                    <Option key={Course.Course_num}>{'[' + Course.Course_num + '] '}{Course.Course_name}</Option>
                 ))}
             </Select>
 
             <div className="notice_table_user">
 
                 <Table dataSource={notice} rowKey="noticeID"
-                    expandableRowIcon={<SaveTwoTone/>}
+                    expandableRowIcon={<SaveTwoTone />}
                     expandedRowRender={record => <p style={{ margin: 0 }}>{record.noticeContent}</p>}
                 >
                     <Column title="번호" dataIndex="noticeID" key="id" />
@@ -110,26 +117,31 @@ function NoticeProfessor(props) {
                                         : <Tag color="green">{c}</Tag>
                                 }</>)}
                     />
-                    <Column title="작성자" dataIndex={['USER','userName']} key="u" />
+                    <Column title="작성자" dataIndex={['USER', 'userName']} key="u" />
 
                     <Column title="작성일" dataIndex="createdAt" key="c" />
 
                     <Column
                         title=""
-                        key="action"
-                        render={() => (
+                        key="f"
+                        dataIndex="noticeFiles"
+                        render={f => (
                             <Space size="middle">
-                            <Button type="text" style={{ fontSize: 18 }}><SaveTwoTone /></Button>
+                            { f !=='0'?
+                            <a href={`/file/${f}`} target="_blank" rel="noopener noreferrer">
+                            <Button type="text" style={{ fontSize: 18 }} onClick={handleClick} id={f}><SaveTwoTone /></Button>
+                            </a>
+                            : null}
                             </Space>
                         )}
                     />
-                <Pagination defaultCurrent={1}
-                                defaultPageSize={4}
-                                total={2}
+                    <Pagination defaultCurrent={1}
+                        defaultPageSize={4}
+                        total={2}
                     ></Pagination>
                 </Table>
-                <div style={{paddingTop:20}}>
-                <Button type="primary" style={{ fontSize: 15 ,float:"right"}} onClick={handleWrite}>작성</Button>
+                <div style={{ paddingTop: 20 }}>
+                    <Button type="primary" style={{ fontSize: 15, float: "right" }} onClick={handleWrite}>작성</Button>
                 </div>
             </div>
         </div>

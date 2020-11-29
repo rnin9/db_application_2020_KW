@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import { useLocation } from "react-router";
 import { Table, Form, Select, Button, Input, message} from 'antd';
 import {BookOutlined} from '@ant-design/icons';
@@ -16,10 +16,29 @@ function NoticeWrite() {
     const location = useLocation();
     const course = location.state.course;
     const history = useHistory();
+    const [filename, setfilename] = useState('0')
 
     const id = localStorage.getItem('id')
-    const handleFileOnChange = () => {
-        console.log('ok')
+    const handleFileOnChange = (event) => {
+        event.preventDefault();
+        let file = event.target.files[0];
+        const formData = new FormData();
+            
+        const config ={
+            header: {'content-type': 'multipart/form-data'}     // frontend에서 보낸 데이터를 backend에서 잘 저장
+        }
+        formData.append("file",file)
+        Axios.post('/update/noticeFile',formData, config)
+          .then(res=>{
+              console.log(res)
+              if(res.data.success){
+                message.success('파일을 저장하는데 성공했습니다.')
+                setfilename(res.data.filename);
+              }else{
+                console.log(res)
+                message.error('파일을 저장하는데 실패했습니다.')
+              }
+          })
 
     }
 
@@ -28,7 +47,9 @@ function NoticeWrite() {
                     title:value.notice.title, 
                     name:value.notice.name, 
                     content:value.notice.content,
-                    criteria:value.notice.criteria}
+                    criteria:value.notice.criteria,
+                    file:filename
+                }
         Axios.post('/add/notice',{data:datas})
         .then(res=>{
             if(res.data===true){
@@ -74,14 +95,12 @@ function NoticeWrite() {
 
                         </Select>
                     </Form.Item>
-                    <Form.Item name={['notice', 'file']}>
-
+                   
                         <input type='file'
-                            accept='image/jpg,impge/png,image/jpeg,image/gif,docx,pdf,hwp'
+                            // accept='image/jpg,impge/png,image/jpeg,image/gif,docx,pdf,hwp'
                             name='file'
                             onChange={handleFileOnChange}
                         />
-                    </Form.Item>
                     
                 </div>
                 <Form.Item name={['notice','content']}>

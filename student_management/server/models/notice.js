@@ -24,9 +24,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         noticeFiles: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false
+            type: DataTypes.STRING(100),
         },
         noticeCriteria: {
             type: DataTypes.STRING(30),
