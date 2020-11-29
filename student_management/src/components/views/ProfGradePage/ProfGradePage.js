@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from 'react';
 import { useHistory } from "react-router";
-import { AutoComplete, Col, Table, } from 'antd';
+import { AutoComplete, Col, Table, Button } from 'antd';
 import './ProfGradePage.css'
 import axios from 'axios';
 import ColumnGroup from 'antd/lib/table/ColumnGroup';
@@ -9,36 +9,6 @@ import Column from 'antd/lib/table/Column';
 
 const userID = localStorage.getItem('id');
 const userName = localStorage.getItem('name');
-const columns = [
-  {
-    title: '학정번호',
-    dataIndex: 'Course_num',
-    key: 'cid',
-    render : text => <a href='./course?cc={text}'>{text}</a>
-  },
-  {
-    title: '과목명',
-    dataIndex: 'Course_name',
-    key: 'cname',
-  },
-  
-  {
-    title: '수업시간',
-    dataIndex: 'class_time',
-    key: 'ctime',
-  },
-  {
-    title: '이수구분',
-    dataIndex: 'classification',
-    key: 'cf',
-  },
-  {
-    title: '수강생',
-    dataIndex: 'headcount_now',
-    key: 'hn',
-  },
-];
-
 function GradePage(){
 
   const [list, setlist] = useState([])
@@ -55,9 +25,8 @@ function GradePage(){
       title: '학정번호',
       dataIndex: 'Course_num',
       key: 'cid',
-      render: cid => (
-          <a onClick={handleClick} id={cid}>{cid}</a>
-        
+      render : (text, record) => (
+          <Button type='link' onClick={handleClick} id={record.Course_num+','+record.year+','+record.semester+','+record.Course_name}>{text}</Button>
       )
     },
     {
@@ -65,7 +34,16 @@ function GradePage(){
       dataIndex: 'Course_name',
       key: 'cname',
     },
-    
+    {
+      title: '연도',
+      dataIndex: 'year',
+      key: 'year',
+    },
+    {
+      title: '학기',
+      dataIndex: 'semester',
+      key: 'semester',
+    },
     {
       title: '수업시간',
       dataIndex: 'class_time',
@@ -96,10 +74,16 @@ function GradePage(){
     }
     
     const handleClick = (e)=>{
+      console.log(e.currentTarget.id);
+      var split = e.currentTarget.id.split(',');
       history.push({
         pathname: "/prof/grade/course",
         state: {
-            ccode: e.currentTarget.id
+        
+            ccode: split[0],
+            cyear: split[1],
+            csem : split[2],
+            cname : split[3],
         }
     })
 
