@@ -16,3 +16,11 @@
   width: 60vw;
   text-align-last: center;
 }
+
+.grade_loading{
+  font-family: "Chosunilbo_myungjo";
+  display: flex;
+  justify-content: center;
+  padding-top:35vh;
+  font-weight:300;
+}
