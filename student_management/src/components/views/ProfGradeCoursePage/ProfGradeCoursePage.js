@@ -8,12 +8,12 @@ import Column from 'antd/lib/table/Column';
 
 const userID = localStorage.getItem('id');
 const userName = localStorage.getItem('name');
+//const cCode = this.props.location.state.ccode;
 const columns = [
   {
     title: '학정번호',
     dataIndex: 'Course_num',
     key: 'cid',
-    render : text => <a href='./course?cc={text}'>{text}</a>
   },
   {
     title: '과목명',
@@ -39,13 +39,15 @@ const columns = [
 ];
 
 
-class GradePage extends Component{
+class GradeCoursePage extends Component{
 
     constructor(props) {
         super(props)
         this.state = {
           name : '',
           list : [],
+          credit : [],
+          update : false,
         }    
       }
     
@@ -67,6 +69,7 @@ class GradePage extends Component{
 
     render(){
         const { list } = this.state;
+        const { credit } = this.state;
         return(
           <div style={{margin: AutoComplete}}>
           
@@ -91,4 +94,4 @@ class GradePage extends Component{
         )};
 }
 
-export default GradePage;
+export default GradeCoursePage;
