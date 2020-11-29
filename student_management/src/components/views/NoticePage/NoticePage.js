@@ -38,7 +38,8 @@ function NoticePage() {
     };
 
     const onCourseChange = value => {      // 전공 선택시
-        const data = { code: value, year: course[0].year, term: course[0].semester, id: id }
+        const data = { code: value, year: course[0].year, term: course[0].semester, id: course[0].professor_id }
+        console.log(data)
         Axios.get('/api/notice/list', { params: data })
             .then(res => {
                 console.log(res.data)
