@@ -10,12 +10,6 @@ module.exports = (sequelize, DataTypes) =>{
       },
       pre_course:{
          type: DataTypes.STRING(20),
-<<<<<<< HEAD
-      },
-      department:{
-         type: DataTypes.STRING(12),
-=======
->>>>>>> origin/Grade,Eval
       },
    },{ timestamps: false});
 }
