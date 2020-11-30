@@ -31,6 +31,8 @@ router.get('/api/userFriend/request/received',controller.api.userFriendreqrec); 
 router.get('/api/student/list',controller.api.studentList);
 
 router.get('/api/userGrade',controller.api.userGrade);
+router.get('/api/userClassificationGraph',controller.api.userClassificationGraph);
+router.get('/api/userGradeGraph',controller.api.userGradeGraph);
 router.get('/api/userMajorSubCredit',controller.api.userMajorSubCredit);
 router.get('/api/userLiberalSubCredit',controller.api.userLiberalSubCredit);
 router.get('/api/userEtcSubCredit',controller.api.userEtcSubCredit);

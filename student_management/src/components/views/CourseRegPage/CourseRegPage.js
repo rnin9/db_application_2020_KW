@@ -115,7 +115,7 @@ class CourseRegPage extends Component{
 
 
     handleData = ()=>{
-      const datas ={userID:id, Course_num: this.state.row.Course_num, year: this.state.row.year, semester: this.state.row.semester}
+      const datas ={userID:id, Course_num: this.state.row.Course_num, year: year, semester: sem}
       axios('/add/course',{ method: 'POST', headers: new Headers(), data: datas}) // 성공, 실패시 메시지
         .then(res=>{
           console.log(res.data[0].cnt);
