@@ -1,124 +1,97 @@
-import React, { Component } from 'react';
-import { AutoComplete, Dropdown, Tag, Button, Mentions, Form, Menu, message } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Input, Button, Mentions, Form, Select, Rate, message } from 'antd';
 import './EvaluationPage.css'
-import axios from 'axios';
-import { BankOutlined, CodeOutlined, DesktopOutlined, DownOutlined, GlobalOutlined, ThunderboltOutlined, UserOutlined } from '@ant-design/icons';
+import Axios from 'axios';
+import { BookOutlined } from '@ant-design/icons';
+import { useHistory } from "react-router";
 
 const { Option } = Mentions;
+const { TextArea } = Input;
 
-const userID = localStorage.getItem('id');
-var depart = '';
+const id = localStorage.getItem('id');
+const year = localStorage.getItem('year');
+const semester = localStorage.getItem('semester');
+function WriteEval() {
 
-function handleMenu(e){
-  //depart=e;
-  message.info(e.key);
-  depart=e.key;
-  console.log(depart);
-}
+  const history = useHistory();
+  const [course, setcourse] = useState([])
+  useEffect(() => {
+    let date = { id: id, year: 2020, term: 2 }
+    Axios.get('/api/notice/course', { params: date })
+      .then(res => {
+        setcourse(res.data)
+      })
 
-const menu = (
-  <Menu onClick={handleMenu}>
-    <Menu.Item key="교양" icon={<BankOutlined/>}>
-      교양
-    </Menu.Item>
-    <Menu.Item key="소프트웨어융합대학" icon={<CodeOutlined/>}>
-      소프트웨어융합대학
-    </Menu.Item>
-    <Menu.Item key="전자정보공과대학" icon={<ThunderboltOutlined/>}>
-      전자정보공과대학
-    </Menu.Item>
-    <Menu.Item key="인문사회과학대학" icon={<UserOutlined/>}>
-      인문사회과학대학
-    </Menu.Item>
-    <Menu.Item key="동북아대학" icon={<GlobalOutlined/>} >
-      동북아대학
-    </Menu.Item>
-  </Menu>
-);
+  }, [])
 
-const onFinish = values => {                      // 제출 시 , POST 형식으로 /add/user request, response 대기
-  /*
-  const datas={ 
-               user_id=userID,
-               content:value.content
-               };       
-    
-    axios('/add/eval',{ method: 'POST', headers: new Headers(), data: datas}) // 성공, 실패시 메시지
-    .then(res=>{
-      if(res.data){
-      message.success("수강평이 등록되었습니다.")
-      return window.location.href='/';
-      } else{
-      message.error("이미 해당 강의에 작성한 수강평이 존재합니다.")
-      }
-    });*/
-    
-};
-
-
-
-class WriteEval extends Component{
-
-    
-    constructor(props) {
-        super(props)
-        this.state = {
-          name : '',
-          list : [],
-          update : false,
-      }
+  const onFinish = (value) => {
+    const datas = {
+      id: id,
+      cname: value.eval.cname,
+      year:year,
+      semester:semester,
+      content: value.eval.content,
+      tags: value.eval.tags,
+      rate: (value.eval.rate)*2
     }
-    
+    console.log(datas)
+    Axios.post('/add/evaluation', { data: datas })
+      .then(res => {
+        if (res.data === true) {
+          message.success('작성에 성공했습니다!')
+          history.push('/user/eval')
+        }
+        else {
+          message.error('작성에 실패했습니다!')
+        }
+      })
 
+  }
 
-    componentDidMount(){
-      this._getData()
-    }
+  const handleChange = (values) => {
+    console.log(values)
+  }
+  const handleCancel = () => {
+    history.push('/user/eval')
+  }
 
-    _getData = async () => {
-     
+  return (
+    <div className="eval_font">
+      <h2 style={{ paddingTop: 30, paddingBottom:20 }}>수강평 작성</h2>
+      <Form onFinish={onFinish} >
       
-    }
+        <div className="eval_menu2">
+        <Form.Item name={['eval', 'cname']}>
+          <Select
+            placeholder="please select course"
+            style={{ width: 300 }}
+          >
+            {course.map(c => (
+              <Option key={c.Course_num}>{"[" + c.Course_num + "] "}{c.Course_name}</Option>
+            ))}
+          </Select>
+        </Form.Item>
+          <Form.Item name={['eval', 'rate']} initialValue={2.5}>
+             <Rate allowHalf style={{width:200}}/>
+          </Form.Item>
+        </div>
+        <Form.Item name={['eval', 'tags']}>
+          <Select mode="tags" style={{ width: 520 }} placeholder="Tags" onChange={handleChange}>
+          </Select>
+        </Form.Item>
 
-
-    render(){
-        const { list } = this.state;
-       
-        return(
-          <div style={{margin: AutoComplete}}> 
-            <div className="table">
-              <h2>수강평 작성</h2>
-            </div>
-            <div className="write_content">
-              <Dropdown overlay={menu} placement="bottomLeft" size="middle">
-                <Button>
-                  학과 <DownOutlined/>
-                </Button>
-              </Dropdown>
-            </div>
-            <div className="write_content">
-              <Form layout="horizontal" onFinish={onFinish}>
-                <Form.Item name="content" label="내 용" labelCol={{span:1}} wrapperCol={{span: 14}} rules={[{ required:true}]}  >
-                  <Mentions rows="4" placeholder="수강평을 작성해주세요.(300자 이내)" value="content">
-                    <Option value="afc163">afc163</Option>
-                    <Option value="zombieJ">zombieJ</Option>
-                    <Option value="yesmeck">yesmeck</Option>
-                  </Mentions>
-                </Form.Item>
-                <Form.Item wrapperCol={{span: 14, offset:5}}>
-                  <Button htmlType="submit" type="primary">
-                    작성 완료
-                  </Button>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <Button htmlType="button" href="/user/eval">
-                    취소
-                  </Button>
-                </Form.Item>
-              </Form>
-            </div>
-          </div>
-            
-        )};
+        <Form.Item name={['eval', 'content']}>
+          <TextArea rows={10} placeholder="Content" style={{ width: 520 }} />
+        </Form.Item>
+        <Button type="primary" style={{ marginRight: 10 }} htmlType="submit">
+          완료
+              </Button>
+        <Button type="primary" onClick={handleCancel}>
+          취소
+              </Button>
+      </Form>
+    </div>
+  )
 }
 
 export default WriteEval;

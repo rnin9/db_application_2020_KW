@@ -6,7 +6,7 @@ const controller = require('./controller');
 router.post('/add/user', controller.add.user);              // signup 정보 추가
 router.post('/add/friend',controller.add.friend);
 router.post('/add/absense',controller.add.absense);
-router.post('/add/eval',controller.add.eval);//수강 평가 추가
+router.post('/add/evaluation',controller.add.evaluation);//수강 평가 추가
 router.post('/add/notice',controller.add.notice);
 
 router.post('/add/course',controller.add.course);//수강 내용 추가
