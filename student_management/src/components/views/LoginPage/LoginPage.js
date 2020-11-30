@@ -24,11 +24,14 @@ const onFinish = (values) => {
   method: 'POST', headers: new Headers(), data: datas})
   .then(res =>{
         if(res.data.success){         // 받은 데이터 확인
+        console.log(res.data)
         message.success('로그인에 성공했습니다!')
         localStorage.setItem('login', true);
         localStorage.setItem('position',res.data.position);
         localStorage.setItem('id',res.data.id);
         localStorage.setItem('name',res.data.name);
+        localStorage.setItem('year',res.data.year);
+        localStorage.setItem('semester',res.data.semester);
         return window.location.href='/main';    //성공!
         }
         else

@@ -41,6 +41,8 @@ class App extends Component {
       position: "",           // 기본 state  admin은 직원, 교수용
       id:"",
       name:"",
+      year:0,
+      semester:0
     }
   }
   componentDidMount(){
@@ -50,6 +52,8 @@ class App extends Component {
         position : localStorage.getItem('position'),
         id : localStorage.getItem('id'),
         name : localStorage.getItem('name'),
+        year : localStorage.getItem('year'),
+        semester : localStorage.getItem('semester')
       })
     }
   

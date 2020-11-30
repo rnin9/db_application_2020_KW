@@ -37,6 +37,8 @@ module.exports = {
           obj['id'] = result[0].dataValues.userID;
           obj['name'] = result[0].dataValues.userName;
           obj['position'] = result[0].dataValues.userPosition; //로그인시 정보 보내기
+          obj['year'] = 2020;
+          obj['semester'] = 2;
 
         } else {
           obj['success'] = false;
