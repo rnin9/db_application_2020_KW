@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AutoComplete, Col, Table} from 'antd';
-import F2 from '@antv/f2';
+//import F2 from '@antv/f2';
 import { LoadingOutlined} from '@ant-design/icons';
 import './GradePage.css'
 import axios from 'axios';
@@ -140,7 +140,7 @@ const cover3 ={
 }
 
 const chart_data = [];
-
+/*
 const chart = new F2.Chart({
   id:'container',
   pixelRatio:window.devicePixelRatio,
@@ -171,7 +171,7 @@ chart.axis('term',{
     return textCfg;
   }
 });
-
+*/
 function GradePage (){
     const [list, setlist] = useState([])
     const [credit, setcredit] = useState([])
@@ -227,7 +227,7 @@ function GradePage (){
       setcredit(cover2);
       setisLoading(false);
 
-      chart.render();
+      //chart.render();
     }
 
         return(
