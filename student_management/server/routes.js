@@ -18,6 +18,7 @@ router.post('/update/userFriend/request',controller.update.requestHandle); //친
 router.post('/update/absense',controller.update.absense);
 router.post('/update/noticeFile',controller.update.noticeFile);
 router.post('/update/grade',controller.update.grade); // (교수가) 학생 성적 변경
+router.post('/update/upvote',controller.update.upvote); // 좋아요 반영. 한 유저는 한 리뷰에 한 번만 좋아요 가능
 
 
 router.get('/api/user',controller.api.user);                // 모든 유저의 정보 get
@@ -44,7 +45,9 @@ router.get('/api/userEtcGrade',controller.api.userEtcGrade);
 router.get('/api/userAllGrade',controller.api.userAllGrade);
 
 router.get('/api/userEval',controller.api.userEval);
-router.get('/api/userEvalTag',controller.api.userEvalTag);
+router.get('/api/userEval/tag',controller.api.userEvalTag);
+router.get('/api/userEval/datail',controller.api.userEvalDetail);
+router.get('/api/userEval/detail/tag',controller.api.userEvalDetailTag);
 
 router.get('/api/absense/list',controller.api.absenseList);
 router.get('/api/absense/continue/list',controller.api.absensectnList);

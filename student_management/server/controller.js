@@ -205,7 +205,7 @@ module.exports = {
     },
 
     course: (req, res) => {
-      model.api.getCourse(result => {
+      model.api.getCourse(req.query[0], result => {
         console.log(result[0]);
         res.send(result[0]);
       })
@@ -231,12 +231,28 @@ module.exports = {
       });
     },
     userEvalTag:(req, res)=>{
+      const body = req.query[0];
+      //console.log(req.query);
+      model.api.getUserEvalTag(body,result=>{
+        if(result[0])
+          //console.log(result[0]);
+          res.send(result[0]);
+      });
+    },
+    userEvalDetailTag:(req, res)=>{
       const body = req.query;
       console.log(req.query);
-      model.api.getUserEvalTag(body,result=>{
+      model.api.getUserEvalDetailTag(body,result=>{
         if(result[0])
           console.log(result[0]);
           res.send(result[0]);
+      });
+    },
+    userEvalDetail:(req, res)=>{        //api key를 이용한 values (user)
+      const body = req.query[0];
+      console.log(body);
+      model.api.getUserEvalDetail(body,result=>{
+        res.send(result[0]);     // result를 대기했던 axios로 전달    
       });
     },
     userFriendreqrec: (req, res) => {
@@ -363,6 +379,13 @@ module.exports = {
       const data = req.body
       model.update.grade(data,result=>{
         res.send(result)
+      })
+    },
+    upvote:(req,res)=>{
+      const data=req.body;
+      console.log(data);
+      model.update.upvote(data,result=>{
+        res.send(result);
       })
     },
     noticeFile:(req,res)=>{

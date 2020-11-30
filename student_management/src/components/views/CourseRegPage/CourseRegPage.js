@@ -4,6 +4,9 @@ import './CourseRegPage.css'
 import axios from 'axios';
 import { parseTwoDigitYear } from 'moment';
 
+const year = localStorage.getItem('year');
+const sem = localStorage.getItem('semester');
+
 const columns = [
   {
     title: '학정번호',
@@ -101,7 +104,7 @@ class CourseRegPage extends Component{
     }
 
     _getData = async () => {
-      const res = await axios.get('/api/course');     
+      const res = await axios.get('/api/course', {params : {year :year, sem:sem}});     
       if(res.data[0] === undefined) {
         let cover = [];
         cover.push(res.data);       // response 데이터들 push
