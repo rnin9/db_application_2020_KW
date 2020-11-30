@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AutoComplete, Col, Table} from 'antd';
-//import F2 from '@antv/f2';
+import { Chart } from "react-google-charts";
 import { LoadingOutlined} from '@ant-design/icons';
 import './GradePage.css'
 import axios from 'axios';
@@ -139,43 +139,17 @@ const cover3 ={
   grade_major:0,
 }
 
-const chart_data = [];
-/*
-const chart = new F2.Chart({
-  id:'container',
-  pixelRatio:window.devicePixelRatio,
-});
 
-chart.source(chart_data, {
-  value:{
-    tickCount : 9,
-    min:0,
-    max:4.5,
-  },
-  term:{
-    range:[0,1],
-  }
-});
-chart.tooltip({
-  showXTip:true,
-  showYTip:true,
-});
-chart.axis('term',{
-  label: function label(text, index, total) {
-    const textCfg = {};
-    if (index === 0) {
-      textCfg.textAlign = 'left';
-    } else if (index === total - 1) {
-      textCfg.textAlign = 'right';
-    }
-    return textCfg;
-  }
-});
-*/
+
 function GradePage (){
     const [list, setlist] = useState([])
+    const [lineGraph, setLineGraph] = useState([])
+    const [pieGraph, setPieGraph] = useState([])
     const [credit, setcredit] = useState([])
     const [isLoading, setisLoading] = useState(true)
+
+    const lineChart_data = [['term','score'],];
+    const pieChart_data = [['classification', 'credit'],];
 
     useEffect(() => {
       _getData()
@@ -183,7 +157,26 @@ function GradePage (){
     }, [])  
     
     const _getData = async () => {
-      
+      const chart_res = await axios.get('/api/userGradeGraph', {params:userID});
+      for(let i=0;i<chart_res.data.length;i++){
+        const sem_f=parseFloat( chart_res.data[i].sem );
+        var str =chart_res.data[i].year;
+        if(sem_f===2.0) str=str+'년도 2학기';
+        else if(sem_f===1.0) str=str+'년도 1학기';
+        else if(sem_f===1.5) str=str+'년도 여름 학기';
+        else if(sem_f===2.5) str=str+'년도 겨울 학기';
+
+        lineChart_data.push([str, parseFloat(chart_res.data[i].grade)]);
+      }
+      setLineGraph(lineChart_data);
+
+      const pie_res = await axios.get('/api/userClassificationGraph', {params:userID});
+      for(let i=0;i<pie_res.data.length;i++){
+        pieChart_data.push([pie_res.data[i].classification, parseInt(pie_res.data[i].credit,10)]);
+      }
+      setPieGraph(pieChart_data);
+      console.log(pieChart_data);
+
       const res = await axios.get('/api/userGrade',{params:userID});     
       var res2 = await axios.get('/api/userMajorSubCredit',{params:userID});
       //let cover2 = {};
@@ -227,7 +220,6 @@ function GradePage (){
       setcredit(cover2);
       setisLoading(false);
 
-      //chart.render();
     }
 
         return(
@@ -236,7 +228,40 @@ function GradePage (){
           <div className="table">
             <h2>성적/수강 정보</h2>
           </div>
-          
+          <div className="table_grade" style={{ display : 'flex'}}>
+            <Chart
+              className="table_grade"
+              width={500}
+              height={250}
+              chartType="LineChart"
+              loader={<div>Loading CHART</div>}
+              data={lineGraph}
+              options={{
+                title:'학기별 성적 분포',
+                hAxis:{
+                  title:'수강 학기',
+                },
+                vAxis:{
+                  title:'성적',
+                  minValue: 0,
+                  maxValue: 5,
+                },
+                legend:'none',
+              }}
+            />
+
+            <Chart
+              className="table_grade"
+              width={300}
+              height={250}
+              chartType="PieChart"
+              loader={<div>Loading CHART</div>}
+              data={pieGraph}
+              options={{
+                title:'전공/교양 학점 비율',
+              }}
+            />
+          </div>
           <div className="table_grade">
             <Table size="small" bordered dataSource={credit} loading={false} rowKey="sub_major">
                 <ColumnGroup title="신청학점">

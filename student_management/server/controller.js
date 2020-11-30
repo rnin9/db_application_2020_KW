@@ -82,6 +82,26 @@ module.exports = {
         }
         });
     },
+    userClassificationGraph: (req, res) => {
+      const body = req.query[0];
+      console.log(body);
+      model.api.getUserClassificationGraph(body,result=>{
+        if(result[0]){
+          //console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
+    userGradeGraph: (req, res) => {
+      const body = req.query[0];
+      console.log(body);
+      model.api.getUserGradeGraph(body,result=>{
+        if(result[0]){
+          //console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
     userMajorSubCredit:(req, res)=>{
       const body = req.query[0]
       model.api.getUserMajorSubCredit(body,result=>{
@@ -205,7 +225,8 @@ module.exports = {
     },
 
     course: (req, res) => {
-      model.api.getCourse(req.query[0], result => {
+      const body =req.query;
+      model.api.getCourse(body, result => {
         console.log(result[0]);
         res.send(result[0]);
       })

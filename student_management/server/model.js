@@ -152,6 +152,26 @@ module.exports = {
                     throw err;
                 })
         },
+        getUserClassificationGraph: (body, callback) => {
+            sequelize.query("SELECT classification, sum(credit) as credit FROM GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester where g.user_id=:user_id group by classification;"
+            , { replacements: { user_id: body } })
+                .then(data => {
+                    callback(data)
+                })
+                .catch(err => {
+                    throw err;
+                })
+        },
+        getUserGradeGraph: (body, callback) => {
+            sequelize.query("SELECT g.year as year,  g.semester as sem, ROUND((SUM(g.grade*c.credit))/SUM(c.credit),2) as grade FROM GRADEs g join COURSEs c on g.course_code=c.Course_num WHERE g.user_id=:user_id and grade is not null GROUP BY g.year,g.semester order by g.year, g.semester;"
+            , { replacements: { user_id: body } })
+                .then(data => {
+                    callback(data)
+                })
+                .catch(err => {
+                    throw err;
+                })
+        },
         getUserMajorSubCredit: (body, callback) => {
             //sequelize.query("call grade_graph(:user_id)", {replacements :{user_id : body}})
 
