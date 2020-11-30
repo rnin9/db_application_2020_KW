@@ -15,6 +15,7 @@ import MyInfoPage from './components/views/MyInfoPage/MyInfoPage.js'
 import MyInfoEditPage from './components/views/MyInfoPage/Edit/MyInfoEditPage'
 import Grade from './components/views/GradePage/GradePage.js'
 import Evaluation from './components/views/EvaluationPage/EvaluationPage.js'
+import EvaluationDetail from './components/views/EvaluationDetailPage/EvaluationDetailPage.js'
 import WriteEval from './components/views/EvaluationPage/WriteEval.js'
 import CourseRegPage from './components/views/CourseRegPage/CourseRegPage.js'
 import TimeTablePage from './components/views/TimeTablePage/TimeTablePage.js'
@@ -95,6 +96,7 @@ class App extends Component {
 
           <AuthRoute exact path="/user/timetable" component={TimeTablePage}></AuthRoute>
           <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>
+          <AuthRoute exact path="/user/eval/detail" component={EvaluationDetail}></AuthRoute>
           <AuthRoute exact path="/write/eval" component={WriteEval}></AuthRoute>
           <AuthRoute exact path="/user/grade" component={Grade}></AuthRoute> {/*유저권한확인*/}
           <AuthRoute exact path="/course/register" component={CourseRegPage}></AuthRoute>

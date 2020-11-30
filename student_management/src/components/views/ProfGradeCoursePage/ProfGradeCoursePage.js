@@ -95,6 +95,7 @@ function GradeCoursePage (){
       var split = e.currentTarget.id.split(',');
       console.log(split);
       const datas={grade:setGrade, code:split[0], id:split[1], year:split[2], sem:split[3]};
+      // 성적 반영할 때 setGrade 중복 문제가 존재
       axios('/update/grade', {method:'POST', headers:new Headers(), data:datas})
         .then(res =>{
           console.log(res.data[0].changedRows);

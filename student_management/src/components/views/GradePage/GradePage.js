@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AutoComplete, Col, Table} from 'antd';
+//import F2 from '@antv/f2';
 import { LoadingOutlined} from '@ant-design/icons';
 import './GradePage.css'
 import axios from 'axios';
@@ -138,6 +139,39 @@ const cover3 ={
   grade_major:0,
 }
 
+const chart_data = [];
+/*
+const chart = new F2.Chart({
+  id:'container',
+  pixelRatio:window.devicePixelRatio,
+});
+
+chart.source(chart_data, {
+  value:{
+    tickCount : 9,
+    min:0,
+    max:4.5,
+  },
+  term:{
+    range:[0,1],
+  }
+});
+chart.tooltip({
+  showXTip:true,
+  showYTip:true,
+});
+chart.axis('term',{
+  label: function label(text, index, total) {
+    const textCfg = {};
+    if (index === 0) {
+      textCfg.textAlign = 'left';
+    } else if (index === total - 1) {
+      textCfg.textAlign = 'right';
+    }
+    return textCfg;
+  }
+});
+*/
 function GradePage (){
     const [list, setlist] = useState([])
     const [credit, setcredit] = useState([])
@@ -190,8 +224,10 @@ function GradePage (){
 
       let cover2 = [];
       cover2.push(cover3);
-      setcredit(cover2)
-      setisLoading(false)
+      setcredit(cover2);
+      setisLoading(false);
+
+      //chart.render();
     }
 
         return(

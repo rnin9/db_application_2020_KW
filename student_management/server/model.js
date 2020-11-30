@@ -97,8 +97,8 @@ module.exports = {
             setTimeout(function () { callback(infos) }, 100) //임의로 시간줘서 데이터 다 받아오기
         },
 
-        getCourse:(callback)=>{//강의 목록 가져오기.
-            sequelize.query("select * from COURSEs;")
+        getCourse:(body, callback)=>{//강의 목록 가져오기.
+            sequelize.query("select * from COURSEs where year=:year and semester =:sem;", {replacements : {year:body.year, sem:body.sem}})
             .then(data=>{
                 callback(data)
             })
@@ -301,7 +301,7 @@ module.exports = {
         },
         getUserEval: (callback) => {        // 쿼리만 수행 (get)
             sequelize.query("select course_code, rating, c.Course_name, u.userName from "+
-            "(select course_code, ROUND(avg(rating),2) as rating from EVALUATIONs e join COURSEs c on e.course_code=c.Course_num, USERs u where u.userID=c.professor_id group by course_code) com "+
+            "(select course_code, ROUND(avg(rating),1) as rating from EVALUATIONs e join COURSEs c on e.course_code=c.Course_num, USERs u where u.userID=c.professor_id group by course_code) com "+
             "join COURSEs c on com.course_code=c.Course_num, USERs u "+
             "where u.userID=c.professor_id order by rating desc;")
             .then(data=>{
@@ -313,7 +313,18 @@ module.exports = {
                 throw err;
             })
         },
-
+        getUserEvalTag: (body, callback) => {        // 쿼리만 수행 (get)
+            console.log(body);
+            sequelize.query("select tag, cnt/all_cnt as percent from (SELECT tag, count(tag) as cnt FROM EVALUATIONs e join TAGs t on e.user_id=t.user_id and e.course_code=t.course_code where e.course_code=:ccode group by tag) a, "+
+            "(SELECT count(*) as all_cnt FROM EVALUATIONs e join TAGs t on e.user_id=t.user_id and e.course_code=t.course_code where e.course_code=:ccode) b order by percent desc limit 3;",
+             { replacements: { ccode: body } })
+                .then(data => {
+                    callback(data);
+                })
+                .catch(err => {
+                    throw err;
+                })
+        },
         getStudentList: (body, callback) => {
             USER.findAll({
                 where: { [Op.and]: [{ userCollege: body.college, userMajor: body.major, userPosition: "학부생" }] },   //INNER JOIN
@@ -347,7 +358,17 @@ module.exports = {
                 callback(data)
             })
         },
-        getUserEvalTag: (body, callback) => {        // 쿼리만 수행 (get)
+        getUserEvalDetail: (body, callback) => {        // 쿼리만 수행 (get)
+            console.log(body);
+            sequelize.query("select * from EVALUATIONs where course_code=:ccode;", { replacements: { ccode: body } })
+                .then(data => {
+                    callback(data);
+                })
+                .catch(err => {
+                    throw err;
+                })
+        },
+        getUserEvalDetailTag: (body, callback) => {        // 쿼리만 수행 (get)
             console.log(body);
             sequelize.query("select tag from TAGs where user_id=:user_id and course_code=:course_code;", { replacements: { user_id: body.user_id, course_code: body.course_code } })
                 .then(data => {
@@ -596,6 +617,17 @@ module.exports = {
                     callback(true)
                 )
             })
+        },
+        upvote:(body, callback) => {
+            sequelize.query("call update_vote(:upvoteID, :reviewerID, :ccode);",
+                    { replacements: { upvoteID:body.upvoteID, reviewerID:body.reviewerID, ccode:body.ccode } })
+                    .then(data => {
+                        console.log(data);
+                        callback(data);
+                    })
+                    .catch(err => {
+                        throw err;
+                    })
         },
         grade:(body, callback) => {
             sequelize.query("update GRADEs set grade=:grade where user_id=:user_id and course_code=:course_code and year=:year and semester=:sem;",
