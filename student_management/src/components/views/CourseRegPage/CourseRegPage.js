@@ -4,8 +4,8 @@ import './CourseRegPage.css'
 import axios from 'axios';
 import { parseTwoDigitYear } from 'moment';
 
-const year = localStorage.getItem('year');
-const sem = localStorage.getItem('semester');
+const gyear = localStorage.getItem('year');
+const gsem = localStorage.getItem('semester');
 
 const columns = [
   {
@@ -104,7 +104,7 @@ class CourseRegPage extends Component{
     }
 
     _getData = async () => {
-      const res = await axios.get('/api/course', {params : {year :year, sem:sem}});     
+      const res = await axios.get('/api/course', {params : {year : gyear, sem: gsem}});     
       if(res.data[0] === undefined) {
         let cover = [];
         cover.push(res.data);       // response 데이터들 push
@@ -115,15 +115,22 @@ class CourseRegPage extends Component{
 
 
     handleData = ()=>{
-      const datas ={userID:id, Course_num: this.state.row.Course_num, year: year, semester: sem}
+      const datas ={userID:id, Course_num: this.state.row.Course_num, year: gyear, semester: gsem}
       axios('/add/course',{ method: 'POST', headers: new Headers(), data: datas}) // 성공, 실패시 메시지
         .then(res=>{
           console.log(res.data[0].cnt);
-          if(res.data[0].cnt>0){
-          message.success("수강신청이 성공했습니다.")
+          if(res.data[0].cnt===2){
+            message.success("수강신청이 성공했습니다.")
           //return window.location.href='/course/register';
-          } else{
-          message.error("수강신청에 실패했습니다. 강의 시간을 확인해주세요.")
+          }
+          else if(res.data[0].cnt===0){
+            message.error("같은 이름의 강의를 수강 중입니다.")
+          }
+          else if(res.data[0].cnt===3){
+            message.info("재수강 수업으로 신청되었습니다.")
+          }
+          else{
+            message.error("수강신청에 실패했습니다. 강의 시간을 확인해주세요.")
           }
       });      
     }

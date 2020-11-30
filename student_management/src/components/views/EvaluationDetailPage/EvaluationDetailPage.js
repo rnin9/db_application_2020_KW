@@ -132,7 +132,7 @@ function EvaluationDetailPage(){
         return(
           <div style={{margin: AutoComplete}}> 
           <div className="table">
-            <h2>수업 평가</h2>
+            <h2>{Cname} 강의평</h2>
           </div>
           
           

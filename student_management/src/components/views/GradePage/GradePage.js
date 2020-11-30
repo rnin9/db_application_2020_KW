@@ -88,6 +88,9 @@ const columns = [
     title: '성적',
     dataIndex: 'grade',
     key: 'grade',
+    render : (grade) => (
+      <div>{grade==='4.5'? 'A+' : grade==='4.0'? 'A0': grade==='3.5'?'B+':grade==='3.0'?'B0':grade==='2.5'?'C+':grade==='2.0'?'C0':grade==='1.5'?'D+':grade==='1.0'?'D0':grade==='0'?'F':'미입력'}</div>
+    )
   },
   {
     title: '인증구분',
@@ -98,6 +101,9 @@ const columns = [
     title: '재수강여부',
     dataIndex: 'Retake',
     key: 'retake',
+    render : (key) =>(
+      <div>{key===0?'X' :'O' }</div>
+    )
   },
 ];
 

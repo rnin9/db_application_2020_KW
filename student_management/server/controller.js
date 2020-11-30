@@ -82,6 +82,15 @@ module.exports = {
         }
         });
     },
+    userGradeNow: (req, res) => {
+      const body = req.query;
+      model.api.getUserGradeNow(body,result=>{
+        if(result[0]){
+          //console.log(result[0]);
+          res.send(result[0]);
+        }
+        });
+    },
     userClassificationGraph: (req, res) => {
       const body = req.query[0];
       console.log(body);
@@ -428,6 +437,12 @@ module.exports = {
     absense:(req,res)=>{
       const data = req.body
       model.delete.deleteAbsense(data,result=>{
+        res.send(result)
+      })
+    },
+    course:(req,res)=>{
+      const data = req.body
+      model.delete.deleteCourse(data,result=>{
         res.send(result)
       })
     },

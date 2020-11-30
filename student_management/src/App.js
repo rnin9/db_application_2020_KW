@@ -19,6 +19,7 @@ import Evaluation from './components/views/EvaluationPage/EvaluationPage.js'
 import EvaluationDetail from './components/views/EvaluationDetailPage/EvaluationDetailPage.js'
 import WriteEval from './components/views/EvaluationPage/WriteEval.js'
 import CourseRegPage from './components/views/CourseRegPage/CourseRegPage.js'
+import CourseDeletePage from './components/views/CourseDeletePage/CourseDeletePage.js'
 import TimeTablePage from './components/views/TimeTablePage/TimeTablePage.js'
 
 import StudentInfoPage from './components/views/StudentInfoPage/StudentInfoPage'
@@ -102,6 +103,7 @@ class App extends Component {
           <AuthRoute exact path="/write/eval" component={WriteEval}></AuthRoute>
           <AuthRoute exact path="/user/grade" component={Grade}></AuthRoute> {/*유저권한확인*/}
           <AuthRoute exact path="/course/register" component={CourseRegPage}></AuthRoute>
+          <AuthRoute exact path="/course/delete" component={CourseDeletePage}></AuthRoute>
           
           <AuthRoute exact path="/professor/studentInfo" component={StudentInfoPage}></AuthRoute>
           <AuthRoute exact path="/employee/studentInfo" component={StudentInfoPage}></AuthRoute>
