@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) =>{
          type: DataTypes.INTEGER.UNSIGNED//SMALLINT가 없어서 INTEGER로 대체
       },
       class_time:{
-         type: DataTypes.STRING(10)
+         type: DataTypes.STRING(30)
       },
       ct_mw:{//class time monday 월수 0000 1000 0001 0000 -> 월 3 수 4
          type: DataTypes.INTEGER.UNSIGNED,//TINYINT가 존재하지 않아서 일단 INTEGER로 대체.
