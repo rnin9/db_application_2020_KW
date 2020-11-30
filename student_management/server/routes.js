@@ -31,6 +31,7 @@ router.get('/api/userFriend/request/received',controller.api.userFriendreqrec); 
 router.get('/api/student/list',controller.api.studentList);
 
 router.get('/api/userGrade',controller.api.userGrade);
+router.get('/api/userGradeNow',controller.api.userGradeNow);
 router.get('/api/userClassificationGraph',controller.api.userClassificationGraph);
 router.get('/api/userGradeGraph',controller.api.userGradeGraph);
 router.get('/api/userMajorSubCredit',controller.api.userMajorSubCredit);
@@ -64,6 +65,7 @@ router.get('/api/profCourse',controller.api.profCourse);
 router.get('/api/profCourseStudent',controller.api.profCourseStudent);
 router.get('/api/timetable',controller.api.timeTable);
 
+router.delete('/delete/course',controller.delete.course);
 router.delete('/delete/friend/request',controller.delete.friendreq);
 router.delete('/delete/absense',controller.delete.absense);
 module.exports = router;
