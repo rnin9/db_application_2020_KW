@@ -335,9 +335,9 @@ module.exports = {
         return res.send(result)
       })
     },
-    eval:(req,res)=>{
+    evaluation:(req,res)=>{
       const data =req.body.data;
-      model.add.eval(data,result=>{
+      model.add.evaluation(data,result=>{
           return res.send(result)
       })
     },

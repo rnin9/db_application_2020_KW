@@ -69,10 +69,6 @@ function NoticeProfessor(props) {
             })
     }
 
-    const handleClick = (e) => {
-       
-    }
-
     return (
         <div className="font_ntc">
 

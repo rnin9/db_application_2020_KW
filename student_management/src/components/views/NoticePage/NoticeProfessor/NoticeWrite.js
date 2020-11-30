@@ -72,7 +72,7 @@ function NoticeWrite() {
             <Form onFinish={onFinish} >
                 <Form.Item name={['notice', 'name']}>
                     <Select
-
+                        placeholder="please select Course"
                         style={{ width: 520 }}
                     >
                         {course.map(c => (

@@ -4,7 +4,7 @@ const { AccessDeniedError } = require('sequelize');
 const Sequelize = require('sequelize');
 const { Op } = Sequelize;
 const {
-    USER, FRIEND, ABSENSE, NOTICE
+    USER, FRIEND, ABSENSE, NOTICE, TAG
 } = require('./models');
 
 const { COURSE, GRADE, EVALUATION } = require('./models');
@@ -514,15 +514,24 @@ module.exports = {
                     throw err;
                 })
         },
-        Eval: (body, callback) => {
-            sequelize.query("insert into EVALUATION(user_id,course_code,year,semester,rating,content) value(:user_id,:course_code, :year, :semester,:rating,:content);",
-                { replacements: { user_id: body.user_id, course_code: body.course_code, year: body.year, semester: body.semester, rating: body.rating, content: body.content } })
-                .then(data => {
-                    callback(data);
-                })
-                .catch(err => {
-                    throw err;
-                })
+        evaluation: (body, callback) => {
+           EVALUATION.create({
+               user_id:body.id,
+               course_code:body.cname,
+               year:body.year,
+               semester:body.semester,
+               rating:body.rate,
+               content:body.content,
+           }).then(
+               body.tags.map(t=>{
+                   TAG.create({
+                       user_id:body.id,
+                       course_code:body.cname,
+                       tag:t
+                   })
+               })
+           )
+           setTimeout(function () { callback(true) }, 100) //임의로 시간줘서 데이터 다 받아오기
         },
         notice: (body, callback)=>{
             NOTICE.create({
