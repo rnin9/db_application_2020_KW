@@ -100,7 +100,7 @@ function NoticePage() {
                         render={f => (
                             <Space size="middle">
                             { f !=='0'?
-                            <a href={`/file/${f}`} target="_blank" rel="noopener noreferrer">
+                            <a href={`/file/${f}`} target="_blank" rel="noopener noreferrer" download>
                             <Button type="text" style={{ fontSize: 18 }} id={f}><SaveTwoTone /></Button>
                             </a>
                             : null}

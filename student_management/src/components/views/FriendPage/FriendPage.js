@@ -1,14 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React,{useState, useEffect} from 'react'
-import { Table, Tag } from 'antd';
+import { useHistory } from "react-router";
+import { Table, Tag, Space, Button,  } from 'antd';
 import axios from 'axios'
 import './Request/FriendRequestPage.css'
+import { CalendarTwoTone } from '@ant-design/icons';
 const { Column} = Table;
-
+const position = localStorage.getItem('position')
 function FriendPage() {
 
     const [friend, setFriend] = useState([])
     const id = localStorage.getItem('id')
+    const history = useHistory();
     useEffect(() => {
         axios.get('/api/userFriend/list',{params:id})
         .then(res=>{
@@ -16,6 +19,15 @@ function FriendPage() {
         })
     }, [])
     // eslint-disable-next-line react-hooks/exhaustive-deps   
+
+    const handleClick=(e)=>{
+        history.push({
+          pathname: "/friend/schedule",
+          state: {
+              friendID: e.currentTarget.id
+          }
+      })
+    }
     return (
 
         <div>
@@ -40,7 +52,17 @@ function FriendPage() {
        />
          <Column title="소속" dataIndex="userCollege"key="c" />
          <Column title="주소" dataIndex="userAddress"key="ad" />         
-
+         <Column
+                        title="시간표"
+                        key="f"
+                        dataIndex="noticeFiles"
+                        render={(text,record) => (
+                            <Space size="middle">
+                            { position ==='학부생'?
+                           <Button type="text" style={{ fontSize: 18 }} id={record.userID} onClick={handleClick}><CalendarTwoTone/></Button>
+                            : null}
+                            </Space>
+                        )}/>
      </Table>
          </div>   
         </div>
