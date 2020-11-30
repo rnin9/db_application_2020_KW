@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "Chosunilbo_myungjo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.table {
+  font-family: Chosunilbo_myungjo;
+  padding-top: 20px;
+  text-align: center;
+}
+.table_eval {
+  font-family: Chosunilbo_myungjo;
+  display: inline-block;
+  width: 60vw;
+  text-align-last: center;
+}
+.write_content {
+  font-family: Chosunilbo_myungjo;
+  display: inline-block;
+  width: 60vw;
+  text-align-last: center;
+}
+.button {
+  font-family: Chosunilbo_myungjo;
+  position: relative;
+  right: 100%;
+  padding: 20px;
+}

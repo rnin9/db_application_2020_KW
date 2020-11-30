@@ -143,7 +143,18 @@ module.exports = {
             })
         },
         getUserGrade: (body, callback) => {
-            sequelize.query("select * from GRADEs g join COURSEs c on g.course_code=c.Course_num where g.user_id=:user_id;", { replacements: { user_id: body } })
+            sequelize.query("select * from GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester where g.user_id=:user_id order by g.year desc, g.semester desc;", { replacements: { user_id: body } })
+                .then(data => {
+                    //console.log("GRADE" +data);
+                    callback(data)
+                })
+                .catch(err => {
+                    throw err;
+                })
+        },
+        getUserGradeNow: (body, callback) => {
+            sequelize.query("select * from GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester where g.user_id=:user_id and g.year=:year and g.semester=:sem order by g.year desc, g.semester desc;",
+            { replacements: { user_id: body.userID, year:body.year, sem:body.sem } })
                 .then(data => {
                     //console.log("GRADE" +data);
                     callback(data)
@@ -153,7 +164,7 @@ module.exports = {
                 })
         },
         getUserClassificationGraph: (body, callback) => {
-            sequelize.query("SELECT classification, sum(credit) as credit FROM GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester where g.user_id=:user_id group by classification;"
+            sequelize.query("SELECT classification, sum(credit) as credit FROM GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester where g.user_id=:user_id and retake=false group by classification;"
             , { replacements: { user_id: body } })
                 .then(data => {
                     callback(data)
@@ -163,7 +174,7 @@ module.exports = {
                 })
         },
         getUserGradeGraph: (body, callback) => {
-            sequelize.query("SELECT g.year as year,  g.semester as sem, ROUND((SUM(g.grade*c.credit))/SUM(c.credit),2) as grade FROM GRADEs g join COURSEs c on g.course_code=c.Course_num WHERE g.user_id=:user_id and grade is not null GROUP BY g.year,g.semester order by g.year, g.semester;"
+            sequelize.query("SELECT g.year as year,  g.semester as sem, ROUND((SUM(g.grade*c.credit))/SUM(c.credit),2) as grade FROM GRADEs g join COURSEs c on g.course_code=c.Course_num WHERE g.user_id=:user_id and grade is not null and retake=false GROUP BY g.year,g.semester order by g.year, g.semester;"
             , { replacements: { user_id: body } })
                 .then(data => {
                     callback(data)
@@ -696,7 +707,18 @@ module.exports = {
                     { where: { userID: body.id } })
                     .then(callback(true));
             }).catch((err) => { throw err })
-        }
+        },
+        deleteCourse: (body, callback) => {
+            sequelize.query("delete from GRADEs where user_id=:user_id and course_code=:ccode and year=:year and semester=:sem;",
+                    { replacements: { user_id:body.userID, year:body.year, sem:body.sem, ccode:body.ccode } })
+                    .then(data => {
+                        console.log(data);
+                        callback(data);
+                    })
+                    .catch(err => {
+                        throw err;
+                    })
+        },
     },
 
 }
