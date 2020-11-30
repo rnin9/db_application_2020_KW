@@ -20,7 +20,7 @@ function ProfessorRoute ({ component: Component, ...rest }) {     //학생만 �
                      )
                 ) : (
                    <Redirect to={{
-                                    pathname: '/login', 
+                                    pathname: '/', 
                                     state: {from: props.location}
                                   }}
                     />

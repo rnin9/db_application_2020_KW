@@ -80,9 +80,9 @@ class App extends Component {
         
         <div className='App'>        
         <BrowserRouter>
-          <Route exact path="/" component={LandingPage}></Route>
+          <Route exact path="/" component={Login}></Route>
           <Route exact path="/register" component={Register}></Route>
-          <Route exact path="/login" component={Login}></Route>
+          {/* <Route exact path="/login" component={Login}></Route> */}
 
           <AuthRoute exact path="/main" component={LandingPage}></AuthRoute>
           <AuthRoute exact path="/user/friend/add" component={FriendRequestPage}></AuthRoute>

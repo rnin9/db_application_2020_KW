@@ -11,7 +11,7 @@ function AuthRoute ({ component: Component, ...rest }) {     //학생만 쓸 수
                     <Component {...props} />
                 ) : (
                    <Redirect to={{
-                                    pathname: '/login', 
+                                    pathname: '/', 
                                     state: {from: props.location}
                                   }}
                     />

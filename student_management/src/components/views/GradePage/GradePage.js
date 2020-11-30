@@ -50,24 +50,24 @@ const columns = [
     title: '년도',
     dataIndex: 'year',
     key: 'year',
-    /*
-    filters: [
-      {
-        text: '2020',
-        value: '컴퓨터정보공학',
-      },
-      {
-        text: '2019',
-        value: '2019',
-      },
-      {
-        text: '2018',
-        value: '2018',
-      },
-    ],
-    filterMultiple: false,
-    onFilter: (value, record) => record.year.indexOf(""+value) !== -1
-    */
+
+    // filters: [
+    //   {
+    //     text: '2020',
+    //     value: 2020,
+    //   },
+    //   {
+    //     text: '2019',
+    //     value: 2019,
+    //   },
+    //   {
+    //     text: '2018',
+    //     value: 2018,
+    //   },
+    // ],
+    // filterMultiple: false,
+    // onFilter: (value, record) => (record.year == value)
+    
   },
   {
     title: '학기',
@@ -303,6 +303,9 @@ function GradePage (){
 
           <br></br>
           <br></br>
+          <div style={{paddingBottom:30}}>
+
+          </div>
           </div>
             
         )

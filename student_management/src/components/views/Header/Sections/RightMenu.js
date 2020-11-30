@@ -23,7 +23,7 @@ function RightMenu(props) {
         </Menu.Item>  
       }
     {!login? <Menu.Item key="rightLogin">
-      <a href="/login" style={{fontSize:15}}> {/*3항 연산자로 로그인시, 아닐시 보일 view 설정*/}
+      <a href="/" style={{fontSize:15}}> {/*3항 연산자로 로그인시, 아닐시 보일 view 설정*/}
       <span  style={{marginRight:10}}>
         <MDBIcon icon="sign-in-alt" />
           </span>

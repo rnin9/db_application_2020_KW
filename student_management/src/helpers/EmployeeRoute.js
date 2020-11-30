@@ -22,7 +22,7 @@ function EmployeeRoute ({ component: Component, ...rest }) {     //학생만 쓸
                      )
                 ) : (
                    <Redirect to={{
-                                    pathname: '/login', 
+                                    pathname: '/', 
                                     state: {from: props.location}
                                   }}
                     />
