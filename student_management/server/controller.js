@@ -285,6 +285,18 @@ module.exports = {
         res.send(result[0]);     // result를 대기했던 axios로 전달    
       });
     },
+    EvalDepart:(req, res)=>{        //api key를 이용한 values (user)
+      const body = req.query[0];
+      model.api.getEvalDepart(body, result=>{
+        res.send(result[0]);     // result를 대기했던 axios로 전달    
+      });
+    },
+    EvalSex:(req, res)=>{        //api key를 이용한 values (user)
+      const body = req.query[0];
+      model.api.getEvalSex(body, result=>{
+        res.send(result[0]);     // result를 대기했던 axios로 전달    
+      });
+    },
     userFriendreqrec: (req, res) => {
       const body = req.query[0]
       model.api.getUserFriendreqrec(body, result => {

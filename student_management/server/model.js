@@ -107,7 +107,7 @@ module.exports = {
             })
         },
         getProfCourse:(body,callback)=>{//교수의 강의 목록 가져오기.
-            sequelize.query("select * from COURSEs where professor_id=:user_id;", {replacements : {user_id:body}})
+            sequelize.query("select * from COURSEs where professor_id=:user_id order by year desc, semester desc;", {replacements : {user_id:body}})
             .then(data=>{
                 console.log(data);
                 callback(data)
@@ -186,7 +186,7 @@ module.exports = {
         getUserMajorSubCredit: (body, callback) => {
             //sequelize.query("call grade_graph(:user_id)", {replacements :{user_id : body}})
 
-            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_major from GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_major from GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "where g.user_id=:user_id and c.classification like '전%'  order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
             .then(data=>{
                 //console.log(data);
@@ -199,7 +199,7 @@ module.exports = {
         getUserLiberalSubCredit: (body, callback) => {
             //sequelize.query("call grade_graph(:user_id)", {replacements :{user_id : body}})
 
-            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_liberal from GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_liberal from GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "where g.user_id=:user_id and c.classification like '교%' order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
             .then(data=>{
                 //console.log(data);
@@ -212,7 +212,7 @@ module.exports = {
         getUserEtcSubCredit: (body, callback) => {
             //sequelize.query("call grade_graph(:user_id)", {replacements :{user_id : body}})
 
-            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_etc from GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_etc from GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "where g.user_id=:user_id and c.classification not like '교%' and c.classification not like '전%' order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
             .then(data=>{
                 //console.log(data);
@@ -224,7 +224,7 @@ module.exports = {
         },
         getUserAllSubCredit: (body, callback) => {
             //sequelize.query("call grade_graph(:user_id)", {replacements :{user_id : body}})
-            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_sum from GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+            sequelize.query("select IFNULL(SUM(c.credit),0) as sub_sum from GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "where g.user_id=:user_id order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
             .then(data=>{
                 //console.log(data);
@@ -235,7 +235,7 @@ module.exports = {
             })
         },
         getUserMajorGetCredit:(body,callback)=>{
-            sequelize.query("select IFNULL(SUM(c.credit),0) as get_major from GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+            sequelize.query("select IFNULL(SUM(c.credit),0) as get_major from GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "where g.user_id=:user_id and g.retake != true and c.classification like '전%'  order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
             .then(data=>{
                 callback(data);
@@ -245,7 +245,7 @@ module.exports = {
             })
         },
         getUserLiberalGetCredit:(body,callback)=>{
-            sequelize.query("select IFNULL(SUM(c.credit),0) as get_liberal from GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+            sequelize.query("select IFNULL(SUM(c.credit),0) as get_liberal from GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "where g.user_id=:user_id and g.retake != true and c.classification like '교%' order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
             .then(data=>{
                 callback(data);
@@ -255,7 +255,7 @@ module.exports = {
             })
         },
         getUserEtcGetCredit:(body,callback)=>{
-            sequelize.query("select IFNULL(SUM(c.credit),0) as get_etc from GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+            sequelize.query("select IFNULL(SUM(c.credit),0) as get_etc from GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "where g.user_id=:user_id and g.retake != true and c.classification not like '교%' and c.classification not like '전%' order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
             .then(data=>{
                 callback(data);
@@ -265,7 +265,7 @@ module.exports = {
             })
         },
         getUserAllGetCredit:(body,callback)=>{
-            sequelize.query("select IFNULL(SUM(c.credit),0) as get_sum from GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+            sequelize.query("select IFNULL(SUM(c.credit),0) as get_sum from GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "where g.user_id=:user_id and g.retake != true order by g.year desc, g.semester desc;", {replacements :{user_id : body}})
             .then(data=>{
                 callback(data);
@@ -288,7 +288,7 @@ module.exports = {
         },
         getUserMajorGrade:(body,callback)=>{
             sequelize.query("SELECT IFNULL(ROUND((SUM(g.grade*c.credit))/SUM(c.credit),2),0) as grade_major "+
-           "FROM GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+           "FROM GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "WHERE user_id=:user_id and c.classification like '전%' and grade<5 and Retake=false;", {replacements :{user_id : body}})
             .then(data=>{
                 callback(data);
@@ -299,7 +299,7 @@ module.exports = {
         },
         getUserLiberalGrade:(body,callback)=>{
             sequelize.query("SELECT IFNULL(ROUND((SUM(g.grade*c.credit))/SUM(c.credit),2),0) as grade_liberal "+
-           "FROM GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+           "FROM GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "WHERE user_id=:user_id and c.classification like '교%' and grade<5 and Retake=false;", {replacements :{user_id : body}})
             .then(data=>{
                 callback(data);
@@ -310,7 +310,7 @@ module.exports = {
         },
         getUserEtcGrade:(body,callback)=>{
             sequelize.query("SELECT IFNULL(ROUND((SUM(g.grade*c.credit))/SUM(c.credit),2),0) as grade_etc "+
-           "FROM GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+           "FROM GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "WHERE user_id=:user_id and c.classification not like '전%' and c.classification not like '교%' and grade<5 and Retake=false;", {replacements :{user_id : body}})
             .then(data=>{
                 callback(data);
@@ -321,7 +321,7 @@ module.exports = {
         },
         getUserAllGrade:(body,callback)=>{
             sequelize.query("SELECT IFNULL(ROUND((SUM(g.grade*c.credit))/SUM(c.credit),2),0) as grade_sum "+
-           "FROM GRADEs g join COURSEs c on g.course_code=c.Course_num "+
+           "FROM GRADEs g join COURSEs c on g.course_code=c.Course_num and g.year=c.year and g.semester=c.semester "+
            "WHERE user_id=:user_id and grade<5 and Retake=false;", {replacements :{user_id : body}})
             .then(data=>{
                 callback(data);
@@ -331,9 +331,9 @@ module.exports = {
             })
         },
         getUserEval: (callback) => {        // 쿼리만 수행 (get)
-            sequelize.query("select course_code, rating, c.Course_name, u.userName from "+
+            sequelize.query("select distinct Course_num, rating, c.Course_name, u.userName from "+
             "(select course_code, ROUND(avg(rating),1) as rating from EVALUATIONs e join COURSEs c on e.course_code=c.Course_num, USERs u where u.userID=c.professor_id group by course_code) com "+
-            "join COURSEs c on com.course_code=c.Course_num, USERs u "+
+            "right join COURSEs c on com.course_code=c.Course_num, USERs u "+
             "where u.userID=c.professor_id order by rating desc;")
             .then(data=>{
                 console.log(data[0]);
@@ -355,6 +355,30 @@ module.exports = {
                 .catch(err => {
                     throw err;
                 })
+        },
+        getEvalDepart: (body,callback) => {        // 쿼리만 수행 (get)
+            sequelize.query("select userCollege as college, count(userCollege) as cnt from USERs u join (select user_id from GRADEs where course_code=:ccode group by user_id) g on u.userID=g.user_id group by userCollege;",
+            { replacements: { ccode: body }})
+            .then(data=>{
+                console.log(data[0]);
+                callback(data);
+
+            })
+            .catch(err =>{
+                throw err;
+            })
+        },
+        getEvalSex: (body, callback) => {        // 쿼리만 수행 (get)
+            sequelize.query("select userGender as gender, count(userGender) as cnt from USERs u join (select user_id from GRADEs where course_code=:ccode group by user_id) g on u.userID=g.user_id group by userGender;",
+            { replacements: { ccode: body }})
+            .then(data=>{
+                console.log(data[0]);
+                callback(data);
+
+            })
+            .catch(err =>{
+                throw err;
+            })
         },
         getStudentList: (body, callback) => {
             USER.findAll({
@@ -411,7 +435,7 @@ module.exports = {
         },
         getNoticeCourse: (body, callback) => {
             sequelize.query("SELECT COURSEs.Course_num, COURSEs.Course_name, COURSEs.professor_id" +
-                " FROM COURSEs JOIN GRADEs " + "ON GRADEs.course_code = COURSEs.Course_num " +
+                " FROM COURSEs JOIN GRADEs " + "ON GRADEs.course_code = COURSEs.Course_num and GRADEs.year=COURSEs.year and GRADEs.semester=COURSEs.semester " +
                 "WHERE GRADEs.user_id=:user_id and GRADEs.year=:year and GRADEs.semester=:semester;",
                 { replacements: { user_id: body.id, year: body.year, semester: body.term } })
                 .then(data => {
@@ -709,7 +733,7 @@ module.exports = {
             }).catch((err) => { throw err })
         },
         deleteCourse: (body, callback) => {
-            sequelize.query("delete from GRADEs where user_id=:user_id and course_code=:ccode and year=:year and semester=:sem;",
+            sequelize.query("call delete_grade(:user_id, :ccode, :year, :sem);",
                     { replacements: { user_id:body.userID, year:body.year, sem:body.sem, ccode:body.ccode } })
                     .then(data => {
                         console.log(data);

@@ -43,6 +43,9 @@ function GradePage(){
       title: '학기',
       dataIndex: 'semester',
       key: 'semester',
+      render : (key) => (
+      <div>{key==='2.0'?'2':key==='2.5'?'겨울':key==='1.5'?'여름':'1'}</div>
+      )
     },
     {
       title: '수업시간',
