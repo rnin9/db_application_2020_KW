@@ -33,10 +33,10 @@ import ProfNoticeWrite from './components/views/NoticePage/NoticeProfessor/Notic
 
 import ProfGrade from './components/views/ProfGradePage/ProfGradePage.js'
 import ProfGradeCourse from './components/views/ProfGradeCoursePage/ProfGradeCoursePage.js'
-import './App.css';
 import ProfessorRoute from './helpers/ProfessorRoute.js';
 import EmployeeRoute from './helpers/EmployeeRoute';
 
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -116,7 +116,7 @@ class App extends Component {
           <ProfessorRoute exact path="/prof/grade/course" component={ProfGradeCourse}></ProfessorRoute>
           <ProfessorRoute exact path="/prof/notice" component={ProfNotice}></ProfessorRoute>
           <ProfessorRoute exact path="/prof/notice/write" component={ProfNoticeWrite}></ProfessorRoute>
-        </BrowserRouter>        
+       </BrowserRouter>        
     </div>
     </Suspense>
     );
