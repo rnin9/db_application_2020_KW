@@ -31,8 +31,7 @@ function EmployeeBar(props) {
       }
     >
       <Menu.Item key="1"><a href="/employee/studentInfo">학생조회</a></Menu.Item>
-      <Menu.Item key="2">성적조회</Menu.Item>
-    </SubMenu>
+  </SubMenu>
 
     <SubMenu
       key="sub2"

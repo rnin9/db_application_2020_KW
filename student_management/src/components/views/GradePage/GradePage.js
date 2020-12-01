@@ -51,33 +51,61 @@ const columns = [
     dataIndex: 'year',
     key: 'year',
 
-    // filters: [
-    //   {
-    //     text: '2020',
-    //     value: 2020,
-    //   },
-    //   {
-    //     text: '2019',
-    //     value: 2019,
-    //   },
-    //   {
-    //     text: '2018',
-    //     value: 2018,
-    //   },
-    // ],
-    // filterMultiple: false,
-    // onFilter: (value, record) => (record.year == value)
+    filters: [
+      {
+        text: '2020',
+        value: 2020,
+      },
+      {
+        text: '2019',
+        value: 2019,
+      },
+      {
+        text: '2018',
+        value: 2018,
+      },
+    ],
+    filterMultiple: false,
+    onFilter: (value, record) => (record.year === value)
     
   },
   {
     title: '학기',
     dataIndex: 'semester',
     key: 'semester',
+    filters: [
+      {
+        text: '2학기',
+        value:  '2.0',
+      },
+      {
+        text: '1학기',
+        value: '1.0',
+      },
+    ],
+    filterMultiple: false,
+    onFilter: (value, record) => (record.semester === value)
   },
   {
     title: '이수구분',
     dataIndex: 'classification',
     key: 'classification',
+    filters: [
+      {
+        text: '교양',
+        value: '교',
+      },
+      {
+        text: '전공',
+        value: '전',
+      },
+      {
+        text: '기초',
+        value: '기',
+      },
+  ],
+    filterMultiple: true,
+    onFilter: (value, record) => record.classification.indexOf(value) !== -1
   },
   {
     title: '학점',
@@ -181,7 +209,6 @@ function GradePage (){
         pieChart_data.push([pie_res.data[i].classification, parseInt(pie_res.data[i].credit,10)]);
       }
       setPieGraph(pieChart_data);
-      console.log(pieChart_data);
 
       const res = await axios.get('/api/userGrade',{params:userID});     
       var res2 = await axios.get('/api/userMajorSubCredit',{params:userID});
