@@ -31,14 +31,15 @@ function NoticePage() {
             let date = { id: id, year: (number - 1) / 10, term: 1 }
             Axios.get('/api/notice/course', { params: date })
                 .then(res => {
-                        setcourse(res.data)                   
+                    setcourse(res.data)                   
                 })
 
         }
     };
 
     const onCourseChange = value => {      // 전공 선택시
-        const data = { code: value, year: course[0].year, term: course[0].semester, id: course[0].professor_id }
+        const p = course[course.findIndex(obj=> obj.Course_num === value)].professor_id
+        const data = { code: value, year: course[0].year, term: course[0].semester, id: p }
         Axios.get('/api/notice/list', { params: data })
             .then(res => {
                 setnotice(res.data)
