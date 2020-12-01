@@ -39,7 +39,9 @@ function TimeTablePage() {
   //   }
   //   setlist(res.data);
   // }
-
+    const handle=()=>{
+      console.log('ok')
+    }
     const handleClick=()=>{
       const value = v
       const DATA = [
@@ -333,7 +335,7 @@ function TimeTablePage() {
       property: 'name',
       label: '',
       dataScope: 'row',
-      format: datum => <strong>{datum.name}</strong>,
+      format: datum => <strong style={{width:20}}>{datum.name}</strong>,
     },
     {
       property: 'm',
@@ -363,17 +365,16 @@ function TimeTablePage() {
     <div style={{margin: AutoComplete}}>
 
       <div className="table">
-        <h3>{userName} 학생의 시간표입니다.</h3>
+        <h3 style={{paddingTop:30}}>{userName} 학생의 시간표입니다.</h3>
       </div>
       <Select
-        defaultValue={termData[0]}
-        style={{ width: 250 }}
+        style={{ width: 250, paddingBottom:20 }}
         onSelect={handleTermChange}>
         {termData.map(term => (
           <Option key={term}>{term}</Option>
         ))}
       </Select>
-      <Button onClick={handleClick}>
+      <Button onClick={handleClick} style={{paddingBottom:20}}>
         확인
       </Button>
       <br></br>
@@ -382,17 +383,18 @@ function TimeTablePage() {
         <TableHeader>
           <TableRow>
             {COLUMNS.map(c => (
-              <TableCell key={c.property} scope='col' border='bottom' align={c.align}>
+              <TableCell className='table_cell1' key={c.property} scope='col' align={c.align} border='all' background='#e6f7ff'>
                 <Text>{c.label}</Text>
               </TableCell>
+
             ))}
           </TableRow>
         </TableHeader>
         <TableBody>
           {DATAs.map(datum => (
-            <TableRow key={datum.id} style={{ borderBlockColor: 'red' }}>
+            <TableRow key={datum.id}>
               {COLUMNS.map(c => (
-                <TableCell key={c.property} scope={c.dataScope} align={c.align}>
+                <TableCell key={c.property} scope={c.dataScope} align={c.align}  border='all' background='white'>
                   <Text>
                     {c.format ? c.format(datum) : datum[c.property]}
                   </Text>

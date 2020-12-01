@@ -150,7 +150,7 @@ class CourseRegPage extends Component{
             <div className="table_course">
               {list.length !== 0
                 ? 
-                <Table rowSelection={{type:'radio', onChange:this.onChange}} pagination={{ pageSize : 30 }} dataSource={list} columns={columns} size="small" rowKey="Course_num"/>
+                <Table rowSelection={{type:'radio', onChange:this.onChange}}  pagination={{pageSize:10}} dataSource={list} columns={columns} size="small" rowKey="Course_num"/>
                 : null}
             
             </div>

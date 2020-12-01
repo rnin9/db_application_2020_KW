@@ -51,33 +51,61 @@ const columns = [
     dataIndex: 'year',
     key: 'year',
 
-    // filters: [
-    //   {
-    //     text: '2020',
-    //     value: 2020,
-    //   },
-    //   {
-    //     text: '2019',
-    //     value: 2019,
-    //   },
-    //   {
-    //     text: '2018',
-    //     value: 2018,
-    //   },
-    // ],
-    // filterMultiple: false,
-    // onFilter: (value, record) => (record.year == value)
+    filters: [
+      {
+        text: '2020',
+        value: 2020,
+      },
+      {
+        text: '2019',
+        value: 2019,
+      },
+      {
+        text: '2018',
+        value: 2018,
+      },
+    ],
+    filterMultiple: false,
+    onFilter: (value, record) => (record.year === value)
     
   },
   {
     title: '학기',
     dataIndex: 'semester',
     key: 'semester',
+    filters: [
+      {
+        text: '2학기',
+        value:  '2.0',
+      },
+      {
+        text: '1학기',
+        value: '1.0',
+      },
+    ],
+    filterMultiple: false,
+    onFilter: (value, record) => (record.semester === value)
   },
   {
     title: '이수구분',
     dataIndex: 'classification',
     key: 'classification',
+    filters: [
+      {
+        text: '교양',
+        value: '교',
+      },
+      {
+        text: '전공',
+        value: '전',
+      },
+      {
+        text: '기초',
+        value: '기',
+      },
+  ],
+    filterMultiple: true,
+    onFilter: (value, record) => record.classification.indexOf(value) !== -1
   },
   {
     title: '학점',
@@ -181,7 +209,6 @@ function GradePage (){
         pieChart_data.push([pie_res.data[i].classification, parseInt(pie_res.data[i].credit,10)]);
       }
       setPieGraph(pieChart_data);
-      console.log(pieChart_data);
 
       const res = await axios.get('/api/userGrade',{params:userID});     
       var res2 = await axios.get('/api/userMajorSubCredit',{params:userID});
@@ -234,9 +261,9 @@ function GradePage (){
           <div className="table">
             <h2>성적/수강 정보</h2>
           </div>
-          <div className="table_grade" style={{ display : 'flex'}}>
+          <div className="table_chart">
             <Chart
-              className="table_grade"
+              // className="table_grade"
               width={500}
               height={250}
               chartType="LineChart"
@@ -257,7 +284,7 @@ function GradePage (){
             />
 
             <Chart
-              className="table_grade"
+              // className="table_grade"
               width={300}
               height={250}
               chartType="PieChart"
@@ -269,7 +296,7 @@ function GradePage (){
             />
           </div>
           <div className="table_grade">
-            <Table size="small" bordered dataSource={credit} loading={false} rowKey="sub_major">
+            <Table size="small" bordered dataSource={credit} loading={false} rowKey="sub_major"  pagination={false} >
                 <ColumnGroup title="신청학점">
                   <Column title="전공" dataIndex="sub_major" key="sub_major"/>
                   <Column title="교양" dataIndex="sub_liberal" key="sub_liberal"/>
@@ -290,7 +317,7 @@ function GradePage (){
                 </ColumnGroup>
               </Table>
           </div>
-          <div>
+          <div style={{height:200}}>
 
           <div className="table">            
             <h3>{userName} 학생의 학기별 수강 정보입니다.</h3>
@@ -299,7 +326,7 @@ function GradePage (){
           <div className="table_grade">          
             {list.length !== 0
               ? 
-              <Table dataSource={list} columns={columns} size="small" rowKey="course_code"/>
+              <Table dataSource={list} columns={columns} size="small" rowKey="course_code" pagination={{pageSize:7}}/>
               :null}         
           </div>
           </div>

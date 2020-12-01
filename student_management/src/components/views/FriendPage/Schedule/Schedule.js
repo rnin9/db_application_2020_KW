@@ -1,5 +1,5 @@
-import React, {useEffect, useState } from 'react';
-import { useLocation } from "react-router";
+import React, { useState } from 'react';
+import { useLocation, useHistory } from "react-router";
 import {
   Table, TableBody, TableCell, TableFooter, TableHeader, TableRow,
   Text,
@@ -16,7 +16,9 @@ const { Option } = Select;
 
 function Schedule() {
   const location = useLocation();
+  const history = useHistory()
   const userID = location.state.friendID;
+  const userName = location.state.friendName;
   
   const termData = ['2020년도 2학기', '2020년도 1학기', '2019년도 2학기', '2019년도 1학기'];
 
@@ -24,20 +26,10 @@ function Schedule() {
   const [DATAs, setDATAs] = useState([])
   const [v, setv] = useState('')
 
-  // useEffect(() => {
-  //   _getData()
-  // }, [])
-
-
-  // const _getData = async () => {
-  //   const res = await axios.get('/api/timeTable', { params: { user_id: userID, year: year, sem: sem } });
-  //   if (res.data === undefined) {
-  //     let cover = [];
-  //     cover.push(res.data);       // response 데이터들 push
-  //     return setlist(cover)
-  //   }
-  //   setlist(res.data);
-  // }
+  
+    const handleBack=()=>{
+      history.push('/user/friend/list')
+    }
 
     const handleClick=()=>{
       const value = v
@@ -186,7 +178,7 @@ function Schedule() {
       
       const DATA = [
         {
-          id: 0, name: '0', m: '', t: '', w: '', th: '', f: '',
+          id: 0, name: '0', m: ' ', t: ' ', w: ' ', th: ' ', f: ' ',
         },
         {
           id: 1, name: '1', m: '', t: '', w: '', th: '', f: '',
@@ -362,17 +354,19 @@ function Schedule() {
     <div style={{margin: AutoComplete}}>
 
       <div className="table">
-        <h3>{userID} 학생의 시간표입니다.</h3>
+        <h3 style={{paddingTop:30}}>{userName} 의 시간표</h3>
       </div>
       <Select
         defaultValue={termData[0]}
-        style={{ width: 250 }}
+        style={{ width: 250, paddingBottom:20 }}
         onSelect={handleTermChange}>
         {termData.map(term => (
           <Option key={term}>{term}</Option>
         ))}
       </Select>
-      <Button onClick={handleClick}>
+      <Button onClick={handleClick}
+        style={{paddingBottom:20}}
+      >
         확인
       </Button>
       <br></br>
@@ -381,7 +375,7 @@ function Schedule() {
         <TableHeader>
           <TableRow>
             {COLUMNS.map(c => (
-              <TableCell key={c.property} scope='col' border='bottom' align={c.align}>
+                <TableCell className='table_cell1' key={c.property} scope='col' align={c.align} border='all' background='#e6f7ff'>
                 <Text>{c.label}</Text>
               </TableCell>
             ))}
@@ -389,9 +383,9 @@ function Schedule() {
         </TableHeader>
         <TableBody>
           {DATAs.map(datum => (
-            <TableRow key={datum.id} style={{ borderBlockColor: 'red' }}>
+            <TableRow key={datum.id}>
               {COLUMNS.map(c => (
-                <TableCell key={c.property} scope={c.dataScope} align={c.align}>
+                 <TableCell key={c.property} scope={c.dataScope} align={c.align}  border='all' background='white'>
                   <Text>
                     {c.format ? c.format(datum) : datum[c.property]}
                   </Text>
@@ -410,6 +404,9 @@ function Schedule() {
           </TableRow>
         </TableFooter>
       </Table>
+      <Button onClick={handleBack}>
+        목록으로
+      </Button>
       </div>
     </div>
     

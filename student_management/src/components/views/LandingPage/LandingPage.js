@@ -63,7 +63,7 @@ function LandingPage (props){
            
             {list.length !== 0
               ? 
-              <Table dataSource={list} columns={columns} size="small" rowKey="userID"/>
+              <Table dataSource={list} columns={columns} size="small" rowKey="userID" pagination={{pageSize:10}}/>
               : null}
           
           </div>

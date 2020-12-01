@@ -24,3 +24,10 @@
   padding-top:35vh;
   font-weight:300;
 }
+
+.table_chart{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+

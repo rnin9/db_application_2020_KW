@@ -51,7 +51,6 @@ function ProfessorBar(props) {
       }
     >
       <Menu.Item key="3"><a href="/prof/notice">공지사항</a></Menu.Item>
-      <Menu.Item key="4">게시판</Menu.Item>
     </SubMenu>  
     <SubMenu key="sub3" icon={<TeamOutlined />} title="친구">
     <Menu.Item key="5"><a href="/user/friend/list">친구목록</a></Menu.Item>
