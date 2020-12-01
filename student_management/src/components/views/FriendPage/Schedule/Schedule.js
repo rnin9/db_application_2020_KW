@@ -15,8 +15,8 @@ const { Option } = Select;
 
 
 function Schedule() {
-  const location = useLocation();
   const history = useHistory()
+  const location = useLocation();
   const userID = location.state.friendID;
   const userName = location.state.friendName;
   

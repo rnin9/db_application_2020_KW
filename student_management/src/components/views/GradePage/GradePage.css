@@ -7,13 +7,13 @@
 }
 .table {
   font-family: Chosunilbo_myungjo;
-  padding-top: 20px;
   text-align: center;
 }
 .table_grade {
   font-family: Chosunilbo_myungjo;
   display: inline-block;
   width: 60vw;
+  height: 20vh;
   text-align-last: center;
 }
 

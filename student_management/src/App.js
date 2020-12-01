@@ -10,6 +10,7 @@ import FriendRequestPage from './components/views/FriendPage/Request/FriendReque
 import FriendHandlePage from './components/views/FriendPage/Handle/FriendHandlePage'
 import FriendListPage from './components/views/FriendPage/FriendPage'
 import FriendSchedule from './components/views/FriendPage/Schedule/Schedule'
+import FriendGrade from './components/views/FriendPage/GradeGraph/GradeGraph'
 import Login from './components/views/LoginPage/LoginPage.js'
 import NavBar from './components/views/NavBar/NavBar.js'
 import MyInfoPage from './components/views/MyInfoPage/MyInfoPage.js'
@@ -35,6 +36,7 @@ import ProfGradeCourse from './components/views/ProfGradeCoursePage/ProfGradeCou
 import './App.css';
 import ProfessorRoute from './helpers/ProfessorRoute.js';
 import EmployeeRoute from './helpers/EmployeeRoute';
+
 
 class App extends Component {
   constructor(props) {
@@ -96,6 +98,7 @@ class App extends Component {
           <AuthRoute exact path="/user/notice" component={NoticePage}></AuthRoute>
           
           <AuthRoute exact path="/friend/schedule" component={FriendSchedule}></AuthRoute>
+          <AuthRoute exact path="/friend/grade" component={FriendGrade}></AuthRoute>
                     
           <AuthRoute exact path="/user/timetable" component={TimeTablePage}></AuthRoute>
           <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>

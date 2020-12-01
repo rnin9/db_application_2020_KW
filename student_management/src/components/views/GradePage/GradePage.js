@@ -326,7 +326,7 @@ function GradePage (){
           <div className="table_grade">          
             {list.length !== 0
               ? 
-              <Table dataSource={list} columns={columns} size="small" rowKey="course_code" pagination={{pageSize:7}}/>
+              <Table dataSource={list} columns={columns} size="small" rowKey="course_code" pagination={{pageSize:6}}/>
               :null}         
           </div>
           </div>
