@@ -24,7 +24,8 @@ function FriendPage() {
         history.push({
           pathname: "/friend/schedule",
           state: {
-              friendID: e.currentTarget.id
+              friendID: e.currentTarget.id,
+              friendName: e.currentTarget.name
           }
       })
     }
@@ -37,7 +38,7 @@ function FriendPage() {
         <div className="friend_table_user">
        
       
-       <Table dataSource={ friend } rowKey="userID">
+       <Table dataSource={ friend } rowKey="userID" pagination={{pageSize:5}}>
        <Column title="ID" dataIndex="userID" key="ids" />
          <Column title="이름" dataIndex="userName"key="s" />
        <Column title="직급" dataIndex='userPosition' key="p"
@@ -59,7 +60,7 @@ function FriendPage() {
                         render={(text,record) => (
                             <Space size="middle">
                             { record.userPosition ==='학부생'?
-                           <Button type="text" style={{ fontSize: 18 }} id={record.userID} onClick={handleClick}><CalendarTwoTone/></Button>
+                           <Button type="text" style={{ fontSize: 18 }} id={record.userID} name={record.userName} onClick={handleClick}><CalendarTwoTone/></Button>
                             : null}
                             </Space>
                         )}/>

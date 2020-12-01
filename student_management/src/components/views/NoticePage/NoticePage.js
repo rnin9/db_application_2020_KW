@@ -9,7 +9,7 @@ import './NoticePage.css'
 const { Column } = Table;
 const { Option } = Select;
 
-const termData = ['2020년도 1학기', '2020년도 2학기', '2019년도 1학기'];    // 단과대학, 전공 데이터
+const termData = ['2020년도 2학기','2020년도 1학기', '2019년도 1학기'];    // 단과대학, 전공 데이터
 
 
 

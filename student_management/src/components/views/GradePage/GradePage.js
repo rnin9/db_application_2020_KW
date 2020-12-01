@@ -229,7 +229,7 @@ function GradePage (){
     }
 
         return(
-          <div style={{margin: AutoComplete, overflowY:"scroll"}}>
+          <div style={{margin: AutoComplete}}>
             {!isLoading ? (<div>
           <div className="table">
             <h2>성적/수강 정보</h2>
@@ -269,7 +269,7 @@ function GradePage (){
             />
           </div>
           <div className="table_grade">
-            <Table size="small" bordered dataSource={credit} loading={false} rowKey="sub_major">
+            <Table size="small" bordered dataSource={credit} loading={false} rowKey="sub_major"  pagination={false} >
                 <ColumnGroup title="신청학점">
                   <Column title="전공" dataIndex="sub_major" key="sub_major"/>
                   <Column title="교양" dataIndex="sub_liberal" key="sub_liberal"/>
@@ -299,7 +299,7 @@ function GradePage (){
           <div className="table_grade">          
             {list.length !== 0
               ? 
-              <Table dataSource={list} columns={columns} size="small" rowKey="course_code"/>
+              <Table dataSource={list} columns={columns} size="small" rowKey="course_code" pagination={{pageSize:7}}/>
               :null}         
           </div>
           </div>

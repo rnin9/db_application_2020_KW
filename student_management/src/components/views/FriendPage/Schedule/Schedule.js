@@ -1,5 +1,5 @@
-import React, {useEffect, useState } from 'react';
-import { useLocation } from "react-router";
+import React, { useState } from 'react';
+import { useLocation, useHistory } from "react-router";
 import {
   Table, TableBody, TableCell, TableFooter, TableHeader, TableRow,
   Text,
@@ -16,7 +16,9 @@ const { Option } = Select;
 
 function Schedule() {
   const location = useLocation();
+  const history = useHistory()
   const userID = location.state.friendID;
+  const userName = location.state.friendName;
   
   const termData = ['2020년도 2학기', '2020년도 1학기', '2019년도 2학기', '2019년도 1학기'];
 
@@ -24,20 +26,10 @@ function Schedule() {
   const [DATAs, setDATAs] = useState([])
   const [v, setv] = useState('')
 
-  // useEffect(() => {
-  //   _getData()
-  // }, [])
-
-
-  // const _getData = async () => {
-  //   const res = await axios.get('/api/timeTable', { params: { user_id: userID, year: year, sem: sem } });
-  //   if (res.data === undefined) {
-  //     let cover = [];
-  //     cover.push(res.data);       // response 데이터들 push
-  //     return setlist(cover)
-  //   }
-  //   setlist(res.data);
-  // }
+  
+    const handleBack=()=>{
+      history.push('/user/friend/list')
+    }
 
     const handleClick=()=>{
       const value = v
@@ -362,7 +354,7 @@ function Schedule() {
     <div style={{margin: AutoComplete}}>
 
       <div className="table">
-        <h3>{userID} 학생의 시간표입니다.</h3>
+        <h3>{userName} 의 시간표</h3>
       </div>
       <Select
         defaultValue={termData[0]}
@@ -410,6 +402,9 @@ function Schedule() {
           </TableRow>
         </TableFooter>
       </Table>
+      <Button onClick={handleBack}>
+        목록으로
+      </Button>
       </div>
     </div>
     
