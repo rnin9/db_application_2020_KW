@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import { Table, Tag, Space, Button,  } from 'antd';
 import axios from 'axios'
 import './Request/FriendRequestPage.css'
-import { CalendarTwoTone } from '@ant-design/icons';
+import { CalendarTwoTone, FundOutlined } from '@ant-design/icons';
 const { Column} = Table;
 const position = localStorage.getItem('position')
 function FriendPage() {
@@ -28,6 +28,15 @@ function FriendPage() {
           }
       })
     }
+
+    const scoreClick=(e)=>{
+      history.push({
+        pathname: "/friend/score",
+        state: {
+            friendID: e.currentTarget.id
+        }
+    })
+  }
     return (
 
         <div>
@@ -53,16 +62,26 @@ function FriendPage() {
          <Column title="소속" dataIndex="userCollege"key="c" />
          <Column title="주소" dataIndex="userAddress"key="ad" />         
          <Column
-                        title="시간표"
-                        key="f"
-                        dataIndex="noticeFiles"
-                        render={(text,record) => (
-                            <Space size="middle">
-                            { position ==='학부생'?
-                           <Button type="text" style={{ fontSize: 18 }} id={record.userID} onClick={handleClick}><CalendarTwoTone/></Button>
-                            : null}
-                            </Space>
-                        )}/>
+            title="시간표"
+            key="f"
+            dataIndex="noticeFiles"
+            render={(text,record) => (
+                <Space size="middle">
+                { position ==='학부생'?
+                <Button type="text" style={{ fontSize: 18 }} id={record.userID} onClick={handleClick}><CalendarTwoTone/></Button>
+                : null}
+                </Space>
+            )}/>
+         <Column
+            title="성적 비교"
+            key="score"
+            render={(text,record) => (
+                <Space size="middle">
+                { position ==='학부생'?
+                <Button type="link" style={{ fontSize: 18 }} id={record.userID} onClick={scoreClick}><FundOutlined/></Button>
+                : null}
+                </Space>
+            )}/>
      </Table>
          </div>   
         </div>

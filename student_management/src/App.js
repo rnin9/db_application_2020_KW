@@ -10,6 +10,7 @@ import FriendRequestPage from './components/views/FriendPage/Request/FriendReque
 import FriendHandlePage from './components/views/FriendPage/Handle/FriendHandlePage'
 import FriendListPage from './components/views/FriendPage/FriendPage'
 import FriendSchedule from './components/views/FriendPage/Schedule/Schedule'
+import FriendScore from './components/views/FriendPage/Score/score'
 import Login from './components/views/LoginPage/LoginPage.js'
 import NavBar from './components/views/NavBar/NavBar.js'
 import MyInfoPage from './components/views/MyInfoPage/MyInfoPage.js'
@@ -96,6 +97,7 @@ class App extends Component {
           <AuthRoute exact path="/user/notice" component={NoticePage}></AuthRoute>
           
           <AuthRoute exact path="/friend/schedule" component={FriendSchedule}></AuthRoute>
+          <AuthRoute exact path="/friend/score" component={FriendScore}></AuthRoute>
                     
           <AuthRoute exact path="/user/timetable" component={TimeTablePage}></AuthRoute>
           <AuthRoute exact path="/user/eval" component={Evaluation}></AuthRoute>
