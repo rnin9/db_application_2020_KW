@@ -28,11 +28,11 @@ function WriteEval() {
     const datas = {
       id: id,
       cname: value.eval.cname,
-      year:year,
-      semester:semester,
+      year: year,
+      semester: semester,
       content: value.eval.content,
       tags: value.eval.tags,
-      rate: (value.eval.rate)*2
+      rate: (value.eval.rate) * 2
     }
     console.log(datas)
     Axios.post('/add/evaluation', { data: datas })
@@ -57,22 +57,22 @@ function WriteEval() {
 
   return (
     <div className="eval_font">
-      <h2 style={{ paddingTop: 30, paddingBottom:20 }}>수강평 작성</h2>
+      <h2 style={{ paddingTop: 30, paddingBottom: 20 }}>수강평 작성</h2>
       <Form onFinish={onFinish} >
-      
+
         <div className="eval_menu2">
-        <Form.Item name={['eval', 'cname']}>
-          <Select
-            placeholder="please select course"
-            style={{ width: 300 }}
-          >
-            {course.map(c => (
-              <Option key={c.Course_num}>{"[" + c.Course_num + "] "}{c.Course_name}</Option>
-            ))}
-          </Select>
-        </Form.Item>
+          <Form.Item name={['eval', 'cname']}>
+            <Select
+              placeholder="please select course"
+              style={{ width: 310 }}
+            >
+              {course.map(c => (
+                <Option key={c.Course_num}>{"[" + c.Course_num + "] "}{c.Course_name}</Option>
+              ))}
+            </Select>
+          </Form.Item>
           <Form.Item name={['eval', 'rate']} initialValue={2.5}>
-             <Rate allowHalf style={{width:200}}/>
+            <Rate allowHalf style={{ width: 210 }} />
           </Form.Item>
         </div>
         <Form.Item name={['eval', 'tags']}>

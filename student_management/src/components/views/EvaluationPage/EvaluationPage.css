@@ -36,7 +36,8 @@
 }
 
 .eval_menu2{
-  padding-left: 30px;
   display: flex;
+  justify-content: center;
+
 }
 
