@@ -365,16 +365,16 @@ function TimeTablePage() {
     <div style={{margin: AutoComplete}}>
 
       <div className="table">
-        <h3>{userName} 학생의 시간표입니다.</h3>
+        <h3 style={{paddingTop:30}}>{userName} 학생의 시간표입니다.</h3>
       </div>
       <Select
-        style={{ width: 250 }}
+        style={{ width: 250, paddingBottom:20 }}
         onSelect={handleTermChange}>
         {termData.map(term => (
           <Option key={term}>{term}</Option>
         ))}
       </Select>
-      <Button onClick={handleClick}>
+      <Button onClick={handleClick} style={{paddingBottom:20}}>
         확인
       </Button>
       <br></br>
