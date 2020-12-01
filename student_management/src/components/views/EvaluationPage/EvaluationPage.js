@@ -95,7 +95,7 @@ function EvaluationPage(){
           rating:0.0,
           tags:[],
         }
-        cover.course_code=res.data[i].course_code;
+        cover.course_code=res.data[i].Course_num;
         cover.Course_name=res.data[i].Course_name;
         cover.professor_name=res.data[i].userName;
         cover.rating=res.data[i].rating;

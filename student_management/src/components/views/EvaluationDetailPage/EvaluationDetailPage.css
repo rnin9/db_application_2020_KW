@@ -28,3 +28,8 @@
   right: 100%;
   padding: 20px;
 }
+.table_chart {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router";
 import { useLocation } from "react-router";
 import { AutoComplete, Table, Tag, Button, message } from 'antd';
+import { Chart } from "react-google-charts";
 import { LikeOutlined, StarTwoTone } from '@ant-design/icons';
 import './EvaluationDetailPage.css'
 import axios from 'axios';
@@ -12,9 +13,14 @@ const userName = localStorage.getItem('name');
 function EvaluationDetailPage(){
 
   const [list, setlist] = useState([])
+  const [barGraph, setBar] = useState([])
+  const [pieGraph, setPie] = useState([])
   const location = useLocation();
   const Ccode = location.state.ccode;
   const Cname = location.state.cname;
+
+  const pieGraph_data = [['College','count'],];
+  const barGraph_data =[['성별','비율',{role:'style'}],];
 
   const columns = [
     {
@@ -88,9 +94,26 @@ function EvaluationDetailPage(){
   }
 
   const _getData = async () => {
-    console.log(Ccode);
+      const pie = await axios.get('/api/Eval/depart',{params:Ccode});
+      const bar = await axios.get('/api/Eval/sex',{params:Ccode});
       const res = await axios.get('/api/userEval/datail',{params:Ccode});
-      
+      var all=0;
+      for(let i=0;i<bar.data.length;i++){
+        all = all + bar.data[i].cnt;
+      }
+      for(let i=0;i<bar.data.length;i++){
+        var sex;
+        if(bar.data[i].gender==='여성') sex='color: #C5A5CF';
+        else sex='color: gold'
+        console.log(sex);
+        barGraph_data.push([bar.data[i].gender,(bar.data[i].cnt/all*100),sex]);
+      }
+      for(let i=0;i<pie.data.length;i++){
+        console.log(pie.data[i].college);
+        pieGraph_data.push([pie.data[i].college,pie.data[i].cnt]);
+      }
+      setBar(barGraph_data);
+      setPie(pieGraph_data);
       let cover2=[];
       for(let i=0;i<res.data.length;i++){
         var cover = {
@@ -143,6 +166,35 @@ function EvaluationDetailPage(){
                 수강평 작성
                 </a>
               </Button>
+            </div>
+
+            <div className="table_chart">
+              <Chart
+                width={450}
+                height={300}
+                chartType="Bar"
+                loader={<div>Loading CHART</div>}
+                data={barGraph}
+                options={{
+                  chartArea:{width:'30%'},
+                  title:'수강생 성별 비율',
+                  vAxis:{
+                    title:'비율',
+                    minValue:0,
+                    maxValue:100,
+                  }
+                }}
+              />
+              <Chart
+                width={450}
+                height={300}
+                chartType="PieChart"
+                loader={<div>Loading CHART</div>}
+                data={pieGraph}
+                options={{
+                  title:'수강생 단과대학 비율',
+                }}
+              />
             </div>
 
             {list.length !== 0
