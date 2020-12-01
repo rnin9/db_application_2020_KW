@@ -229,14 +229,14 @@ function GradePage (){
     }
 
         return(
-          <div style={{margin: AutoComplete}}>
+          <div style={{margin: AutoComplete, overflowY:"scroll"}}>
             {!isLoading ? (<div>
           <div className="table">
             <h2>성적/수강 정보</h2>
           </div>
-          <div className="table_grade" style={{ display : 'flex'}}>
+          <div className="table_chart">
             <Chart
-              className="table_grade"
+              // className="table_grade"
               width={500}
               height={250}
               chartType="LineChart"
@@ -257,7 +257,7 @@ function GradePage (){
             />
 
             <Chart
-              className="table_grade"
+              // className="table_grade"
               width={300}
               height={250}
               chartType="PieChart"
@@ -290,7 +290,7 @@ function GradePage (){
                 </ColumnGroup>
               </Table>
           </div>
-          <div>
+          <div style={{height:200}}>
 
           <div className="table">            
             <h3>{userName} 학생의 학기별 수강 정보입니다.</h3>

@@ -58,7 +58,7 @@ function FriendPage() {
                         dataIndex="noticeFiles"
                         render={(text,record) => (
                             <Space size="middle">
-                            { position ==='학부생'?
+                            { record.userPosition ==='학부생'?
                            <Button type="text" style={{ fontSize: 18 }} id={record.userID} onClick={handleClick}><CalendarTwoTone/></Button>
                             : null}
                             </Space>
