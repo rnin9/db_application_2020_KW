@@ -24,37 +24,29 @@ function GradeGraph() {
     const _getData = async () => {
         const chart_res = await axios.get('/api/userGradeGraph', { params: userID });
         const chart_res2 = await axios.get('/api/userGradeGraph', { params: friendID });
-        let len;
-        if(chart_res.data.length >= chart_res2.data.length)
-            len = chart_res.data.length
-        else
-            len = chart_res2.data.length
-
-        for (let i = 0; i < len; i++) {
-            if(chart_res.data[i]===undefined)
-            var sem_f = parseFloat(chart_res2.data[i].sem);
-            else
-            var sem_f = parseFloat(chart_res.data[i].sem);
-            
-            if (chart_res.data[i]===undefined)
-            var str = chart_res2.data[i].year;
-            else
-            var str = chart_res.data[i].year;
-
-            if (sem_f === 2.0) str = str + '년도 2학기';
-            else if (sem_f === 1.0) str = str + '년도 1학기';
-            else if (sem_f === 1.5) str = str + '년도 여름 학기';
-            else if (sem_f === 2.5) str = str + '년도 겨울 학기';
-            
-            if(chart_res2.data[i]===undefined && chart_res.data[i]===undefined)
-            lineChart_data.push([str, 0, 0]);
-            else if( chart_res.data[i]===undefined)
-            lineChart_data.push([str, 0, parseFloat(chart_res2.data[i].grade)]);
-            else if( chart_res2.data[i]===undefined)
-            lineChart_data.push([str, parseFloat(chart_res.data[i].grade), 0]);
-            else
-            lineChart_data.push([str, parseFloat(chart_res.data[i].grade),  parseFloat(chart_res2.data[i].grade)]);
+        let long,short,who;
+        if(chart_res.data.length >= chart_res2.data.length){
+            who = 1;
+            long = chart_res.data.length;
+            short = chart_res2.data.length;
+        } else{
+            who = 2;
+            long = chart_res2.data.length;
+            short = chart_res.data.length;
+        }
+        console.log(short, long);
+        if(short === 0){
+            if(who===1) lineChart_data.push(['1학기', parseFloat(chart_res.data[0].grade), 0]);
+            else lineChart_data.push(['1학기', 0, parseFloat(chart_res2.data[0].grade)]);
+        }
+        for (let i = 0; i < short; i++) {
+            lineChart_data.push([(i+1)+'학기', parseFloat(chart_res.data[i].grade), parseFloat(chart_res2.data[i].grade)]);
   
+        }
+        if(short === 0) short=1;
+        for(let i=short ; i<long;i++){
+            if(who===1) lineChart_data.push([(i+1)+'학기', chart_res.data[i].grade,0]);
+            else lineChart_data.push([(i+1)+'학기', 0,chart_res2.data[i].grade]);
         }
         setLineGraph(lineChart_data);
 
@@ -83,7 +75,6 @@ function GradeGraph() {
                             minValue: 0,
                             maxValue: 5,
                         },
-                        legend: 'none',
                     }}
                 />
 

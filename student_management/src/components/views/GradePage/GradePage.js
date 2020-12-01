@@ -13,6 +13,8 @@ import Column from 'antd/lib/table/Column';
 
 const userID = localStorage.getItem('id');
 const userName = localStorage.getItem('name');
+const year = localStorage.getItem('year');
+const sem = localStorage.getItem('semester');
 const columns = [
   {
     title: '학정번호',
@@ -73,14 +75,25 @@ const columns = [
     title: '학기',
     dataIndex: 'semester',
     key: 'semester',
+    render : (key) => (
+      <div>{key==='2.0'?'2':key==='2.5'?'겨울':key==='1.5'?'여름':'1'}</div>
+    ),
     filters: [
       {
         text: '2학기',
-        value:  '2.0',
+        value:  '2',
       },
       {
         text: '1학기',
-        value: '1.0',
+        value: '1',
+      },
+      {
+        text: '겨울 학기',
+        value: '겨울',
+      },
+      {
+        text: '여름 학기',
+        value: '여름',
       },
     ],
     filterMultiple: false,
@@ -135,29 +148,6 @@ const columns = [
   },
 ];
 
-const c_columns= [
-  {
-    title: '신청학점',
-    dataIndex: 'credit',
-    key: 'credit',
-  },
-  {
-    title: '취득학점',
-    dataIndex: 'credit',
-    key: 'credit',
-  },
-  {
-    title: '평량평균',
-    dataIndex: 'grade',
-    key: 'grade',
-  },
-  {
-    title: '평량평균',
-    dataIndex: 'grade',
-    key: 'grade',
-  },
-];
-
 const cover3 ={
   sub_sum:0,
   sub_liberal:0,
@@ -192,6 +182,8 @@ function GradePage (){
     
     const _getData = async () => {
       const chart_res = await axios.get('/api/userGradeGraph', {params:userID});
+      console.log(chart_res.data.length);
+      if(chart_res.data.length === 0) lineChart_data.push([year+'년도 '+sem+'학기' ,0]);
       for(let i=0;i<chart_res.data.length;i++){
         const sem_f=parseFloat( chart_res.data[i].sem );
         var str =chart_res.data[i].year;
@@ -263,7 +255,6 @@ function GradePage (){
           </div>
           <div className="table_chart">
             <Chart
-              // className="table_grade"
               width={500}
               height={250}
               chartType="LineChart"
@@ -284,14 +275,13 @@ function GradePage (){
             />
 
             <Chart
-              // className="table_grade"
               width={300}
               height={250}
               chartType="PieChart"
               loader={<div>Loading CHART</div>}
               data={pieGraph}
               options={{
-                title:'전공/교양 학점 비율',
+                title:'이수 수업 비율',
               }}
             />
           </div>

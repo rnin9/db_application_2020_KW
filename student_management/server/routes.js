@@ -51,6 +51,8 @@ router.get('/api/userEval',controller.api.userEval);
 router.get('/api/userEval/tag',controller.api.userEvalTag);
 router.get('/api/userEval/datail',controller.api.userEvalDetail);
 router.get('/api/userEval/detail/tag',controller.api.userEvalDetailTag);
+router.get('/api/eval/depart',controller.api.EvalDepart);
+router.get('/api/eval/sex',controller.api.EvalSex);
 
 router.get('/api/absense/list',controller.api.absenseList);
 router.get('/api/absense/continue/list',controller.api.absensectnList);

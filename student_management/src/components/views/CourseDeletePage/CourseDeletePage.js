@@ -66,19 +66,17 @@ function CourseDeletePage(){
     axios('/delete/course', {method:'delete', headers:new Headers(), data:datas})
       .then(res =>{
         console.log(res.data);
-        if(res.data[0].affectedRows === 1){
-          message.success('성공적으로 삭제되었습니다.');
-          return window.location.href='/course/delete';
-        }
-        else message.error('오류가 발생하였습니다.');
+        return window.location.href='/course/delete';
       });
   }
 
   const _getData = async () => {
     //현재 학기 수강정보만 불러옴
     const res = await axios.get('/api/userGradeNow',{params:{userID:userID,year:year,sem:sem}});
+      console.log(res.data);
       
-      
+      for(let i=0;i<res.data.length;i++)
+
       setlist(res.data);
       
     }

@@ -29,7 +29,7 @@ function GradeCoursePage (){
     const Cname = location.state.cname;
     var setGrade = 0;
 
-    const handleTermChange = value => {  // 성적 선택
+    const handleTermChange = (value, e) => {  // 성적 선택
       console.log(value);
 
       if(value === 'A+') setGrade=4.5;
@@ -42,7 +42,17 @@ function GradeCoursePage (){
       else if(value === 'D0') setGrade=1.0;
       else setGrade=0;
       
-      console.log(setGrade);
+      console.log(e);/*
+      var split = e.currentTarget.id.split(',');
+      console.log(split);
+      const datas={grade:setGrade, code:split[0], id:split[1], year:split[2], sem:split[3]};
+      // 성적 반영할 때 setGrade 중복 문제가 존재
+      axios('/update/grade', {method:'POST', headers:new Headers(), data:datas})
+        .then(res =>{
+          console.log(res.data[0].changedRows);
+          if(res.data[0].changedRows != '0') message.success('성공적으로 반영되었습니다.');
+          else message.error('성적이 반영되지 않았습니다. 이미 반영되었을 수 있습니다.');
+        });*/
     };
     
     const columns = [
@@ -61,21 +71,26 @@ function GradeCoursePage (){
         title: '학년',
         dataIndex: 'userGrade',
         key: 'uGrade',
-      },
+      },/*
       {
         title: '재수강여부',
         dataIndex: 'Retake',
         key: 'rt',
-      },
+        render : (key) => (
+          <div>{key===0?'X':'O'}</div>
+        )
+      },*/
       {
         title: '성적',
         dataIndex: 'grade',
         key: 'grade',
-        render : (grade) => (
+        render : (text, record) => (
           <Select
-            defaultValue={grade==='4.5'? 'A+' : grade==='4.0'? 'A0': grade==='3.5'?'B+':grade==='3.0'?'B0':grade==='2.5'?'C+':grade==='2.0'?'C0':grade==='1.5'?'D+':grade==='1.0'?'D0':grade==='0'?'F':'미입력'}
+            defaultValue={record.grade==='4.5'? 'A+' : record.grade==='4.0'? 'A0': record.grade==='3.5'?'B+':record.grade==='3.0'?'B0':
+            record.grade==='2.5'?'C+':record.grade==='2.0'?'C0':record.grade==='1.5'?'D+':record.grade==='1.0'?'D0':record.grade==='0'?'F':'미입력'}
             style={{ width: 100 }}
-            onSelect={handleTermChange}>
+            onSelect={handleTermChange}
+            id={record.course_code+','+record.userID+','+record.year+','+record.semester}>
             {score.map(sc => (
                 <Option key={sc}>{sc}</Option>
             ))}
