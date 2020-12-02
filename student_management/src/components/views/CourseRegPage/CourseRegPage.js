@@ -162,43 +162,13 @@ class CourseRegPage extends Component{
             title: '학과',
             dataIndex: 'major',
             key: 'major',
-            filters: [
-              {
-                text: '컴정공',
-                value: '컴퓨터정보공학',
-              },
-              {
-                text: '컴소',
-                value: '컴퓨터소프트웨어',
-              },
-              {
-                text: '전기공',
-                value: '전기공학',
-              },
-            ],
-            filterMultiple: false,
-            onFilter: (value, record) => record.major.indexOf(value) !== -1
+            ...this.getColumnSearchProps('major'),
           },
           {
             title: '이수',
             dataIndex: 'classification',
             key: 'classification',
-            filters: [
-              {
-                text: '교양',
-                value: '교',
-              },
-              {
-                text: '전공',
-                value: '전',
-              },
-              {
-                text: '기초',
-                value: '기',
-              },
-          ],
-            filterMultiple: true,
-            onFilter: (value, record) => record.classification.indexOf(value) !== -1
+            ...this.getColumnSearchProps('classification'),
           },
           {
             title: '학점',

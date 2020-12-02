@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useHistory } from "react-router";
-import { AutoComplete, Table, Tag, Button } from 'antd';
-import { StarTwoTone, LoadingOutlined } from '@ant-design/icons';
+import { AutoComplete, Table, Tag, Button, Input, Space } from 'antd';
+import { StarTwoTone, LoadingOutlined, SearchOutlined } from '@ant-design/icons';
+import Highlighter from 'react-highlight-words';
 import './EvaluationPage.css'
 import axios from 'axios';
 
@@ -13,12 +14,76 @@ function EvaluationPage(){
   const [list, setlist] = useState([])
   const [isLoading, setisLoading] = useState(true)
   const history = useHistory();
+  const [searchText, setSearchText] = useState('');
+  const [searchedColumn, setSearchedColumn] = useState('');
+  const searchInput = useRef(null);
+
+  function getColumnSearchProps(dataIndex) {
+    return {
+      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            ref={ searchInput }
+            placeholder={'Search'}
+            value={selectedKeys[0]}
+            onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Space>
+            <Button
+              type="primary"
+              onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+              icon={<SearchOutlined />}
+              size="small"
+              style={{ width: 90 }}
+            >
+              검색
+            </Button>
+            <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+              초기화
+            </Button>
+          </Space>
+        </div>
+      ),
+      filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+      onFilter: (value, record) =>
+        record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+      onFilterDropdownVisibleChange: visible => {
+        if (visible) {    setTimeout(() => searchInput.current.select());   }
+      },
+      render: text =>
+        searchedColumn === dataIndex ? (
+          <Highlighter
+            highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+            searchWords={[searchText]}
+            autoEscape
+            textToHighlight={text.toString()}
+          />
+        ) : (
+          text
+        ),
+    }
+  };
+
+  function handleSearch(selectedKeys, confirm, dataIndex) {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+
+  function handleReset(clearFilters) {
+    clearFilters();
+    setSearchText('');
+  };
+
 
   const columns = [
     {
       title: '과목명',
       dataIndex: 'Course_name',
       key: 'cname',
+      ...getColumnSearchProps('Course_name'),
       //강의명 클릭시 디테일 페이지로 넘어감
       render : (text, record) => (
         <Button type='link' onClick={handleClick} id={record.course_code+','+record.Course_name}>{text}</Button>
@@ -29,11 +94,17 @@ function EvaluationPage(){
       title: '교수명',
       dataIndex: 'professor_name',
       key: 'professor_name',
+      ...getColumnSearchProps('professor_name'),
+
     },
     {
       title: '평점',
       dataIndex: 'rating',
       key: 'rating',
+      sorter: {
+        compare: (a, b) => a.rating - b.rating,
+        multiple: 3,
+      },
       render : (key) => (
         <div><StarTwoTone twoToneColor="#FFE400"/> {key}</div>
       )
@@ -42,6 +113,7 @@ function EvaluationPage(){
       title: '태그',
       dataIndex : 'tags',
       key : 'tags',
+      ...getColumnSearchProps('tags'),
       render: tags =>(
         <>
           {tags.map(tag => {
