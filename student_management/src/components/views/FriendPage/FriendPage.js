@@ -4,18 +4,20 @@ import { useHistory } from "react-router";
 import { Table, Tag, Space, Button, } from 'antd';
 import axios from 'axios'
 import './Request/FriendRequestPage.css'
-import { CalendarTwoTone, FundTwoTone } from '@ant-design/icons';
+import { CalendarTwoTone, FundTwoTone, LoadingOutlined } from '@ant-design/icons';
 const { Column } = Table;
 const position = localStorage.getItem('position')
 function FriendPage() {
 
   const [friend, setFriend] = useState([])
+  const [isLoading, setisLoading] = useState(true)
   const id = localStorage.getItem('id')
   const history = useHistory();
   useEffect(() => {
     axios.get('/api/userFriend/list', { params: id })
       .then(res => {
         setFriend(res.data)
+        setisLoading(false)
       })
   }, [])
   // eslint-disable-next-line react-hooks/exhaustive-deps   
@@ -40,8 +42,9 @@ function FriendPage() {
     })
   }
   return (
-
     <div>
+      {!isLoading ? (
+        <div>
       <div className="friend_table_menu" style={{ fontSize: 30, paddingBottom: 40 }}>
         친구 목록
         </div>
@@ -87,7 +90,9 @@ function FriendPage() {
               </Space>
             )} />
         </Table>
-      </div>
+        </div>
+      </div>):(<div className="friend_loading"><LoadingOutlined style={{fontSize:30, marginRight:10}}/> Loading...</div>)
+      }
     </div>
   )
 }

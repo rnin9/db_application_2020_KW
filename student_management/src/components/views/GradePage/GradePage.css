@@ -9,11 +9,11 @@
   font-family: Chosunilbo_myungjo;
   text-align: center;
 }
-.table_grade {
+.grade_table_grade {
   font-family: Chosunilbo_myungjo;
   display: inline-block;
   width: 60vw;
-  height: 20vh;
+  height: 15vh;
   text-align-last: center;
 }
 
@@ -25,7 +25,7 @@
   font-weight:300;
 }
 
-.table_chart{
+.grade_table_chart{
   display: flex;
   justify-content: center;
   padding-bottom: 20px;

@@ -404,7 +404,7 @@ function Schedule() {
           </TableRow>
         </TableFooter>
       </Table>
-      <Button onClick={handleBack}>
+      <Button onClick={handleBack} type="primary">
         목록으로
       </Button>
       </div>

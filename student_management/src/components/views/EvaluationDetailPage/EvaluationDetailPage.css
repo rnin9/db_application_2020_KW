@@ -32,4 +32,6 @@
   display: flex;
   justify-content: center;
   padding-bottom: 20px;
+  padding-left:100px;
+  padding-top:32px;
 }

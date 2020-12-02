@@ -4,6 +4,7 @@ import { Menu ,Badge} from 'antd';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
+import sym from '../../LandingPage/LandingImage/symbol.jpg'
 import {MDBIcon}  from 'mdbreact';
 
 function LeftMenu(props) {
@@ -13,10 +14,12 @@ function LeftMenu(props) {
     <div className="menu_left">
     <Menu mode="horizontal">
     <Menu.Item key="Home">
-      <span role="img" aria-label="sun-flower"style={{fontSize:25, paddingLeft:7}}>
-      🌻
+      <span role="img" aria-label="sun-flower"style={{fontSize:25}}>
+      {/* 🌻
+       */}
+      <img src={sym} style={{width:50,heigh:50}}/>
       </span>
-      <a className="logo" href="/main" style={{fontSize:25,marginLeft:20}}>
+      <a className="logo" href="/main" style={{fontSize:25}}>
       DB143
       </a>
     </Menu.Item>

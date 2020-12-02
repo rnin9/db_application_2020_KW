@@ -8,6 +8,7 @@ import { requestReceived } from '../../../redux/_actions/friend_actions';
 import p1 from './LandingImage/1.jpg'
 import p2 from './LandingImage/2.jpg'
 import p3 from './LandingImage/3.jpg'
+import favicon from './LandingImage/favicons.png'
 import { GithubFilled, TeamOutlined, YoutubeFilled } from '@ant-design/icons';
 
 
@@ -35,7 +36,9 @@ function LandingPage (){
 
 return (
   <div style={{ margin: AutoComplete }} className="head">
-    <h2 style={{paddingTop:30, paddingBottom:20}}> 학생 관리 시스템 </h2>
+    <div className='header'>
+    <h2 > 학생 관리 프로그램 </h2>
+    </div>
     <Carousel autoplay style={{ display: "flex", justifyContent: "center" }}>
       <div className="land_img">
         <a href="https://www.kw.ac.kr/ko/life/notice.jsp?BoardMode=view&DUID=34156&tpage=1&searchKey=1&searchVal=%EA%B3%B5%EA%B0%90&srCategoryId=" target="_blank" rel="noopener noreferrer"
@@ -58,7 +61,7 @@ return (
     <div className="table_user">
     <Card title="Quick Menu">
     <a href="https://klas.kw.ac.kr" target="_blank" rel="noopener noreferrer" >
-    <Card.Grid style={gridStyle}><span style={{color:'black'}}>KLAS</span></Card.Grid>
+<Card.Grid style={gridStyle}><span style={{color:'black'}}><img src={favicon} style={{marginRight:3}}></img>KLAS</span></Card.Grid>
     </a>
     <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" >
     <Card.Grid style={gridStyle}><YoutubeFilled style={{marginRight:3, color:'red'}}/><span style={{color:'black'}}>Youtube</span></Card.Grid>

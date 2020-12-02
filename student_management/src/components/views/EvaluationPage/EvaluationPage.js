@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router";
 import { AutoComplete, Table, Tag, Button } from 'antd';
-import { StarTwoTone } from '@ant-design/icons';
+import { StarTwoTone, LoadingOutlined } from '@ant-design/icons';
 import './EvaluationPage.css'
 import axios from 'axios';
 
@@ -11,6 +11,7 @@ const userName = localStorage.getItem('name');
 function EvaluationPage(){
 
   const [list, setlist] = useState([])
+  const [isLoading, setisLoading] = useState(true)
   const history = useHistory();
 
   const columns = [
@@ -111,20 +112,22 @@ function EvaluationPage(){
       }
       
       setlist(cover2);
-      
+      setisLoading(false);
     }
 
 
         return(
-          <div style={{margin: AutoComplete}}> 
-          <div className="table">
+          <div style={{margin: AutoComplete}}>
+          {!isLoading ? ( 
+            <div>
+            <div className="table">
             <h2>수업 평가</h2>
           </div>
           
           
           <div className="table_eval">
             <div className="add_Eval">
-              <Button type="primary">
+              <Button type="primary" style={{float:"right"}}>
                 <a href="/write/eval">
                 수강평 작성
                 </a>
@@ -140,8 +143,8 @@ function EvaluationPage(){
           </div>
           <br></br>
           <br></br>
+          </div>):(<div className="eval_loading"><LoadingOutlined style={{fontSize:30, marginRight:10}}/> Loading...</div>)}
           </div>
-            
         );
 }
 

@@ -22,6 +22,15 @@
     margin-bottom: 30;
 }
 
+.header h2{
+    padding-top: 30px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #e0e0e0;
+    color: #353c4e;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    border-radius: 5px;
+}
 .ant-card-body{
     padding:0
 }

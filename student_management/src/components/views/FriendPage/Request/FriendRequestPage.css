@@ -22,5 +22,12 @@
     padding-top:30px
 }
 
+.friend_loading{
+    font-family: "Chosunilbo_myungjo";
+    display: flex;
+    justify-content: center;
+    padding-top:35vh;
+    font-weight:300;
+  }
 
 

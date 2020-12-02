@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { useLocation } from "react-router";
 import { AutoComplete, Table, Tag, Button, message } from 'antd';
 import { Chart } from "react-google-charts";
-import { LikeOutlined, StarTwoTone } from '@ant-design/icons';
+import { LikeOutlined, StarTwoTone, LoadingOutlined } from '@ant-design/icons';
 import './EvaluationDetailPage.css'
 import axios from 'axios';
 
@@ -161,7 +161,7 @@ function EvaluationDetailPage(){
           
           <div className="table_eval">
             <div className="add_Eval">
-              <Button type="primary">
+              <Button type="primary" style={{float:"right"}}>
                 <a href="/write/eval">
                 수강평 작성
                 </a>
@@ -173,7 +173,7 @@ function EvaluationDetailPage(){
                 width={450}
                 height={300}
                 chartType="Bar"
-                loader={<div>Loading CHART</div>}
+                loader={<div><LoadingOutlined/></div>}
                 data={barGraph}
                 options={{
                   chartArea:{width:'30%'},
@@ -186,10 +186,10 @@ function EvaluationDetailPage(){
                 }}
               />
               <Chart
-                width={450}
+                width={470}
                 height={300}
                 chartType="PieChart"
-                loader={<div>Loading CHART</div>}
+                loader={<div style={{marginLeft:10}}>Loading...</div>}
                 data={pieGraph}
                 options={{
                   title:'수강생 단과대학 비율',

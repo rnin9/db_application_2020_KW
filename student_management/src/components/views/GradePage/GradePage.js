@@ -253,12 +253,12 @@ function GradePage (){
           <div className="table">
             <h2>성적/수강 정보</h2>
           </div>
-          <div className="table_chart">
+          <div className="grade_table_chart">
             <Chart
               width={500}
               height={250}
               chartType="LineChart"
-              loader={<div>Loading CHART</div>}
+              loader={<div><LoadingOutlined style={{marginRight:10}}/></div>}
               data={lineGraph}
               options={{
                 title:'학기별 성적 분포',
@@ -278,20 +278,20 @@ function GradePage (){
               width={300}
               height={250}
               chartType="PieChart"
-              loader={<div>Loading CHART</div>}
+              loader={<div>Loading....</div>}
               data={pieGraph}
               options={{
                 title:'이수 수업 비율',
               }}
             />
           </div>
-          <div className="table_grade">
+          <div className="grade_table_grade">
             <Table size="small" bordered dataSource={credit} loading={false} rowKey="sub_major"  pagination={false} >
                 <ColumnGroup title="신청학점">
                   <Column title="전공" dataIndex="sub_major" key="sub_major"/>
                   <Column title="교양" dataIndex="sub_liberal" key="sub_liberal"/>
                   <Column title="기타" dataIndex="sub_etc" key="sub_etc"/>
-                  <Column title="계" dataIndex="sub_sum" key="sub_sum"/>
+                <Column title="계" dataIndex="sub_sum" key="sub_sum"/>
                 </ColumnGroup>
                 <ColumnGroup title="취득학점">
                   <Column title="전공" dataIndex="get_major" key="get_major"/>
@@ -324,8 +324,6 @@ function GradePage (){
           ):  (<div className="grade_loading"><LoadingOutlined style={{fontSize:30, marginRight:10}}/> Loading...</div>)}
           
 
-          <br></br>
-          <br></br>
           <div style={{paddingBottom:30}}>
 
           </div>
