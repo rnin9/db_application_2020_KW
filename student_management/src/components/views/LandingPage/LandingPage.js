@@ -69,7 +69,7 @@ return (
     <a href="https://klas.kw.ac.kr" target="_blank" rel="noopener noreferrer" >
 <Card.Grid style={gridStyle}><span style={{color:'black'}}><img src={favicon} style={{marginRight:3}}></img>KLAS</span></Card.Grid>
     </a>
-    <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" >
+    <a href="https://youtu.be/YYzqUc34p8I" target="_blank" rel="noopener noreferrer" >
     <Card.Grid style={gridStyle}><YoutubeFilled style={{marginRight:3, color:'red'}}/><span style={{color:'black'}}>Youtube</span></Card.Grid>
     </a>
     <a href="https://github.com/rnin9/db_application_2020_KW" target="_blank" rel="noopener noreferrer" >
