@@ -11,10 +11,16 @@ import p3 from './LandingImage/3.jpg'
 import favicon from './LandingImage/favicons.png'
 import { GithubFilled, TeamOutlined, YoutubeFilled } from '@ant-design/icons';
 
+const userID = localStorage.getItem('id')
 
 function LandingPage (){
-
-  const gridStyle = {
+  const dispatch = useDispatch()  
+ useEffect(() => {
+      dispatch(requestReceived(userID))
+    // eslint-disable-next-line react-hooks/exhaustive-deps   
+    }, [])
+ 
+    const gridStyle = {
     width: '25%',
     textAlign: 'center',
   };

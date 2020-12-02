@@ -66,12 +66,7 @@ function GradeCoursePage (){
         dataIndex: 'userName',
         key: 'uname',
       },
-      
-      {
-        title: '학년',
-        dataIndex: 'userGrade',
-        key: 'uGrade',
-      },/*
+      /*
       {
         title: '재수강여부',
         dataIndex: 'Retake',
