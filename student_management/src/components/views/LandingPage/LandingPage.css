@@ -10,15 +10,18 @@
     text-align: center;
 }
 .table_user{
+    padding-top:30;
     font-family: Chosunilbo_myungjo;
     display: inline-block;
-    width: 60vw;
+    width: 73vw;
     text-align-last: center;
 }
 
-/* .land_img img{
-   width: '100%';
-   display:"flex";
-   justify-content:"center";
-   padding: 30 30 10
-} */
+.head{
+    font-family: Chosunilbo_myungjo;
+    margin-bottom: 30;
+}
+
+.ant-card-body{
+    padding:0
+}
