@@ -42,9 +42,6 @@ function NoticeProfessor(props) {
                 })
 
         }
-        setTimeout(function () {
-            setcourse(courses)
-        }, 100) //임의로 시간줘서 데이터 다 받아오기
     };
 
     const onCourseChange = value => {      // 과목 선택시
