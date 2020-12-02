@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { AutoComplete, Col, Table} from 'antd';
+import React, { useState, useEffect, useRef } from 'react';
+import { AutoComplete, Col, Table, Input, Space, Button} from 'antd';
 import { Chart } from "react-google-charts";
-import { LoadingOutlined} from '@ant-design/icons';
+import Highlighter from 'react-highlight-words';
+import { LoadingOutlined ,SearchOutlined} from '@ant-design/icons';
 import './GradePage.css'
 import axios from 'axios';
 // import { select } from 'd3';
@@ -15,138 +16,6 @@ const userID = localStorage.getItem('id');
 const userName = localStorage.getItem('name');
 const year = localStorage.getItem('year');
 const sem = localStorage.getItem('semester');
-const columns = [
-  {
-    title: '학정번호',
-    dataIndex: 'course_code',
-    key: 'course_code',
-  },
-  {
-    title: '과목명',
-    dataIndex: 'Course_name',
-    key: 'cname',
-  },
-  
-  {
-    title: '개설학과',
-    dataIndex: 'major',
-    key: 'major',
-    filters: [
-      {
-        text: '컴정공',
-        value: '컴퓨터정보공학',
-      },
-      {
-        text: '컴소',
-        value: '컴퓨터소프트웨어',
-      },
-      {
-        text: '전기공',
-        value: '전기공학',
-      },
-    ],
-    filterMultiple: false,
-    onFilter: (value, record) => record.major.indexOf(value) !== -1
-  },
-  {
-    title: '년도',
-    dataIndex: 'year',
-    key: 'year',
-
-    filters: [
-      {
-        text: '2020',
-        value: 2020,
-      },
-      {
-        text: '2019',
-        value: 2019,
-      },
-      {
-        text: '2018',
-        value: 2018,
-      },
-    ],
-    filterMultiple: false,
-    onFilter: (value, record) => (record.year === value)
-    
-  },
-  {
-    title: '학기',
-    dataIndex: 'semester',
-    key: 'semester',
-    render : (key) => (
-      <div>{key==='2.0'?'2':key==='2.5'?'겨울':key==='1.5'?'여름':'1'}</div>
-    ),
-    filters: [
-      {
-        text: '2학기',
-        value:  '2',
-      },
-      {
-        text: '1학기',
-        value: '1',
-      },
-      {
-        text: '겨울 학기',
-        value: '겨울',
-      },
-      {
-        text: '여름 학기',
-        value: '여름',
-      },
-    ],
-    filterMultiple: false,
-    onFilter: (value, record) => (record.semester === value)
-  },
-  {
-    title: '이수구분',
-    dataIndex: 'classification',
-    key: 'classification',
-    filters: [
-      {
-        text: '교양',
-        value: '교',
-      },
-      {
-        text: '전공',
-        value: '전',
-      },
-      {
-        text: '기초',
-        value: '기',
-      },
-  ],
-    filterMultiple: true,
-    onFilter: (value, record) => record.classification.indexOf(value) !== -1
-  },
-  {
-    title: '학점',
-    dataIndex: 'credit',
-    key: 'credit',
-  },
-  {
-    title: '성적',
-    dataIndex: 'grade',
-    key: 'grade',
-    render : (grade) => (
-      <div>{grade==='4.5'? 'A+' : grade==='4.0'? 'A0': grade==='3.5'?'B+':grade==='3.0'?'B0':grade==='2.5'?'C+':grade==='2.0'?'C0':grade==='1.5'?'D+':grade==='1.0'?'D0':grade==='0'?'F':'미입력'}</div>
-    )
-  },
-  {
-    title: '인증구분',
-    dataIndex: 'classification',
-    key: 'classification',
-  },
-  {
-    title: '재수강여부',
-    dataIndex: 'Retake',
-    key: 'retake',
-    render : (key) =>(
-      <div>{key===0?'X' :'O' }</div>
-    )
-  },
-];
 
 const cover3 ={
   sub_sum:0,
@@ -166,6 +35,9 @@ const cover3 ={
 
 
 function GradePage (){
+
+
+
     const [list, setlist] = useState([])
     const [lineGraph, setLineGraph] = useState([])
     const [pieGraph, setPieGraph] = useState([])
@@ -174,12 +46,16 @@ function GradePage (){
 
     const lineChart_data = [['term','score'],];
     const pieChart_data = [['classification', 'credit'],];
+    const [searchText, setSearchText] = useState('');
+  const [searchedColumn, setSearchedColumn] = useState('');
+  const searchInput = useRef(null);
 
+  
     useEffect(() => {
       _getData()
       
     }, [])  
-    
+  
     const _getData = async () => {
       const chart_res = await axios.get('/api/userGradeGraph', {params:userID});
       console.log(chart_res.data.length);
@@ -246,6 +122,201 @@ function GradePage (){
       setisLoading(false);
 
     }
+
+    const columns = [
+      {
+        title: '학정번호',
+        dataIndex: 'course_code',
+        key: 'course_code',
+      },
+      {
+        title: '과목명',
+        dataIndex: 'Course_name',
+        key: 'cname',
+        ...getColumnSearchProps('Course_name')
+      },
+      
+      {
+        title: '개설학과',
+        dataIndex: 'major',
+        key: 'major',
+        filters: [
+          {
+            text: '컴정공',
+            value: '컴퓨터정보공학',
+          },
+          {
+            text: '컴소',
+            value: '컴퓨터소프트웨어',
+          },
+          {
+            text: '전기공',
+            value: '전기공학',
+          },
+        ],
+        filterMultiple: false,
+        onFilter: (value, record) => record.major.indexOf(value) !== -1
+      },
+      {
+        title: '년도',
+        dataIndex: 'year',
+        key: 'year',
+    
+        filters: [
+          {
+            text: '2020',
+            value: 2020,
+          },
+          {
+            text: '2019',
+            value: 2019,
+          },
+          {
+            text: '2018',
+            value: 2018,
+          },
+        ],
+        filterMultiple: false,
+        onFilter: (value, record) => (record.year === value)
+        
+      },
+      {
+        title: '학기',
+        dataIndex: 'semester',
+        key: 'semester',
+        render : (key) => (
+          <div>{key==='2.0'?'2':key==='2.5'?'겨울':key==='1.5'?'여름':'1'}</div>
+        ),
+        filters: [
+          {
+            text: '2학기',
+            value:  '2',
+          },
+          {
+            text: '1학기',
+            value: '1',
+          },
+          {
+            text: '겨울 학기',
+            value: '겨울',
+          },
+          {
+            text: '여름 학기',
+            value: '여름',
+          },
+        ],
+        filterMultiple: false,
+        onFilter: (value, record) => (record.semester === value)
+      },
+      {
+        title: '이수구분',
+        dataIndex: 'classification',
+        key: 'classification',
+        filters: [
+          {
+            text: '교양',
+            value: '교',
+          },
+          {
+            text: '전공',
+            value: '전',
+          },
+          {
+            text: '기초',
+            value: '기',
+          },
+      ],
+        filterMultiple: true,
+        onFilter: (value, record) => record.classification.indexOf(value) !== -1
+      },
+      {
+        title: '학점',
+        dataIndex: 'credit',
+        key: 'credit',
+      },
+      {
+        title: '성적',
+        dataIndex: 'grade',
+        key: 'grade',
+        render : (grade) => (
+          <div>{grade==='4.5'? 'A+' : grade==='4.0'? 'A0': grade==='3.5'?'B+':grade==='3.0'?'B0':grade==='2.5'?'C+':grade==='2.0'?'C0':grade==='1.5'?'D+':grade==='1.0'?'D0':grade==='0'?'F':'미입력'}</div>
+        ),
+        sorter: (a, b) => a.grade - b.grade,
+      },
+      {
+        title: '인증구분',
+        dataIndex: 'classification',
+        key: 'classification',
+      },
+      {
+        title: '재수강여부',
+        dataIndex: 'Retake',
+        key: 'retake',
+        render : (key) =>(
+          <div>{key===0?'X' :'O' }</div>
+        )
+      },
+    ];
+
+    function getColumnSearchProps(dataIndex) {
+      return {
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+          <div style={{ padding: 8 }}>
+            <Input
+              ref={ searchInput }
+              placeholder={'Search'}
+              value={selectedKeys[0]}
+              onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+              onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+              style={{ width: 188, marginBottom: 8, display: 'block' }}
+            />
+            <Space>
+              <Button
+                type="primary"
+                onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                icon={<SearchOutlined />}
+                size="small"
+                style={{ width: 90 }}
+              >
+                검색
+              </Button>
+              <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+                초기화
+              </Button>
+            </Space>
+          </div>
+        ),
+        filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+        onFilter: (value, record) =>
+          record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: visible => {
+          if (visible) {    setTimeout(() => searchInput.current.select());   }
+        },
+        render: text =>
+          searchedColumn === dataIndex ? (
+            <Highlighter
+              highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+              searchWords={[searchText]}
+              autoEscape
+              textToHighlight={text.toString()}
+            />
+          ) : (
+            text
+          ),
+      }
+    };
+  
+    function handleSearch(selectedKeys, confirm, dataIndex) {
+      confirm();
+      setSearchText(selectedKeys[0]);
+      setSearchedColumn(dataIndex);
+    };
+  
+    function handleReset(clearFilters) {
+      clearFilters();
+      setSearchText('');
+    };
+  
 
         return(
           <div style={{margin: AutoComplete}}>

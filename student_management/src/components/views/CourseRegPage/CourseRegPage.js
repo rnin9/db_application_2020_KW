@@ -3,7 +3,7 @@ import { AutoComplete, Table, Form, Button, message, Input, Space } from 'antd';
 import './CourseRegPage.css'
 import axios from 'axios';
 import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, LoadingOutlined } from '@ant-design/icons';
 
 
 const gyear = localStorage.getItem('year');
@@ -31,6 +31,7 @@ class CourseRegPage extends Component{
           update : false,
           searchText: '',
           searchedColumn: '',
+          isLoading: true,
         }    
       }
     
@@ -110,9 +111,12 @@ class CourseRegPage extends Component{
       if(res.data[0] === undefined) {
         let cover = [];
         cover.push(res.data);       // response 데이터들 push
-        return this.setState({ list : cover })
+        this.setState({ list : cover })
+        this.setState({ isLoading:false })
+        return 
       }
       this.setState({ list : res.data });
+      this.setState({ isLoading:false})
     }
 
 
@@ -185,7 +189,9 @@ class CourseRegPage extends Component{
         ];
         
         return(
-          <div style={{margin: AutoComplete}}> 
+          <div style={{margin: AutoComplete}}>
+            {!this.state.isLoading ? (<div>
+          
             <div className="table">
               <h2>강의 정보</h2>
             </div>
@@ -200,6 +206,9 @@ class CourseRegPage extends Component{
             <div>
               <Button type="primary" onClick={this.handleData}>수강 신청</Button>
             </div>
+            </div>
+            ):(<div className="reg_loading"><LoadingOutlined style={{fontSize:30, marginRight:10}}/> Loading...</div>)
+            }
           </div>
             
         )};
